@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { validate } from 'validate.js';
 
 import LoginContext from '../utils/LoginContext';
 
@@ -8,15 +7,9 @@ export default function Login() {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    const emailConstraints = {
-      Email: { email: true },
-    };
-    const passwordConstraints = {
-      Password: { length: { minimum: 6 } },
-    };
-    const validationEmail = validate({ Email: email }, emailConstraints);
-    const validationPassword = validate({ Password: password }, passwordConstraints);
-    if (validationEmail === undefined && validationPassword === undefined) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordMinimumLength = 6;
+    if (emailRegex.test(email) && password.length > passwordMinimumLength) {
       setDisabled(false);
     }
   }, [email, password]);
