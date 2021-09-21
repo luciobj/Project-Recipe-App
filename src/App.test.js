@@ -1,9 +1,33 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import App from './App';
+import renderWithRouter from './utils/renderWithRouter';
 
-test('Farewell, front-end', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/TRYBE/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('Requisito 13 - Implemente os elementos da barra de busca respeitando os atributos descritos no protótipo', () => {
+  it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
+    renderWithRouter(<App />);
+
+    const ingredientSearch = screen.getByTestId("ingredient-search-radio");
+    const nameSearch = screen.getByTestId("name-search-radio");
+    const firstLetterSearch = screen.getByTestId("first-letter-search-radio");
+    const searchButton = screen.getByTestId("exec-search-btn");
+
+    expect(ingredientSearch).toBeInTheDocument();
+    expect(nameSearch).toBeInTheDocument();
+    expect(firstLetterSearch).toBeInTheDocument();
+    expect(searchButton).toBeInTheDocument();
+  });
+  it('Verifica se os inputs e o botão possuem os textos corretos', () => {
+    renderWithRouter(<App />);
+
+    const ingredientText = screen.getByText(/ingrediente/i);
+    const nameText = screen.getByText(/nome/i);
+    const firstLetterText = screen.getByText(/primeira letra/i);
+    const searchText = screen.getByText(/buscar/i);
+
+    expect(ingredientText).toBeInTheDocument();
+    expect(nameText).toBeInTheDocument();
+    expect(firstLetterText).toBeInTheDocument();
+    expect(searchText).toBeInTheDocument();
+  });
+})
