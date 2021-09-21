@@ -90,10 +90,10 @@ describe('Tests if the page is redirected after clicking on the button', () => {
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
     const loginButton = screen.getByTestId(loginButtonTestid);
-    const { pathname } = history.location;
     userEvent.type(emailInput, 'meuemail@eesse.com');
     userEvent.type(passwordInput, '1234567');
     userEvent.click(loginButton);
+    const { pathname } = history.location;
     expect(pathname).toBe('/comidas');
   });
 });
