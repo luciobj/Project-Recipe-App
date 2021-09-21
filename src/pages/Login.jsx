@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { validate } from 'validate.js';
 
 import LoginContext from '../utils/LoginContext';
@@ -38,9 +39,15 @@ export default function Login() {
           value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
         />
-        <button type="button" disabled={ disabled } data-testid="login-submit-btn">
-          Login
-        </button>
+        <Link to="/comidas">
+          <button
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={ disabled }
+          >
+            Login
+          </button>
+        </Link>
       </div>
     </section>
   );
