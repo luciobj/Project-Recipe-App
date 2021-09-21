@@ -5,7 +5,8 @@ import renderWithRouter from './utils/renderWithRouter';
 
 describe('Requisito 13 - Implemente os elementos da barra de busca respeitando os atributos descritos no protótipo', () => {
   it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
-    renderWithRouter(<App />);
+    const { history } = renderWithRouter(<App />);
+    history.push("/comidas");
 
     const ingredientSearch = screen.getByTestId("ingredient-search-radio");
     const nameSearch = screen.getByTestId("name-search-radio");
@@ -18,7 +19,8 @@ describe('Requisito 13 - Implemente os elementos da barra de busca respeitando o
     expect(searchButton).toBeInTheDocument();
   });
   it('Verifica se os inputs e o botão possuem os textos corretos', () => {
-    renderWithRouter(<App />);
+    const { history } = renderWithRouter(<App />);
+    history.push("/comidas");
 
     const ingredientText = screen.getByText(/ingrediente/i);
     const nameText = screen.getByText(/nome/i);
