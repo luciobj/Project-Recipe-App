@@ -33,3 +33,24 @@ describe('Requisito 13 - Implemente os elementos da barra de busca respeitando o
     expect(searchText).toBeInTheDocument();
   });
 })
+
+describe('Requisito 14 - Posicione a barra logo abaixo do header e implemente 3 radio buttons: Ingrediente, Nome e Primeira letra', () => {
+  it('Verifica se o botão de busca do header existe', () => {
+    const { history } = renderWithRouter(<App/>);
+    history.push('/comidas');
+
+    const headerSearchButton = screen.getByTestId('search-top-btn');
+
+    expect(headerSearchButton).toBeInTheDocument();
+  })
+  it('Verifica se, na página de comidas, a busca por INGREDIENTE é feita corretamente', () => {
+    const { history } = renderWithRouter(<App/>);
+    history.push('/comidas');
+
+    const searchInput = screen.getByTestId('search-input');
+    const ingredientRadioInput = screen.getByText('Ingrediente');
+
+    expect(searchInput).toBeInTheDocument();
+    expect(ingredientRadioInput).toBeInTheDocument();
+  })
+})
