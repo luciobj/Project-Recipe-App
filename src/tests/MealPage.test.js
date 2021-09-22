@@ -1,17 +1,17 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import App from './App';
-import renderWithRouter from './utils/renderWithRouter';
+import App from '../App';
+import renderWithRouter from '../utils/renderWithRouter';
 
-describe('Requisito 13 - Implemente os elementos da barra de busca respeitando os atributos descritos no protótipo', () => {
+describe('Requisito 13 - Implementa barra de busca', () => {
   it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
     const { history } = renderWithRouter(<App />);
-    history.push("/comidas");
+    history.push('/comidas');
 
-    const ingredientSearch = screen.getByTestId("ingredient-search-radio");
-    const nameSearch = screen.getByTestId("name-search-radio");
-    const firstLetterSearch = screen.getByTestId("first-letter-search-radio");
-    const searchButton = screen.getByTestId("exec-search-btn");
+    const ingredientSearch = screen.getByTestId('ingredient-search-radio');
+    const nameSearch = screen.getByTestId('name-search-radio');
+    const firstLetterSearch = screen.getByTestId('first-letter-search-radio');
+    const searchButton = screen.getByTestId('exec-search-btn');
 
     expect(ingredientSearch).toBeInTheDocument();
     expect(nameSearch).toBeInTheDocument();
@@ -20,7 +20,7 @@ describe('Requisito 13 - Implemente os elementos da barra de busca respeitando o
   });
   it('Verifica se os inputs e o botão possuem os textos corretos', () => {
     const { history } = renderWithRouter(<App />);
-    history.push("/comidas");
+    history.push('/comidas');
 
     const ingredientText = screen.getByText(/ingrediente/i);
     const nameText = screen.getByText(/nome/i);
@@ -32,19 +32,19 @@ describe('Requisito 13 - Implemente os elementos da barra de busca respeitando o
     expect(firstLetterText).toBeInTheDocument();
     expect(searchText).toBeInTheDocument();
   });
-})
+});
 
-describe('Requisito 14 - Posicione a barra logo abaixo do header e implemente 3 radio buttons: Ingrediente, Nome e Primeira letra', () => {
+describe('Requisito 14 - radio buttons para filtragem', () => {
   it('Verifica se o botão de busca do header existe', () => {
-    const { history } = renderWithRouter(<App/>);
+    const { history } = renderWithRouter(<App />);
     history.push('/comidas');
 
     const headerSearchButton = screen.getByTestId('search-top-btn');
 
     expect(headerSearchButton).toBeInTheDocument();
-  })
-  it('Verifica se, na página de comidas, a busca por INGREDIENTE é feita corretamente', () => {
-    const { history } = renderWithRouter(<App/>);
+  });
+  it('Verifica se a busca por INGREDIENTE é feita corretamente', () => {
+    const { history } = renderWithRouter(<App />);
     history.push('/comidas');
 
     const searchInput = screen.getByTestId('search-input');
@@ -52,5 +52,5 @@ describe('Requisito 14 - Posicione a barra logo abaixo do header e implemente 3 
 
     expect(searchInput).toBeInTheDocument();
     expect(ingredientRadioInput).toBeInTheDocument();
-  })
-})
+  });
+});

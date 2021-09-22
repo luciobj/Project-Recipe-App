@@ -4,7 +4,8 @@ import './App.css';
 import RecipesProvider from './context/recipesProvider';
 
 import Login from './pages/Login';
-import MainPage from './pages/mainPage';
+import MealPage from './pages/MealPage';
+import DrinksPage from './pages/DrinksPage';
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <RecipesProvider>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/comidas" component={ MainPage } />
-          <Route path="/bebidas" component={ MainPage } />
+          <Route path="/comidas" component={ MealPage } />
+          <Route path="/bebidas" component={ DrinksPage } />
         </Switch>
       </RecipesProvider>
     </div>

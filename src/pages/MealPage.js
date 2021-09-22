@@ -1,10 +1,10 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
 
-function MainPage() {
+function MealPage() {
   return (
     <SearchBar />
   );
 }
 
-export default MainPage;
+export default MealPage;
