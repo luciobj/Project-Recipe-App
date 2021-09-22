@@ -15,8 +15,8 @@ describe('Implemente os elementos do header na tela principal de receitas', () =
     const pageTitle = screen.getByTestId(pageTitleTestId);
     const searchTopBtn = screen.getByTestId(searchTopBtnTestId);
 
-    expect(profile).toBeInDocument();
-    expect(pageTitle).toBeInDocument();
-    expect(searchTopBtn).toBeInDocument();
+    expect(profile).toBeInTheDocument();
+    expect(pageTitle).toBeInTheDocument();
+    expect(searchTopBtn).toBeInTheDocument();
   });
 });
