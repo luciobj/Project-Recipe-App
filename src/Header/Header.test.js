@@ -1,22 +1,37 @@
 import React from 'react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouter from '../Services/renderWithRouter';
 import App from '../App';
 
 const profileTestId = 'profile-top-btn';
 const pageTitleTestId = 'page-title';
-const searchTopBtnTestId = 'search-top-btn';
+const SearchBtnTestId = 'search-top-btn';
+const searchBarTestId = 'search-input';
+const searchIconTestId = 'search-icon';
+const userIconTestId = 'user-icon';
 
-describe('Implemente os elementos do header na tela principal de receitas', () => {
-  test('se os data-testids `profile-top-btn`, `page-title` e `search-top-btn`', () => {
-    renderWithRouter(<App />);
-    const profile = screen.getByTestId(profileTestId);
-    const pageTitle = screen.getByTestId(pageTitleTestId);
-    const searchTopBtn = screen.getByTestId(searchTopBtnTestId);
-
+describe('Ícone de perfil, h1 Comida e botão de pesquisa disposto na tela', () => {
+  renderWithRouter(<App />);
+  const profile = screen.getByTestId(profileTestId);
+  const pageTitle = screen.getByTestId(pageTitleTestId);
+  const SearchBtn = screen.getByTestId(SearchBtnTestId);
+  it('should be have the user icon and the search button create a search bar', () => {
     expect(profile).toBeInTheDocument();
     expect(pageTitle).toBeInTheDocument();
-    expect(searchTopBtn).toBeInTheDocument();
+    expect(SearchBtn).toBeInTheDocument();
+
+    const userIcon = screen.getByTestId(userIconTestId);
+    expect(userIcon).toBeInTheDocument();
+
+    userEvent.click(SearchBtn);
+    expect(profile).not.toBeInTheDocument();
+    expect(pageTitle).not.toBeInTheDocument();
+
+    const searchIcon = screen.getByTestId(searchIconTestId);
+    expect(searchIcon).toBeInTheDocument();
+
+    const searchBar = screen.getByTestId(searchBarTestId);
+    expect(searchBar).toBeInTheDocument();
   });
 });

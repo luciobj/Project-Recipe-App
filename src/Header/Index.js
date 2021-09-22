@@ -17,7 +17,7 @@ function Index() {
           type="button"
           className="btn-search"
         >
-          <img src={ searchIcon } alt="Icone de pesquisa" />
+          <img data-testid="search-icon" src={ searchIcon } alt="Icone de pesquisa" />
         </button>
         <input type="text" data-testid="search-input" />
       </div>
@@ -25,9 +25,9 @@ function Index() {
   }
   return (
     <header className="header">
-      <button data-testid="profile-top-btn" type="button" className="">
+      <button data-testid="profile-top-btn" type="button">
         <Link to="/perfil">
-          <img src={ profileIcon } alt="Icone de usuario" />
+          <img data-testid="user-icon" src={ profileIcon } alt="User icon" />
         </Link>
       </button>
       <h1 data-testid="page-title">Comidas</h1>
