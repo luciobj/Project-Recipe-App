@@ -72,30 +72,30 @@ describe('3, 4, 5 - Tests if the inputs have propet validation', () => {
 //   });
 // });
 
-// describe('7- Tests the local storage is updated with the email', () => {
-//   Object.defineProperty(window, 'localStorage', {
-//     value: {
-//       getItem: jest.fn(() => null),
-//       setItem: jest.fn(() => null),
-//     },
-//     writable: true,
-//   });
-//   it('shows the correct input email', () => {
-//     renderWithRouter(<App />);
-//     const emailInput = screen.getByTestId(emailTestid);
-//     const passwordInput = screen.getByTestId(passwordTestid);
-//     const loginButton = screen.getByTestId(loginButtonTestid);
-//     userEvent.type(emailInput, acceptableEmail);
-//     userEvent.type(passwordInput, acceptablePassword);
-//     userEvent.click(loginButton);
-//     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-//     expect(window.localStorage.setItem).toHaveBeenCalledWith(
-//       'email',
-//       { email: acceptableEmail },
-//     );
-//     // expect(localEmail).toBe(acceptableEmail);
-//   });
-// });
+describe('7- Tests the local storage is updated with the email', () => {
+  // Reference for mock: https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
+  Object.defineProperty(window, 'localStorage', {
+    value: {
+      getItem: jest.fn(() => null),
+      setItem: jest.fn(() => null),
+    },
+    writable: true,
+  });
+  it('shows the correct input email', () => {
+    renderWithRouter(<App />);
+    const emailInput = screen.getByTestId(emailTestid);
+    const passwordInput = screen.getByTestId(passwordTestid);
+    const loginButton = screen.getByTestId(loginButtonTestid);
+    userEvent.type(emailInput, acceptableEmail);
+    userEvent.type(passwordInput, acceptablePassword);
+    userEvent.click(loginButton);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(window.localStorage.setItem).toHaveBeenCalledWith(
+      'user',
+      { email: acceptableEmail },
+    );
+  });
+});
 
 describe('8- Tests if the page is redirected after clicking on the button', () => {
   it('the path is now the main for foods', () => {
