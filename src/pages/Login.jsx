@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { validate } from 'validate.js';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import LoginContext from '../utils/LoginContext';
 
@@ -26,7 +25,8 @@ export default function Login() {
 
   const handleClick = () => {
     history.push('/comidas');
-    // localStorage.setItem('user', { email });
+    const localEmail = JSON.stringify(email);
+    localStorage.setItem('user', { email: localEmail });
   };
 
   return (
@@ -58,7 +58,3 @@ export default function Login() {
     </section>
   );
 }
-
-Login.propTypes = {
-  history: PropTypes.objectOf().isRequired,
-};
