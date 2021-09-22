@@ -3,14 +3,14 @@ import { Switch, Route } from 'react-router';
 import './App.css';
 
 import Login from './pages/Login';
-import MainPage from './pages/mainPage';
+import MealsPage from './pages/MealsPage';
 
 function App() {
   return (
     <div>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/comidas" component={ MainPage } />
+        <Route path="/comidas" component={ MealsPage } />
       </Switch>
     </div>
   );
