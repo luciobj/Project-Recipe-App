@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { validate } from 'validate.js';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 import LoginContext from '../utils/LoginContext';
 
@@ -10,23 +9,17 @@ export default function Login() {
   const history = useHistory();
 
   useEffect(() => {
-    const emailConstraints = {
-      Email: { email: true },
-    };
-    const passwordConstraints = {
-      Password: { length: { minimum: 6 } },
-    };
-    const validationEmail = validate({ Email: email }, emailConstraints);
-    const validationPassword = validate({ Password: password }, passwordConstraints);
-    if (validationEmail === undefined && validationPassword === undefined) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordMinimumLength = 6;
+    if (emailRegex.test(email) && password.length > passwordMinimumLength) {
       setDisabled(false);
     }
   }, [email, password]);
 
   const handleClick = () => {
-    history.push('/comidas');
     const localEmail = JSON.stringify(email);
     localStorage.setItem('user', { email: localEmail });
+    history.push('/comidas');
   };
 
   return (
@@ -48,8 +41,8 @@ export default function Login() {
         />
         <button
           type="button"
-          data-testid="login-submit-btn"
           disabled={ disabled }
+          data-testid="login-submit-btn"
           onClick={ handleClick }
         >
           Login
