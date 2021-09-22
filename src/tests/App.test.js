@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import renderWithRouter from '../utils/renderWithRouter';
 import App from '../App';
 
 test('Farewell, front-end', () => {
-  render(<App />);
+  renderWithRouter(<App />);
 });
