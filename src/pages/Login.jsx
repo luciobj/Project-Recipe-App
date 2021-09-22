@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { validate } from 'validate.js';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import LoginContext from '../utils/LoginContext';
 
 export default function Login() {
   const { email, setEmail, password, setPassword } = useContext(LoginContext);
   const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const emailConstraints = {
@@ -21,6 +23,11 @@ export default function Login() {
       setDisabled(false);
     }
   }, [email, password]);
+
+  const handleClick = () => {
+    history.push('/comidas');
+    // localStorage.setItem('user', { email });
+  };
 
   return (
     <section>
@@ -39,16 +46,19 @@ export default function Login() {
           value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
         />
-        <Link to="/comidas">
-          <button
-            type="button"
-            data-testid="login-submit-btn"
-            disabled={ disabled }
-          >
-            Login
-          </button>
-        </Link>
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ disabled }
+          onClick={ handleClick }
+        >
+          Login
+        </button>
       </div>
     </section>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.objectOf().isRequired,
+};

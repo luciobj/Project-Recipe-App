@@ -8,11 +8,14 @@ import App from '../App';
 const emailTestid = 'email-input';
 const passwordTestid = 'password-input';
 const loginButtonTestid = 'login-submit-btn';
+const acceptableEmail = 'meuemail@eesse.com';
+const acceptablePassword = '1234567';
 
-describe('Tests if the login page', () => {
+describe('2- Tests if the login page', () => {
   beforeEach(() => {
     renderWithRouter(<App />);
   });
+
   it('has the email input', () => {
     const emailInput = screen.getByTestId(emailTestid);
     expect(emailInput).toBeInTheDocument();
@@ -23,7 +26,7 @@ describe('Tests if the login page', () => {
   });
 });
 
-describe('Tests if the inputs have propet validation', () => {
+describe('3, 4, 5 - Tests if the inputs have propet validation', () => {
   beforeEach(() => {
     renderWithRouter(<App />);
   });
@@ -33,7 +36,7 @@ describe('Tests if the inputs have propet validation', () => {
     const passwordInput = screen.getByTestId(passwordTestid);
     const loginButton = screen.getByTestId(loginButtonTestid);
     userEvent.type(emailInput, 'meuemaileesse');
-    userEvent.type(passwordInput, '1234567');
+    userEvent.type(passwordInput, acceptablePassword);
     expect(loginButton).toBeDisabled();
   });
   it('checks with a invalid email and password', () => {
@@ -48,13 +51,13 @@ describe('Tests if the inputs have propet validation', () => {
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
     const loginButton = screen.getByTestId(loginButtonTestid);
-    userEvent.type(emailInput, 'meuemail@eesse.com');
-    userEvent.type(passwordInput, '1234567');
+    userEvent.type(emailInput, acceptableEmail);
+    userEvent.type(passwordInput, acceptablePassword);
     expect(loginButton).not.toBeDisabled();
   });
 });
 
-// describe('Tests the local storage is updated with the email and password', () => {
+// describe('6- Tests the local storage is updated with the tokens', () => {
 //   beforeEach(() => {
 //     renderWithRouter(<App />);
 //   });
@@ -69,31 +72,40 @@ describe('Tests if the inputs have propet validation', () => {
 //   });
 // });
 
-// describe('Tests the local storage is updated with the tokens', () => {
-//   beforeEach(() => {
-//     renderWithRouter(<App />);
-//   });
+describe('7- Tests the local storage is updated with the email', () => {
+  // beforeEach(() => {
+  //   renderWithRouter(<App />);
+  // });
 
-//   it('checks with a invalid email and a valid password', () => {
-//     const emailInput = screen.getByTestId(emailTestid);
-//     const passwordInput = screen.getByTestId(passwordTestid);
-//     const loginButton = screen.getByTestId(loginButtonTestid);
-//     userEvent.type(emailInput, 'meuemaileesse');
-//     userEvent.type(passwordInput, '1234567');
-//     expect(loginButton).toBeDisabled();
-//   });
-// });
-
-describe('Tests if the page is redirected after clicking on the button', () => {
-  it('the path is now the main for foods', () => {
+  it('shows the correct input email', () => {
     const { history } = renderWithRouter(<App />);
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
     const loginButton = screen.getByTestId(loginButtonTestid);
-    userEvent.type(emailInput, 'meuemail@eesse.com');
-    userEvent.type(passwordInput, '1234567');
+    userEvent.type(emailInput, acceptableEmail);
+    userEvent.type(passwordInput, acceptablePassword);
     userEvent.click(loginButton);
+    // console.log(history);
+    const localEmail = localStorage.getItem('user');
+    // console.log(JSON.parse(localEmail));
+    expect(localEmail).toBe(acceptableEmail);
+  });
+});
+
+describe('8- Tests if the page is redirected after clicking on the button', () => {
+  it('the path is now the main for foods', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/');
+    console.log(history.location);
+    const emailInput = screen.getByTestId(emailTestid);
+    const passwordInput = screen.getByTestId(passwordTestid);
+    const loginButton = screen.getByTestId(loginButtonTestid);
+    userEvent.type(emailInput, acceptableEmail);
+    userEvent.type(passwordInput, acceptablePassword);
+    userEvent.click(loginButton);
+    // history.push('/comidas');
     const { pathname } = history.location;
+    // console.log(history.location.pathname);
     expect(pathname).toBe('/comidas');
   });
 });
