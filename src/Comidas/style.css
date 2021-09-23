@@ -1,4 +1,4 @@
 .comidas {
-  display: flex;
   align-items: stretch;
+  display: flex;
 }
