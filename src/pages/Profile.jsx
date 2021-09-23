@@ -4,6 +4,7 @@ import Header from '../Header';
 import logoDrink from '../images/drinkIcon.svg';
 import logoExplore from '../images/exploreIcon.svg';
 import logoMeal from '../images/mealIcon.svg';
+import Footer from '../Footer';
 
 export default function Profile(props) {
   function getEmail() {
@@ -49,11 +50,7 @@ export default function Profile(props) {
         Sair
       </button>
 
-      <footer>
-        <img src={ logoDrink } alt="drinks" />
-        <img src={ logoExplore } alt="explore" />
-        <img src={ logoMeal } alt="foods" />
-      </footer>
+      <Footer />
     </div>
   );
 }
