@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Header';
-import logoDrink from '../images/drinkIcon.svg';
-import logoExplore from '../images/exploreIcon.svg';
-import logoMeal from '../images/mealIcon.svg';
 import Footer from '../Footer';
 
 export default function Profile(props) {
