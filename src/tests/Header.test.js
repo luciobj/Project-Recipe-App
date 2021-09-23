@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
-import renderWithRouter from '../Services/renderWithRouter';
+import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 const profileTestId = 'profile-top-btn';
