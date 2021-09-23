@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
 
 import LoginContext from '../utils/LoginContext';
 
@@ -18,7 +16,6 @@ export default function Login() {
 
   return (
     <section>
-      <Header />
       <div>
         <p>Login: </p>
         <input
@@ -38,7 +35,6 @@ export default function Login() {
           Login
         </button>
       </div>
-      <Footer />
     </section>
   );
 }

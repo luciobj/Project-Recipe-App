@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
-import App from '../App';
+import Header from '../Header';
 
 const profileTestId = 'profile-top-btn';
 const pageTitleTestId = 'page-title';
@@ -12,7 +12,7 @@ const searchIconTestId = 'search-icon';
 const userIconTestId = 'user-icon';
 
 describe('Ícone de perfil, h1 Comida e botão de pesquisa disposto na tela', () => {
-  renderWithRouter(<App />);
+  renderWithRouter(<Header />);
   const profile = screen.getByTestId(profileTestId);
   const pageTitle = screen.getByTestId(pageTitleTestId);
   const SearchBtn = screen.getByTestId(SearchBtnTestId);
