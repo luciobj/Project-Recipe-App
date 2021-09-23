@@ -16,9 +16,6 @@ import LoginProvider from './utils/LoginProvider';
 import RecipesMade from './RecipesMade';
 import FavoriteRecipes from './FavoriteRecipes';
 
-// Explorar Ingredients
-// Explorar Origem
-
 function App() {
   return (
     <BrowserRouter>
