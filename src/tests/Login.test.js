@@ -57,23 +57,55 @@ describe('3, 4, 5 - Tests if the inputs have propet validation', () => {
   });
 });
 
-// describe('6- Tests the local storage is updated with the tokens', () => {
-//   beforeEach(() => {
-//     renderWithRouter(<App />);
-//   });
+describe('6- Tests the local storage is updated with the tokens', () => {
+  // Reference for mock:
+  // * https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
+  // * https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
+  // const localStorageMock = {
+  //   store: {},
+  //   getItem: (key) => store[key],
+  //   setItem: (key, value) => {
+  //     store[key] = value.toString();
+  //   },
+  //   clear: () => {
+  //     store = {};
+  //   },
+  //   removeItem: (key) => {
+  //     delete store[key];
+  //   },
+  // };
 
-//   it('checks with a invalid email and a valid password', () => {
-//     const emailInput = screen.getByTestId(emailTestid);
-//     const passwordInput = screen.getByTestId(passwordTestid);
-//     const loginButton = screen.getByTestId(loginButtonTestid);
-//     userEvent.type(emailInput, 'meuemaileesse');
-//     userEvent.type(passwordInput, '1234567');
-//     expect(loginButton).toBeDisabled();
-//   });
-// });
+  // Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
+  // afterEach(() => {
+  //   window.localStorage.clear();
+  // });
+
+  Object.defineProperty(window, 'localStorage', {
+    value: {
+      getItem: jest.fn(() => null),
+      setItem: jest.fn(() => null),
+    },
+    writable: true,
+  });
+
+  it('shows the correct input email', () => {
+    renderWithRouter(<App />);
+    const emailInput = screen.getByTestId(emailTestid);
+    const passwordInput = screen.getByTestId(passwordTestid);
+    const loginButton = screen.getByTestId(loginButtonTestid);
+    const localStorageSetCalls = 3;
+    const token = 1;
+    userEvent.type(emailInput, acceptableEmail);
+    userEvent.type(passwordInput, acceptablePassword);
+    userEvent.click(loginButton);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(localStorageSetCalls);
+    expect(window.localStorage.setItem).toHaveBeenCalledWith('mealsToken', token);
+    expect(window.localStorage.setItem).toHaveBeenCalledWith('cocktailsToken', token);
+  });
+});
 
 describe('7- Tests the local storage is updated with the email', () => {
-  // Reference for mock: https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
   Object.defineProperty(window, 'localStorage', {
     value: {
       getItem: jest.fn(() => null),
@@ -86,10 +118,11 @@ describe('7- Tests the local storage is updated with the email', () => {
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
     const loginButton = screen.getByTestId(loginButtonTestid);
+    const localStorageSetCalls = 6;
     userEvent.type(emailInput, acceptableEmail);
     userEvent.type(passwordInput, acceptablePassword);
     userEvent.click(loginButton);
-    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(localStorageSetCalls);
     expect(window.localStorage.setItem).toHaveBeenCalledWith(
       'user',
       { email: acceptableEmail },

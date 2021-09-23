@@ -18,6 +18,8 @@ export default function Login() {
 
   const handleClick = () => {
     localStorage.setItem('user', { email });
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
     history.push('/comidas');
   };
 
