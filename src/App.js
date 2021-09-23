@@ -5,6 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import LoginProvider from './utils/LoginProvider';
 import Explore from './Explore';
 import Meals from './Meals';
 import Drinks from './Drinks';
@@ -12,7 +13,6 @@ import ExploreMeals from './ExploreMeals';
 import ExploreDrinks from './ExploreDrinks';
 import IngredientsExplore from './IngredientsExplore';
 import OriginExplore from './OriginExplore';
-import LoginProvider from './utils/LoginProvider';
 import RecipesMade from './RecipesMade';
 import FavoriteRecipes from './FavoriteRecipes';
 
