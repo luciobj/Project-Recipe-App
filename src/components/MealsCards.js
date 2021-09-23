@@ -1,10 +1,17 @@
 import React, {useContext} from "react";
+import { Redirect } from "react-router";
 import RecipesContext from '../context/recipesContext';
 
 function MealsCards() {
     const { meals } = useContext(RecipesContext);
 
     if (meals === null) return global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    if (meals.length === 1) {
+        return(
+            <Redirect to={`/comidas/${meals[0].idMeal}`} />
+        );
+    }
+    
     return(
         <div>
             {meals.map(({idMeal, strMealThumb, strMeal}, index) => {
