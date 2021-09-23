@@ -70,7 +70,6 @@ function SearchBar() {
 
   return (
     <div>
-      <button type="button" data-testid="search-top-btn">BOTÃO PARA TESTE</button>
       <label htmlFor="search-input">
         <input
           type="text"
