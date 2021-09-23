@@ -1,9 +1,13 @@
 import React from 'react';
+import Categories from '../components/Categories';
 import SearchBar from '../components/SearchBar';
 
 function MealsPage() {
   return (
-    <SearchBar />
+    <div>
+      <SearchBar />
+      { Categories('meal') }
+    </div>
   );
 }
 
