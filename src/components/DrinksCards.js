@@ -5,7 +5,7 @@ import RecipesContext from '../context/recipesContext';
 function DrinksCards() {
     const { drinks } = useContext(RecipesContext);
     
-    if (drinks === null) return global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    if (drinks === null || drinks === undefined) return global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
     if (drinks.length === 1) {
         return(
             <Redirect to={`/bebidas/${drinks[0].idDrink}`} />
