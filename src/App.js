@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Profile from './pages/Profile';
 import Login from './pages/Login';
 import LoginProvider from './utils/LoginProvider';
+import Profile from './pages/Profile';
 import Explore from './Explore';
 import Meals from './Meals';
 import Drinks from './Drinks';
