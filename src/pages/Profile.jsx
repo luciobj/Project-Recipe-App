@@ -12,6 +12,7 @@ export default function Profile(props) {
       return email;
     } return '';
   }
+
   // const user = localStorage.getItem('user');
   const { history } = props;
   return (
