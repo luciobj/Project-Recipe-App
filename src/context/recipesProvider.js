@@ -7,12 +7,11 @@ function RecipesProvider({ children }) {
   const [drinks, setDrinks] = useState([]);
 
   const contextValue = {
+    meals,
     setMeals,
     setDrinks,
+    drinks,
   };
-
-  console.log(meals);
-  console.log(drinks);
 
   return (
     <RecipesContext.Provider value={ contextValue }>

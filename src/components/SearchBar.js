@@ -13,7 +13,7 @@ import {
 
 function SearchBar() {
   // ref pra pegar o pathname: https://surajsharma.net/blog/current-url-in-react
-  // podemos utilizar o pathname pra renderizar as comidas e as bebidas quando estivermos em suas devidas páginas;
+  // podemos utilizar o pathname pra renderizar as comidas e as bebidas quando estivermos em suas respectivas páginas;
   const url = window.location.pathname.replace('/', '');
   // declarei a variável 'firstLetter pois o lint reclamou que a string estava sendo duplicada;
   const FIRST_LETTER = 'first-letter';
@@ -28,6 +28,9 @@ function SearchBar() {
   };
 
   const getMeals = async () => {
+    if (typeOfFilter === FIRST_LETTER && searchWord.length > 1) {
+      return global.alert('Sua busca deve conter somente 1 (um) caracter');
+    }
     if (typeOfFilter === 'ingredient') {
       const data = await fetchMealByIngredient(searchWord);
       setMeals(data);
@@ -40,12 +43,12 @@ function SearchBar() {
       const data = await fetchMealByFirstLetter(searchWord);
       setMeals(data);
     }
-    if (typeOfFilter === FIRST_LETTER && searchWord.length > 1) {
-      global.alert('Sua busca deve conter somente 1 (um) caracter');
-    }
   };
 
   const getDrinks = async () => {
+    if (typeOfFilter === FIRST_LETTER && searchWord.length > 1) {
+      return global.alert('Sua busca deve conter somente 1 (um) caracter');
+    }
     if (typeOfFilter === 'ingredient') {
       const data = await fetchDrinkByIngredient(searchWord);
       setDrinks(data);
@@ -57,9 +60,6 @@ function SearchBar() {
     if (typeOfFilter === FIRST_LETTER) {
       const data = await fetchDrinkByFirstLetter(searchWord);
       setDrinks(data);
-    }
-    if (typeOfFilter === FIRST_LETTER && searchWord.length > 1) {
-      global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
   };
 

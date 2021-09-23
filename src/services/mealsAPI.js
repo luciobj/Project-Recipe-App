@@ -1,6 +1,6 @@
 const API_INGREDIENT_URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
-const API_NAME_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s='
-const API_LETTER_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?f='
+const API_NAME_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const API_LETTER_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=';
 
 export const fetchMealByIngredient = async (ingredient) => {
   try {

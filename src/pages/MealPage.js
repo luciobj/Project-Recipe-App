@@ -1,9 +1,13 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
+import MealsCards from '../components/MealsCards';
 
 function MealPage() {
   return (
-    <SearchBar />
+    <div>
+      <SearchBar />
+      <MealsCards />
+    </div>
   );
 }
 
