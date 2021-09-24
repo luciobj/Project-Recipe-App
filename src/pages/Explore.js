@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../Header';
-import Footer from '../Footer';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 function Explore() {
   // ref pra usar o history em componentes funionais: https://www.codegrepper.com/code-examples/javascript/redirect+onclick+react

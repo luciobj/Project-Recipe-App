@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './style.css';
+import '../Styles/Header.css';
 import PropTypes from 'prop-types';
-import SearchBar from '../Components/SearchBar';
+import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
-import ProfileIcon from '../Components/ProfileIcon';
+import ProfileIcon from './ProfileIcon';
 
 function Index({ title, containBtnSearch = false }) {
   const [clickSearchIcon, setClickSearchIcon] = useState(false);
