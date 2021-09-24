@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/comidas" component={ MealsPage } />
         <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/explorar/comidas" component={ ExploreMeals } />
-        <Route exact path="explorar/bebidas" component={ ExploreDrinks } />
+        <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
       </Switch>
     </LoginProvider>
   );
