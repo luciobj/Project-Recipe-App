@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
 import ProfileIcon from './ProfileIcon';
 
-function Index({ title, containBtnSearch = false }) {
+function Header({ title, containBtnSearch = false }) {
   const [clickSearchIcon, setClickSearchIcon] = useState(false);
   if (clickSearchIcon) {
     return (
@@ -61,4 +61,4 @@ Index.propTypes = {
   containBtnSearch: PropTypes.bool.isRequired,
 };
 
-export default Index;
+export default Header;

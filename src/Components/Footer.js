@@ -5,7 +5,7 @@ import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
-const index = () => (
+const Footer = () => (
   <footer className="footer" data-testid="footer">
     <div data-testid="drinks-bottom-btn" src={ drinkIcon }>
       <Link to="/bebidas">
@@ -25,4 +25,4 @@ const index = () => (
   </footer>
 );
 
-export default index;
+export default Footer;
