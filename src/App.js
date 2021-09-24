@@ -6,15 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import LoginProvider from './utils/LoginProvider';
 import Profile from './pages/Profile';
-import Explore from './Explore';
-import Meals from './Meals';
-import Drinks from './Drinks';
-import ExploreMeals from './ExploreMeals';
-import ExploreDrinks from './ExploreDrinks';
-import IngredientsExplore from './IngredientsExplore';
-import OriginExplore from './OriginExplore';
-import RecipesMade from './RecipesMade';
-import FavoriteRecipes from './FavoriteRecipes';
+import Explore from './pages/Explore';
+import Meals from './pages/Meals';
+import Drinks from './pages/Drinks';
+import ExploreMeals from './pages/ExploreMeals';
+import ExploreDrinks from './pages/ExploreDrinks';
+import IngredientsExplore from './pages/IngredientsExplore';
+import OriginExplore from './pages/OriginExplore';
+import RecipesMade from './pages/RecipesMade';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (

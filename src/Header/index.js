@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
+import SearchBar from '../Components/SearchBar';
 import searchIcon from '../images/searchIcon.svg';
 import ProfileIcon from '../Components/ProfileIcon';
 
@@ -23,7 +24,7 @@ function Index({ title, containBtnSearch = false }) {
             alt="Icone de pesquisa"
           />
         </button>
-        <input type="text" data-testid="search-input" />
+        <SearchBar />
       </div>
     );
   }
