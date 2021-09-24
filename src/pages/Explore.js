@@ -5,10 +5,7 @@ function Explore() {
   // ref pra usar o history em componentes funionais: https://www.codegrepper.com/code-examples/javascript/redirect+onclick+react
   const history = useHistory();
 
-  const handleCLick = ({ target }) => {
-    const { name } = target;
-    history.push(`/explorar/${name}`);
-  };
+  const handleCLick = ({ target: { name } }) => history.push(`/explorar/${name}`);
 
   return (
     <div>
