@@ -47,14 +47,15 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
     const meals = {
       idMeal: '52782',
       strMeal: 'Lamb tomato and sweet spices',
-      strMealThumb: 'https://www.themealdb.com/images/media/meals/qtwtss1468572261.jpg',
+      strMealThumb:
+        'https://www.themealdb.com/images/media/meals/qtwtss1468572261.jpg',
     };
 
     jest.spyOn(global, 'fetch');
     global.fetch.mockResolvedValue({
       json: jest.fn().mockResolvedValue(meals),
     });
-  
+
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
 
@@ -72,45 +73,50 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
 
     fireEvent.change(searchInput, { target: { value: 'potato' } });
     expect(searchInput).toHaveValue('potato');
-    fireEvent.click(ingredientRadioInput)
+    fireEvent.click(ingredientRadioInput);
     expect(ingredientRadioInput.checked).toBe(true);
     fireEvent.click(searchButton);
 
     expect(global.fetch).toBeCalled();
-    expect(global.fetch).toBeCalledWith('https://www.themealdb.com/api/json/v1/1/filter.php?i=potato');
+    expect(global.fetch).toBeCalledWith(
+      'https://www.themealdb.com/api/json/v1/1/filter.php?i=potato',
+    );
   });
 
-  it('Dispara alerta caso a pesquisa por primeira letra seja feita com mais de uma letra', async () => {
-    const { history } = renderWithRouter(<App />);
-    history.push('/comidas');
+  it('Dispara alerta caso a pesquisa por primeira letra seja feita com mais de uma letra',
+    async () => {
+      const { history } = renderWithRouter(<App />);
+      history.push('/comidas');
 
-    global.alert = jest.fn();
+      global.alert = jest.fn();
 
-    const headerSearchButton = screen.getByTestId('search-top-btn');
-    const searchInput = screen.getByTestId('search-input');
-    const firstLetterRadioInput = screen.getByLabelText('Primeira letra');
-    const searchButton = screen.getByText('Buscar');
-    
-    expect(headerSearchButton).toBeInTheDocument();
-    expect(searchInput).toBeInTheDocument();
-    expect(searchInput).toHaveValue('');
-    expect(firstLetterRadioInput).toBeInTheDocument();
-    expect(firstLetterRadioInput.checked).toBe(false);
-    expect(searchButton).toBeInTheDocument();
-    
-    fireEvent.change(searchInput, { target: { value: 'po' } });
-    expect(searchInput.value.length).toBe(2);
-    fireEvent.click(firstLetterRadioInput)
-    expect(firstLetterRadioInput.checked).toBe(true);
-    fireEvent.click(searchButton);
+      const headerSearchButton = screen.getByTestId('search-top-btn');
+      const searchInput = screen.getByTestId('search-input');
+      const firstLetterRadioInput = screen.getByLabelText('Primeira letra');
+      const searchButton = screen.getByText('Buscar');
 
-    expect(window.alert).toBeCalledWith('Sua busca deve conter somente 1 (um) caracter');
-  })
+      expect(headerSearchButton).toBeInTheDocument();
+      expect(searchInput).toBeInTheDocument();
+      expect(searchInput).toHaveValue('');
+      expect(firstLetterRadioInput).toBeInTheDocument();
+      expect(firstLetterRadioInput.checked).toBe(false);
+      expect(searchButton).toBeInTheDocument();
+
+      fireEvent.change(searchInput, { target: { value: 'po' } });
+      expect(searchInput.value.length).toBe(2);
+      fireEvent.click(firstLetterRadioInput);
+      expect(firstLetterRadioInput.checked).toBe(true);
+      fireEvent.click(searchButton);
+
+      expect(window.alert).toBeCalledWith(
+        'Sua busca deve conter somente 1 (um) caracter',
+      );
+    });
 });
 
 describe('Requisito 15 - Testa se a página de drinks é renderizada', () => {
   it('verifica página de drinks', () => {
-    const { history } = renderWithRouter(<App />)
+    const { history } = renderWithRouter(<App />);
     history.push('/bebidas');
 
     const ingredientSearch = screen.getByTestId('ingredient-search-radio');
