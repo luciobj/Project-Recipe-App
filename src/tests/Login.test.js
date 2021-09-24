@@ -11,27 +11,27 @@ const loginButtonTestid = 'login-submit-btn';
 const acceptableEmail = 'meuemail@eesse.com';
 const acceptablePassword = '1234567';
 
-describe('2- Tests if the login page', () => {
+describe('Requisito 2- Testa se a página de Login', () => {
   beforeEach(() => {
     renderWithRouter(<App />);
   });
 
-  it('has the email input', () => {
+  it('tem o input para o email', () => {
     const emailInput = screen.getByTestId(emailTestid);
     expect(emailInput).toBeInTheDocument();
   });
-  it('has the password input', () => {
+  it('tem o input para o email', () => {
     const passwordInput = screen.getByTestId(passwordTestid);
     expect(passwordInput).toBeInTheDocument();
   });
 });
 
-describe('3, 4, 5 - Tests if the inputs have propet validation', () => {
+describe('Requisitos 3 a 5 - Testa se a validação dos campos', () => {
   beforeEach(() => {
     renderWithRouter(<App />);
   });
 
-  it('checks with a invalid email and a valid password', () => {
+  it('Fica desabilitado com email no formato errado', () => {
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
     const loginButton = screen.getByTestId(loginButtonTestid);
@@ -39,7 +39,7 @@ describe('3, 4, 5 - Tests if the inputs have propet validation', () => {
     userEvent.type(passwordInput, acceptablePassword);
     expect(loginButton).toBeDisabled();
   });
-  it('checks with a invalid email and password', () => {
+  it('Fica desabilitado com email e senha nos formatos errados', () => {
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
     const loginButton = screen.getByTestId(loginButtonTestid);
@@ -47,7 +47,7 @@ describe('3, 4, 5 - Tests if the inputs have propet validation', () => {
     userEvent.type(passwordInput, '1234');
     expect(loginButton).toBeDisabled();
   });
-  it('checks with a valid email and a valid password', () => {
+  it('Fica abilitado com email e senha no formato correto', () => {
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
     const loginButton = screen.getByTestId(loginButtonTestid);
@@ -57,7 +57,7 @@ describe('3, 4, 5 - Tests if the inputs have propet validation', () => {
   });
 });
 
-describe('6- Tests the local storage is updated with the tokens', () => {
+describe('Requisito 6- Testa se os tokens são salvos no localStorage', () => {
   // Reference for mock:
   // * https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
   // * https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
@@ -89,7 +89,7 @@ describe('6- Tests the local storage is updated with the tokens', () => {
     writable: true,
   });
 
-  it('shows the correct input email', () => {
+  it('É salvo o email passado corretamente', () => {
     renderWithRouter(<App />);
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
@@ -105,7 +105,7 @@ describe('6- Tests the local storage is updated with the tokens', () => {
   });
 });
 
-describe('7- Tests the local storage is updated with the email', () => {
+describe('Requisito 7- Testa se o email é salvo no localStorage', () => {
   Object.defineProperty(window, 'localStorage', {
     value: {
       getItem: jest.fn(() => null),
@@ -113,7 +113,7 @@ describe('7- Tests the local storage is updated with the email', () => {
     },
     writable: true,
   });
-  it('shows the correct input email', () => {
+  it('mostra o email correto passado', () => {
     renderWithRouter(<App />);
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
@@ -124,14 +124,13 @@ describe('7- Tests the local storage is updated with the email', () => {
     userEvent.click(loginButton);
     expect(localStorage.setItem).toHaveBeenCalledTimes(localStorageSetCalls);
     expect(window.localStorage.setItem).toHaveBeenCalledWith(
-      'user',
-      { email: acceptableEmail },
+      'user', JSON.stringify({ email: acceptableEmail }),
     );
   });
 });
 
-describe('8- Tests if the page is redirected after clicking on the button', () => {
-  it('the path is now the main for foods', () => {
+describe('Requisito 8- Testa se é redirecionado após o login', () => {
+  it('o URL é agora /comidas', () => {
     const { history } = renderWithRouter(<App />);
     const emailInput = screen.getByTestId(emailTestid);
     const passwordInput = screen.getByTestId(passwordTestid);
