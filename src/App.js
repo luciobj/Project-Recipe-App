@@ -21,26 +21,26 @@ function App() {
     <Switch>
       <LoginProvider>
         <Route exact path="/" component={ Login } />
+        <Route path="/perfil" component={ Profile } />
+        <Route exact path="/receitas-feitas" component={ RecipesMade } />
+        <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route exact path="/comidas" component={ Meals } />
+        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/explorar" component={ Explore } />
+        <Route exact path="/explorar/comidas" component={ ExploreMeals } />
+        <Route
+          exact
+          path="/explorar/comidas/ingredientes"
+          component={ IngredientsExplore }
+        />
+        <Route
+          exact
+          path="/explorar/bebidas/ingredientes"
+          component={ IngredientsExplore }
+        />
+        <Route exact path="/explorar/comidas/area" component={ OriginExplore } />
+        <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
       </LoginProvider>
-      <Route path="/perfil" component={ Profile } />
-      <Route exact path="/receitas-feitas" component={ RecipesMade } />
-      <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
-      <Route exact path="/comidas" component={ Meals } />
-      <Route exact path="/bebidas" component={ Drinks } />
-      <Route exact path="/explorar" component={ Explore } />
-      <Route exact path="/explorar/comidas" component={ ExploreMeals } />
-      <Route
-        exact
-        path="/explorar/comidas/ingredientes"
-        component={ IngredientsExplore }
-      />
-      <Route
-        exact
-        path="/explorar/bebidas/ingredientes"
-        component={ IngredientsExplore }
-      />
-      <Route exact path="/explorar/comidas/area" component={ OriginExplore } />
-      <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
     </Switch>
   );
 }
