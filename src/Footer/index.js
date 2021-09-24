@@ -8,7 +8,7 @@ import mealIcon from '../images/mealIcon.svg';
 const index = () => (
   <footer className="footer" data-testid="footer">
     <div data-testid="drinks-bottom-btn" src={ drinkIcon }>
-      <Link to="/explorar/bebidas">
+      <Link to="/bebidas">
         <img src={ drinkIcon } alt="drink icon" />
       </Link>
     </div>
@@ -18,7 +18,7 @@ const index = () => (
       </Link>
     </div>
     <div data-testid="food-bottom-btn" src={ mealIcon }>
-      <Link to="/explorar/comidas">
+      <Link to="/comidas">
         <img src={ mealIcon } alt="meal icon" />
       </Link>
     </div>
