@@ -2,7 +2,27 @@ import React from 'react';
 
 function ExploreMeals() {
   return (
-    <h1>Explorar comidas</h1>
+    <div>
+           <button
+        type="button"
+        data-testid="explore-by-ingredient"
+      >
+        Por Ingredientes
+      </button>
+
+      <button
+        type="button"
+        data-testid="explore-by-area">
+          Por Local de Origem
+      </button>
+
+      <button 
+        type="button"
+        data-testid="explore-surprise"
+      >
+        Me Surpreenda!
+      </button>
+    </div>
   );
 }
 
