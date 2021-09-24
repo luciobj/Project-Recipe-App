@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
-import Header from '../Header';
+import Header from '../Components/Header';
 
 const profileTestId = 'profile-top-btn';
 const pageTitleTestId = 'page-title';
