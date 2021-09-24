@@ -56,7 +56,7 @@ function Header({ title, containBtnSearch = false }) {
   );
 }
 
-Index.propTypes = {
+Header.propTypes = {
   title: PropTypes.string.isRequired,
   containBtnSearch: PropTypes.bool.isRequired,
 };
