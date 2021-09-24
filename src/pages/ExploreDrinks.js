@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 function ExploreDrinks() {
-  return(
-      <h1>Explorar bebidas</h1>
+  return (
+    <h1>Explorar bebidas</h1>
   );
 }
 

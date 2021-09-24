@@ -1,9 +1,9 @@
-import React from "react";
-import { useHistory } from 'react-router-dom'
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Explore() {
   // ref pra usar o history em componentes funionais: https://www.codegrepper.com/code-examples/javascript/redirect+onclick+react
-  let history = useHistory();
+  const history = useHistory();
 
   const handleCLick = ({ target }) => {
     const { name } = target;

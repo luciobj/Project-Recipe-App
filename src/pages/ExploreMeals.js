@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 function ExploreMeals() {
-  return(
-      <h1>Explorar comidas</h1>
-    );
+  return (
+    <h1>Explorar comidas</h1>
+  );
 }
 
 export default ExploreMeals;
