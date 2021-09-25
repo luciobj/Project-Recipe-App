@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { fetchRandomMeal, fetchRandomDrink } from '../Services/randomRecipeAPI'
 
@@ -9,25 +9,27 @@ function ExploreButtons() {
   const [randomMeal, setRandomMeal] = useState([]);
   const [randomDrink, setRandomDrink] = useState([]);
 
-  const getRandomMeal = async () => {
-    const data = await fetchRandomMeal();
-    setRandomMeal(data);
-  } 
+  useEffect(() => {
+    const getRandomMeal = async () => {
+      const data = await fetchRandomMeal();
+      setRandomMeal(data);
+    } 
+    getRandomMeal(); 
+  }, []);
 
-  const getRandomDrink = async () => {
-    const data = await fetchRandomDrink();
-    setRandomDrink(data);
+  useEffect(() => {
+    const getRandomDrink = async () => {
+      const data = await fetchRandomDrink();
+      setRandomDrink(data);
+    }
+    getRandomDrink();
+  }, []);
+
+  const handleSurpriseClick = () => {
+    if (url === 'comidas') history.push(`/${url}/${randomMeal[0].idMeal}`)
+    if (url === 'bebidas') history.push(`/${url}/${randomDrink[0].idDrink}`)
   }
   
-  const handleSurpriseClick = () => {
-    if (url === 'comidas') {
-      getRandomMeal();
-      randomMeal !== [] && console.log(randomMeal);
-      // history.push(`/${url}/${randomMeal[0].idMeal}`)
-    }
-    if (url === 'bebidas') getRandomDrink();
-  }
-
   const handleCLick = ({ target: { name } }) => history.push(`/explorar/${url}/${name}`);
 
   if (url === 'comidas') {
