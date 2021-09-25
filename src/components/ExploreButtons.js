@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { fetchRandomMeal, fetchRandomDrink } from '../Services/randomRecipeAPI'
 
 function ExploreButtons() {
+  const url = window.location.pathname.replace('/explorar/', '');
+  const history = useHistory();
+
   const [randomMeal, setRandomMeal] = useState([]);
   const [randomDrink, setRandomDrink] = useState([]);
 
@@ -17,12 +20,13 @@ function ExploreButtons() {
   }
   
   const handleSurpriseClick = () => {
-    if (url === 'comidas') getRandomMeal();
+    if (url === 'comidas') {
+      getRandomMeal();
+      randomMeal !== [] && console.log(randomMeal);
+      // history.push(`/${url}/${randomMeal[0].idMeal}`)
+    }
     if (url === 'bebidas') getRandomDrink();
   }
-
-  const url = window.location.pathname.replace('/explorar/', '');
-  const history = useHistory();
 
   const handleCLick = ({ target: { name } }) => history.push(`/explorar/${url}/${name}`);
 
