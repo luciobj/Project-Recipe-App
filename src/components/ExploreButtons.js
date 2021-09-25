@@ -30,8 +30,7 @@ function ExploreButtons() {
     if (url === 'bebidas') history.push(`/${url}/${randomDrink[0].idDrink}`);
   };
 
-  const handleCLick = ({ target: { name } }) =>
-    history.push(`/explorar/${url}/${name}`);
+  const handleCLick = ({ target: { name } }) => history.push(`/explorar/${url}/${name}`);
 
   if (url === 'comidas') {
     return (
