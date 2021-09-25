@@ -28,8 +28,8 @@ function App() {
         />
         <Route
           exact
-          path="/explorar/bebidas/ingredientes" 
-          component={ ExploreByIngredients } 
+          path="/explorar/bebidas/ingredientes"
+          component={ ExploreByIngredients }
         />
         <Route exact path="/explorar/comidas/area" component={ ExploreByArea } />
       </Switch>

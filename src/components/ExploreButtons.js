@@ -31,7 +31,6 @@ function ExploreButtons() {
   };
 
   const handleCLick = ({ target: { name } }) =>
-
     history.push(`/explorar/${url}/${name}`);
 
   if (url === 'comidas') {
@@ -67,7 +66,7 @@ function ExploreButtons() {
     );
   }
 
-  if (url === "bebidas") {
+  if (url === 'bebidas') {
     return (
       <div>
         <button
