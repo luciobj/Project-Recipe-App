@@ -21,12 +21,14 @@ function App() {
         <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/explorar/comidas" component={ ExploreMeals } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
-        <Route 
-          exact path="/explorar/comidas/ingredientes"
+        <Route
+          exact
+          path="/explorar/comidas/ingredientes"
           component={ ExploreByIngredients }
         />
-        <Route 
-          exact path="/explorar/bebidas/ingredientes" 
+        <Route
+          exact
+          path="/explorar/bebidas/ingredientes" 
           component={ ExploreByIngredients } 
         />
         <Route exact path="/explorar/comidas/area" component={ ExploreByArea } />

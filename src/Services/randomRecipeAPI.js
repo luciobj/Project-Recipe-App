@@ -6,7 +6,7 @@ export const fetchRandomMeal = async () => {
     const response = await fetch(RANDOM_MEAL_URL);
     const { meals } = await response.json();
     return meals;
-  } catch {
+  } catch (error) {
     throw new Error('Não foi possível realizar pesquisa');
   }
 };

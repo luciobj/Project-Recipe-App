@@ -31,6 +31,7 @@ function ExploreButtons() {
   };
 
   const handleCLick = ({ target: { name } }) =>
+
     history.push(`/explorar/${url}/${name}`);
 
   if (url === 'comidas') {
@@ -39,7 +40,7 @@ function ExploreButtons() {
         <button
           type="button"
           name="ingredientes"
-          onClick={handleCLick}
+          onClick={ handleCLick }
           data-testid="explore-by-ingredient"
         >
           Por Ingredientes
@@ -48,7 +49,7 @@ function ExploreButtons() {
         <button
           type="button"
           name="area"
-          onClick={handleCLick}
+          onClick={ handleCLick }
           data-testid="explore-by-area"
         >
           Por Local de Origem
@@ -57,7 +58,7 @@ function ExploreButtons() {
         <button
           type="button"
           name="surprise"
-          onClick={handleSurpriseClick}
+          onClick={ handleSurpriseClick }
           data-testid="explore-surprise"
         >
           Me Surpreenda!
@@ -72,7 +73,7 @@ function ExploreButtons() {
         <button
           type="button"
           name="ingredientes"
-          onClick={handleCLick}
+          onClick={ handleCLick }
           data-testid="explore-by-ingredient"
         >
           Por Ingredientes
@@ -81,7 +82,7 @@ function ExploreButtons() {
         <button
           type="button"
           name="surprise"
-          onClick={handleSurpriseClick}
+          onClick={ handleSurpriseClick }
           data-testid="explore-surprise"
         >
           Me Surpreenda!
