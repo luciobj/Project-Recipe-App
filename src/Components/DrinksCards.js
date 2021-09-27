@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import RecipesContext from '../context/recipesContext';
 
 function DrinksCards() {
-  const MAX_LENGTH = 12;
+  const maxLength = 12;
   const { drinks } = useContext(RecipesContext);
 
   if (drinks === null || drinks === undefined) {
@@ -27,7 +27,7 @@ function DrinksCards() {
             />
             <h3 data-testid={ `${index}-card-name` }>{ strDrink }</h3>
           </div>
-        )).slice(0, MAX_LENGTH)}
+        )).slice(0, maxLength)}
     </div>
   );
 }

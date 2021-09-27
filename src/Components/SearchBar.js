@@ -16,7 +16,7 @@ function SearchBar() {
   // podemos utilizar o pathname pra renderizar as comidas e as bebidas quando estivermos em suas respectivas páginas;
   const url = window.location.pathname.replace('/', '');
   // declarei a variável 'firstLetter pois o lint reclamou que a string estava sendo duplicada;
-  const FIRST_LETTER = 'first-letter';
+  const firstLetter = 'first-letter';
 
   const { setMeals, setDrinks } = useContext(RecipesContext);
   const [searchWord, setSearchWord] = useState('');
@@ -28,7 +28,7 @@ function SearchBar() {
   };
 
   const getMeals = async () => {
-    if (typeOfFilter === FIRST_LETTER && searchWord.length > 1) {
+    if (typeOfFilter === firstLetter && searchWord.length > 1) {
       return global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (typeOfFilter === 'ingredient') {
@@ -39,14 +39,14 @@ function SearchBar() {
       const data = await fetchMealByName(searchWord);
       setMeals(data);
     }
-    if (typeOfFilter === FIRST_LETTER) {
+    if (typeOfFilter === firstLetter) {
       const data = await fetchMealByFirstLetter(searchWord);
       setMeals(data);
     }
   };
 
   const getDrinks = async () => {
-    if (typeOfFilter === FIRST_LETTER && searchWord.length > 1) {
+    if (typeOfFilter === firstLetter && searchWord.length > 1) {
       return global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (typeOfFilter === 'ingredient') {
@@ -57,7 +57,7 @@ function SearchBar() {
       const data = await fetchDrinkByName(searchWord);
       setDrinks(data);
     }
-    if (typeOfFilter === FIRST_LETTER) {
+    if (typeOfFilter === firstLetter) {
       const data = await fetchDrinkByFirstLetter(searchWord);
       setDrinks(data);
     }
