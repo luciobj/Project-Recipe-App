@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
-import RecipesContext from '../context/recipesContext"'';
+import RecipesContext from '../context/recipesContext';
 
 function DrinksCards() {
   const { drinks } = useContext(RecipesContext);
