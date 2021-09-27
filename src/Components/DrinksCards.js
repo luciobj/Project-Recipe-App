@@ -3,23 +3,23 @@ import { Redirect } from 'react-router';
 import RecipesContext from '../context/recipesContext';
 
 function DrinksCards() {
+  const MAX_LENGTH = 12;
   const { drinks } = useContext(RecipesContext);
 
   if (drinks === null || drinks === undefined) {
     return global.alert(
-      'Sinto muito, não encontramos nenhuma receita para esses filtros.'
+      'Sinto muito, não encontramos nenhuma receita para esses filtros.',
     );
   }
   if (drinks.length === 1) {
-    return <Redirect to={`/bebidas/${drinks[0].idDrink}`} />;
+    return <Redirect to={ `/bebidas/${drinks[0].idDrink}` } />;
   }
 
   return (
     <div>
       {drinks
-        .map(({ idDrink, strDrinkThumb, strDrink }, index) => {
-          return (
-            <div data-testid={ `${index}-recipe-card` } key={idDrink}>
+        .map(({ idDrink, strDrinkThumb, strDrink }, index) =>
+            <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
               <img
                 src={ strDrinkThumb }
                 alt={ strDrink }
@@ -27,9 +27,8 @@ function DrinksCards() {
               />
               <h3 data-testid={ `${index}-card-name` }>{ strDrink }</h3>
             </div>
-          );
-        })
-        .slice(0, 12)}
+        )
+        .slice(0, MAX_LENGTH)}
     </div>
   );
 }
