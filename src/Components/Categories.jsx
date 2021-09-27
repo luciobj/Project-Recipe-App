@@ -27,10 +27,10 @@ export default function Categories(props) {
       setFiltered('');
     } else {
       target.checked = false;
-      const xablau = document.getElementsByName('categories');
-      for (let index = 0; index < xablau.length; index += 1) {
-        if (xablau[index].value === filtered) {
-          xablau[index].checked = true;
+      const inputs = document.getElementsByName('categories');
+      for (let index = 0; index < inputs.length; index += 1) {
+        if (inputs[index].value === filtered) {
+          inputs[index].checked = true;
         }
       }
     }
@@ -55,7 +55,6 @@ export default function Categories(props) {
             </label>
           )).slice(0, maxRender) }
       </label>
-      { filtered }
     </div>
   );
 }
