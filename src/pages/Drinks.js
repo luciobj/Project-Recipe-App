@@ -2,11 +2,11 @@ import React from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
-const ExploreMeals = () => (
+const Drinks = () => (
   <div>
-    <Header title="Explorar Comidas" containBtnSearch />
+    <Header title="Bebidas" />
     <Footer />
   </div>
 );
 
-export default ExploreMeals;
+export default Drinks;

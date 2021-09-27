@@ -1,9 +1,12 @@
 import React from 'react';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
-function ExploreDrinks() {
-  return (
-    <h1>Explorar bebidas</h1>
-  );
-}
+const ExploreDrinks = () => (
+  <div>
+    <Header title="Explorar Bebidas" containBtnSearch />
+    <Footer />
+  </div>
+);
 
 export default ExploreDrinks;

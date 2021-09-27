@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 function Explore() {
   // ref pra usar o history em componentes funionais: https://www.codegrepper.com/code-examples/javascript/redirect+onclick+react
@@ -9,6 +11,7 @@ function Explore() {
 
   return (
     <div>
+      <Header title="Explorar" containBtnSearch />
       <button
         type="button"
         name="comidas"
@@ -26,6 +29,7 @@ function Explore() {
       >
         Explorar Bebidas
       </button>
+      <Footer />
     </div>
   );
 }
