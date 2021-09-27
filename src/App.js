@@ -3,9 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+// import MealsPage from './pages/MealsPage';
 import LoginProvider from './utils/LoginProvider';
-
-import MealsPage from './pages/MealsPage';
 import FoodDetail from './pages/FoodDetail';
 import DrinkDetail from './pages/DrinkDetail';
 import Explore from './pages/Explore';
@@ -24,7 +23,7 @@ function App() {
       <LoginProvider>
         <Route exact path="/" component={ Login } />
         <Route path="/perfil" component={ Profile } />
-        <Route exact path="/comidas" component={ MealsPage } />
+        {/* <Route exact path="/comidas" component={ MealsPage } /> */}
         <Route
           exact
           path="/comidas/52787"
