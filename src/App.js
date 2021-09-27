@@ -15,7 +15,7 @@ import IngredientsExplore from './pages/IngredientsExplore';
 import OriginExplore from './pages/OriginExplore';
 import RecipesMade from './pages/RecipesMade';
 import FavoriteRecipes from './pages/FavoriteRecipes';
-import MealDetails from './pages/MealDetails'
+import MealDetails from './pages/MealDetails';
 
 function App() {
   return (
