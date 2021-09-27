@@ -20,18 +20,19 @@ export default function Categories(props) {
 
   const handleClick = ({ target }) => {
     const { value } = target;
+    const inputs = document.getElementsByName('categories');
     if (filtered === '') {
       setFiltered(value);
-    } else if (value === filtered) {
-      target.checked = false;
-      setFiltered('');
+      for (let index = 0; index < inputs.length; index += 1) {
+        if (inputs[index].value !== target.value) {
+          inputs[index].disabled = true;
+        }
+      }
     } else {
       target.checked = false;
-      const inputs = document.getElementsByName('categories');
+      setFiltered('');
       for (let index = 0; index < inputs.length; index += 1) {
-        if (inputs[index].value === filtered) {
-          inputs[index].checked = true;
-        }
+        inputs[index].disabled = false;
       }
     }
   };
@@ -55,6 +56,7 @@ export default function Categories(props) {
             </label>
           )).slice(0, maxRender) }
       </label>
+      { filtered }
     </div>
   );
 }
