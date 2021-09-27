@@ -58,6 +58,7 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
   });
   it('Verifica se a busca por INGREDIENTE é feita corretamente', async () => {
     const meals = {
+      json: () => {},
       idMeal: '52782',
       strMeal: 'Lamb tomato and sweet spices',
       strMealThumb:
@@ -107,13 +108,6 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
       const searchInput = screen.getByTestId('search-input');
       const firstLetterRadioInput = screen.getByLabelText('Primeira letra');
       const searchButton = screen.getByText('Buscar');
-
-      expect(headerSearchButton).toBeInTheDocument();
-      expect(searchInput).toBeInTheDocument();
-      expect(searchInput).toHaveValue('');
-      expect(firstLetterRadioInput).toBeInTheDocument();
-      expect(firstLetterRadioInput.checked).toBe(false);
-      expect(searchButton).toBeInTheDocument();
 
       fireEvent.change(searchInput, { target: { value: 'po' } });
       expect(searchInput.value.length).toBe(2);

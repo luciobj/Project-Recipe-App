@@ -22,11 +22,6 @@ function SearchBar() {
   const [searchWord, setSearchWord] = useState('');
   const [typeOfFilter, setTypeOfFilter] = useState('');
 
-  const handleChange = ({ target }, callback) => {
-    const { value } = target;
-    callback(value);
-  };
-
   const getMeals = async () => {
     if (typeOfFilter === firstLetter && searchWord.length > 1) {
       return global.alert('Sua busca deve conter somente 1 (um) caracter');
@@ -76,7 +71,7 @@ function SearchBar() {
           id="search-input"
           name="search-input"
           placeholder="Buscar Receita"
-          onChange={ (target) => handleChange(target, setSearchWord) }
+          onChange={ ({ target }) => setSearchWord(target.value) }
           data-testid="search-input"
         />
       </label>
@@ -87,7 +82,7 @@ function SearchBar() {
           type="radio"
           name="radio-search"
           value="ingredient"
-          onChange={ (target) => handleChange(target, setTypeOfFilter) }
+          onChange={ ({ target }) => setTypeOfFilter(target.value) }
           data-testid="ingredient-search-radio"
         />
         {' '}
@@ -100,7 +95,7 @@ function SearchBar() {
           type="radio"
           name="radio-search"
           value="name"
-          onChange={ (target) => handleChange(target, setTypeOfFilter) }
+          onChange={ ({ target }) => setTypeOfFilter(target.value) }
           data-testid="name-search-radio"
         />
         {' '}
@@ -113,7 +108,7 @@ function SearchBar() {
           type="radio"
           name="radio-search"
           value="first-letter"
-          onChange={ (target) => handleChange(target, setTypeOfFilter) }
+          onChange={ ({ target }) => setTypeOfFilter(target.value) }
           data-testid="first-letter-search-radio"
         />
         {' '}

@@ -8,7 +8,7 @@ export const fetchDrinkByIngredient = async (ingredient) => {
     const { drinks } = await response.json();
     return drinks;
   } catch (error) {
-    return console.log(error);
+    throw new Error('Não foi possível realizar pesquisa');
   }
 };
 
@@ -18,7 +18,7 @@ export const fetchDrinkByName = async (name) => {
     const { drinks } = await response.json();
     return drinks;
   } catch (error) {
-    console.log(error);
+    throw new Error('Não foi possível realizar pesquisa');
   }
 };
 
@@ -28,6 +28,6 @@ export const fetchDrinkByFirstLetter = async (firstLetter) => {
     const { drinks } = await response.json();
     return drinks;
   } catch (error) {
-    return console.log(error);
+    throw new Error('Não foi possível realizar pesquisa');
   }
 };
