@@ -6,7 +6,7 @@ function MealsPage() {
   return (
     <div>
       <SearchBar />
-      { Categories('meal') }
+      <Categories mealOrDrink="meal" />
     </div>
   );
 }
