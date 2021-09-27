@@ -58,16 +58,19 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
   });
   it('Verifica se a busca por INGREDIENTE é feita corretamente', async () => {
     const meals = {
-      json: () => {},
       idMeal: '52782',
       strMeal: 'Lamb tomato and sweet spices',
       strMealThumb:
         'https://www.themealdb.com/images/media/meals/qtwtss1468572261.jpg',
     };
 
+    const result = {
+      json: () => { meals },
+    }
+
     jest.spyOn(global, 'fetch');
     global.fetch.mockResolvedValue({
-      json: jest.fn().mockResolvedValue(meals),
+      json: jest.fn().mockResolvedValue(result),
     });
 
     const { history } = renderWithRouter(<App />);
