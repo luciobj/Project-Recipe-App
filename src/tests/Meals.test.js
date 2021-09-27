@@ -46,11 +46,11 @@ describe('Requisito 13 - Implementa barra de busca', () => {
 });
 
 describe('Requisito 14 - radio buttons para filtragem', () => {
+  const headerSearchButton = screen.getByTestId('search-top-btn');
+
   it('Verifica se o botão de busca do header existe', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
-
-    const headerSearchButton = screen.getByTestId('search-top-btn');
 
     expect(headerSearchButton).toBeInTheDocument();
   });
@@ -70,7 +70,6 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
 
-    const headerSearchButton = screen.getByTestId('search-top-btn');
     const searchInput = screen.getByTestId('search-input');
     const ingredientRadioInput = screen.getByLabelText('Ingrediente');
     const searchButton = screen.getByText('Buscar');
@@ -101,7 +100,6 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
 
       global.alert = jest.fn();
 
-      const headerSearchButton = screen.getByTestId('search-top-btn');
       const searchInput = screen.getByTestId('search-input');
       const firstLetterRadioInput = screen.getByLabelText('Primeira letra');
       const searchButton = screen.getByText('Buscar');
@@ -130,7 +128,6 @@ describe('Requisito 15 - Testa se a página de drinks é renderizada', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/bebidas');
 
-    const ingredientSearch = screen.getByTestId('ingredient-search-radio');
     const nameSearch = screen.getByTestId('name-search-radio');
     const firstLetterSearch = screen.getByTestId('first-letter-search-radio');
     const searchButton = screen.getByTestId('exec-search-btn');
