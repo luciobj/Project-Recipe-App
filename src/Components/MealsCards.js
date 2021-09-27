@@ -11,7 +11,7 @@ function MealsCards() {
       'Sinto muito, não encontramos nenhuma receita para esses filtros.',
     );
   }
-  
+
   if (meals.length === 1) {
     return <Redirect to={ `/comidas/${meals[0].idMeal}` } />;
   }
