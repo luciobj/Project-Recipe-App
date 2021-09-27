@@ -5,6 +5,8 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import LoginProvider from './utils/LoginProvider';
 import MealsPage from './pages/MealsPage';
+import FoodDetail from './pages/FoodDetail';
+import DrinkDetail from './pages/DrinkDetail';
 
 function App() {
   return (
@@ -12,7 +14,17 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/perfil" component={ Profile } />
-        <Route path="/comidas" component={ MealsPage } />
+        <Route exact path="/comidas" component={ MealsPage } />
+        <Route
+          exact
+          path="/comidas/52787"
+          component={ FoodDetail }
+        />
+        <Route
+          exact
+          path="/bebidas/11007"
+          component={ DrinkDetail }
+        />
       </Switch>
     </LoginProvider>
   );
