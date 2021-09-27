@@ -8,7 +8,7 @@ export const fetchDrinkByIngredient = async (ingredient) => {
     const response = await fetch(`${API_INGREDIENT_URL}${ingredient}`);
     const { drinks } = await response.json();
     return drinks;
-  } catch (error) {
+  } catch {
     throw new Error(ERROR_MESSAGE);
   }
 };
@@ -18,7 +18,7 @@ export const fetchDrinkByName = async (name) => {
     const response = await fetch(`${API_NAME_URL}${name}`);
     const { drinks } = await response.json();
     return drinks;
-  } catch (error) {
+  } catch {
     throw new Error(ERROR_MESSAGE);
   }
 };
@@ -28,7 +28,7 @@ export const fetchDrinkByFirstLetter = async (firstLetter) => {
     const response = await fetch(`${API_LETTER_URL}${firstLetter}`);
     const { drinks } = await response.json();
     return drinks;
-  } catch (error) {
+  } catch {
     throw new Error(ERROR_MESSAGE);
   }
 };
