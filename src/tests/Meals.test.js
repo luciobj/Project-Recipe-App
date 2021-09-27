@@ -104,7 +104,6 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
 
       global.alert = jest.fn();
 
-      const headerSearchButton = screen.getByTestId(searchTopBtn);
       const searchInput = screen.getByTestId('search-input');
       const firstLetterRadioInput = screen.getByLabelText('Primeira letra');
       const searchButton = screen.getByText('Buscar');

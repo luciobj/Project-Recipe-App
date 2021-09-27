@@ -1,6 +1,7 @@
 const API_INGREDIENT_URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
 const API_NAME_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const API_LETTER_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=';
+const ERROR_MESSAGE = 'Não foi possível realizar pesquisa';
 
 export const fetchMealByIngredient = async (ingredient) => {
   try {
@@ -8,7 +9,7 @@ export const fetchMealByIngredient = async (ingredient) => {
     const { meals } = await response.json();
     return meals;
   } catch (error) {
-    throw new Error('Não foi possível realizar pesquisa');
+    throw new Error(ERROR_MESSAGE);
   }
 };
 
@@ -18,7 +19,7 @@ export const fetchMealByName = async (name) => {
     const { meals } = await response.json();
     return meals;
   } catch (error) {
-    throw new Error('Não foi possível realizar pesquisa');
+    throw new Error(ERROR_MESSAGE);
   }
 };
 
@@ -28,6 +29,6 @@ export const fetchMealByFirstLetter = async (firstLetter) => {
     const { meals } = await response.json();
     return meals;
   } catch (error) {
-    throw new Error('Não foi possível realizar pesquisa');
+    throw new Error(ERROR_MESSAGE);
   }
 };
