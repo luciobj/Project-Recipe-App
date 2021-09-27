@@ -65,8 +65,8 @@ describe('Requisito 14 - radio buttons para filtragem', () => {
     };
 
     const result = {
-      json: () => { meals },
-    }
+      json: () => meals,
+    };
 
     jest.spyOn(global, 'fetch');
     global.fetch.mockResolvedValue({
