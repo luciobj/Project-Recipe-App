@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import logoShare from '../images/shareIcon.svg';
 import logoFavorite from '../images/whiteHeartIcon.svg';
-import './FoodDetail.css';
+import '../Styles/FoodDetail.css';
 
 export default function FoodDetail(props) {
   const { history } = props;
