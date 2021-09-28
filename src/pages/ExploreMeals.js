@@ -1,12 +1,14 @@
 import React from 'react';
-import ExploreButtons from '../components/ExploreButtons';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import ExploreButtons from '../Components/ExploreButtons';
 
-function ExploreMeals() {
-  return (
-    <div>
-      <ExploreButtons />
-    </div>
-  );
-}
+const ExploreMeals = () => (
+  <div>
+    <Header title="Explorar Comidas" containBtnSearch />
+    <ExploreButtons />
+    <Footer />
+  </div>
+);
 
 export default ExploreMeals;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+
 import App from '../App';
 import renderWithRouter from '../utils/renderWithRouter';
 
@@ -18,6 +19,16 @@ describe('Requisito 13 - Implementa barra de busca', () => {
     expect(firstLetterSearch).toBeInTheDocument();
     expect(searchButton).toBeInTheDocument();
   });
+
+  it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/comidas');
+
+    const ingredientSearch = screen.getByText(/Comidas/i);
+
+    expect(ingredientSearch).toBeInTheDocument();
+  });
+
   it('Verifica se os inputs e o botão possuem os textos corretos', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
