@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 
 import LoginContext from '../utils/LoginContext';
 
 export default function Login() {
   const { email, setEmail, password, setPassword } = useContext(LoginContext);
   const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -13,6 +15,14 @@ export default function Login() {
       setDisabled(false);
     }
   }, [email, password]);
+
+  const handleClick = () => {
+    localStorage.setItem('user', JSON.stringify({ email }));
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    console.log(localStorage.getItem('user'));
+    history.push('/comidas');
+  };
 
   return (
     <section>
@@ -31,7 +41,12 @@ export default function Login() {
           value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
         />
-        <button type="button" disabled={ disabled } data-testid="login-submit-btn">
+        <button
+          type="button"
+          disabled={ disabled }
+          data-testid="login-submit-btn"
+          onClick={ handleClick }
+        >
           Login
         </button>
       </div>

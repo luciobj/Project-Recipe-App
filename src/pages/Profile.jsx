@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import logoProfile from '../images/profileIcon.svg';
-import logoDrink from '../images/drinkIcon.svg';
-import logoExplore from '../images/exploreIcon.svg';
-import logoMeal from '../images/mealIcon.svg';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 export default function Profile(props) {
   function getEmail() {
@@ -18,10 +16,7 @@ export default function Profile(props) {
   const { history } = props;
   return (
     <div>
-      <header>
-        <img src={ logoProfile } alt="icon-profile" />
-        <h2>Perfil</h2>
-      </header>
+      <Header title="Perfil" containBtnSearch />
       <p data-testid="profile-email">{ getEmail() }</p>
 
       <button
@@ -52,11 +47,7 @@ export default function Profile(props) {
         Sair
       </button>
 
-      <footer>
-        <img src={ logoDrink } alt="drinks" />
-        <img src={ logoExplore } alt="explore" />
-        <img src={ logoMeal } alt="foods" />
-      </footer>
+      <Footer />
     </div>
   );
 }
