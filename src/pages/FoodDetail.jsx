@@ -7,6 +7,8 @@ import '../Styles/FoodDetail.css';
 export default function FoodDetail(props) {
   const { history } = props;
   const [recipe, setRecipe] = useState({});
+  const [drinks, setDrinks] = useState({});
+
 
   function getIdRecipesDetails() {
     const id = history.location.pathname.replace('/comidas/', '');
@@ -47,9 +49,25 @@ export default function FoodDetail(props) {
 
   function getIdvideo(urlVideo) {
     const idVideo = urlVideo.replace('https://www.youtube.com/watch?v=', '');
-    console.log(idVideo);
     return idVideo;
   }
+
+  // async function fetchRecommendedDrinks() {
+  //   const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  //   const object = await response.json();
+  //   setDrinks(object);
+  //   console.log(drinks);
+  // }
+
+  useEffect(() => {
+    const fetchRecommendedDrinks = async () => {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      const object = await response.json();
+      setDrinks(object);
+    };
+    fetchRecommendedDrinks();
+  }, []);
+
 
   const { meals } = recipe;
 
@@ -64,8 +82,18 @@ export default function FoodDetail(props) {
           />
           <h1 data-testid="recipe-title">{ recipeSelected.strMeal }</h1>
           <h2 data-testid="recipe-category">{ recipeSelected.strCategory }</h2>
-          <input type="image" src={ logoShare } alt="share-icon" />
-          <input type="image" src={ logoFavorite } alt="favorite-icon" />
+          <input
+            data-testid="share-btn"
+            type="image"
+            src={ logoShare }
+            alt="share-icon"
+          />
+          <input
+            data-testid="favorite-btn"
+            type="image"
+            src={ logoFavorite }
+            alt="favorite-icon"
+          />
 
           <h1>Ingredients:</h1>
           {
@@ -85,6 +113,7 @@ export default function FoodDetail(props) {
           <h1>Video</h1>
           <div className="video-responsive">
             <iframe
+              data-testid="video"
               src={ `https://www.youtube.com/embed/${getIdvideo(recipeSelected.strYoutube)}` }
               title="Embedded youtube"
             />
@@ -92,6 +121,15 @@ export default function FoodDetail(props) {
         </div>
       )) }
       <h1>Recomendadas</h1>
+      <div>
+        {
+          drinks['drinks'] && drinks['drinks'].map((drink) => (
+            <div key={ drink.idDrink }>
+              <img src={drink.strDrinkThumb} alt={drink.strDrink} />
+            </div>
+          ))
+        }
+      </div>
       <button
         id="start-recipe"
         data-testid="start-recipe-btn"

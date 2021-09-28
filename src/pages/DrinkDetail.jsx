@@ -6,6 +6,8 @@ import logoFavorite from '../images/whiteHeartIcon.svg';
 export default function DrinkDetail(props) {
   const { history } = props;
   const [recipe, setRecipe] = useState({});
+  const [foods, setFoods] = useState({});
+
 
   function getIdRecipesDetails() {
     const id = history.location.pathname.replace('/bebidas/', '');
@@ -16,7 +18,7 @@ export default function DrinkDetail(props) {
 
   useEffect(() => {
     const fetchRecipeByID = async () => {
-      const response = await fetch(`https://thecocktaildb.com/api/json/v1/1/lookup.php?i=${idRecipe}`);
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idRecipe}`);
       const object = await response.json();
       setRecipe(object);
     };
@@ -44,11 +46,14 @@ export default function DrinkDetail(props) {
     return ingredientsByQuantity;
   }
 
-  // function getIdvideo(urlVideo) {
-  //   const idVideo = urlVideo.replace('https://www.youtube.com/watch?v=', '');
-  //   console.log(idVideo);
-  //   return idVideo;
-  // }
+  useEffect(() => {
+    const fetchRecommendedFoods = async () => {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const object = await response.json();
+      setFoods(object);
+    };
+    fetchRecommendedFoods();
+  }, []);
 
   const { drinks } = recipe;
 
@@ -63,8 +68,18 @@ export default function DrinkDetail(props) {
           />
           <h1 data-testid="recipe-title">{ recipeSelected.strDrink }</h1>
           <h2 data-testid="recipe-category">{ recipeSelected.strAlcoholic }</h2>
-          <input type="image" src={ logoShare } alt="share-icon" />
-          <input type="image" src={ logoFavorite } alt="favorite-icon" />
+          <input
+            data-testid="share-btn"
+            type="image"
+            src={ logoShare }
+            alt="share-icon"
+          />
+          <input
+            data-testid="favorite-btn"
+            type="image"
+            src={ logoFavorite }
+            alt="favorite-icon"
+          />
 
           <h1>Ingredients:</h1>
           {
@@ -91,6 +106,15 @@ export default function DrinkDetail(props) {
         </div>
       )) }
       <h1>Recomendadas</h1>
+      <div>
+        {
+          foods['meals'] && foods['meals'].map((food) => (
+            <div key={ food.idMeal }>
+              <img src={food.strMealThumb} alt={food.strMeal} />
+            </div>
+          ))
+        }
+      </div>
       <button
         id="start-recipe"
         data-testid="start-recipe-btn"
