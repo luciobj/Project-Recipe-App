@@ -1,8 +1,8 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 
-import App from '../App';
 import renderWithRouter from '../utils/renderWithRouter';
+import App from '../App';
 
 describe('Requisito 13 - Implementa barra de busca', () => {
   it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
