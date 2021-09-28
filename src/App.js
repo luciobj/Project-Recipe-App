@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
-import LoginProvider from './utils/LoginProvider';
+import LoginProvider from './context/LoginProvider';
 import Profile from './pages/Profile';
 import Explore from './pages/Explore';
 import Meals from './pages/Meals';

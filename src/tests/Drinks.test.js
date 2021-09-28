@@ -103,3 +103,11 @@ describe('Requisito 27 - Checa os botões para filtro por categoria', () => {
 //     expect(categoryCheck).toBe(true);
 //   });
 // });
+
+// describe('Requisito 32 - Verifica o redirecionamento para página de detalhes', () => {
+//   beforeEach(() => {
+//     renderWithRouter(<Drinks />);
+//   });
+//   it('Testa se é redirecionado corretamente', () => {
+//   });
+// });

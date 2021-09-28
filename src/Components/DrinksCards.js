@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
 import RecipesContext from '../context/recipesContext';
 
-function DrinksCards() {
+function DrinksCards(props) {
   const maxLength = 12;
   const { drinks } = useContext(RecipesContext);
 
@@ -15,11 +15,17 @@ function DrinksCards() {
     return <Redirect to={ `/bebidas/${drinks[0].idDrink}` } />;
   }
 
+  const { history } = props;
+
   return (
     <div>
       {drinks
         .map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-          <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+          <div
+            data-testid={ `${index}-recipe-card` }
+            key={ idDrink }
+            onClick={ () => history.push(`/bebidas/${idDrink}`) }
+          >
             <img
               src={ strDrinkThumb }
               alt={ strDrink }

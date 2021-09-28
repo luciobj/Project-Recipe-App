@@ -6,12 +6,12 @@ import Categories from '../Components/Categories';
 import DrinksCards from '../Components/DrinksCards';
 import Footer from '../Components/Footer';
 
-const Drinks = () => (
+const Drinks = (props) => (
   <RecipesProvider>
     <div>
       <Header title="Bebidas" />
       <Categories mealOrDrink="drink" />
-      <DrinksCards />
+      <DrinksCards history={ props.history } />
       <Footer />
     </div>
   </RecipesProvider>
