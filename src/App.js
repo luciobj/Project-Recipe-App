@@ -15,6 +15,7 @@ import IngredientsExplore from './pages/IngredientsExplore';
 import OriginExplore from './pages/OriginExplore';
 import RecipesMade from './pages/RecipesMade';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import MealDetails from './pages/MealDetails';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         />
         <Route exact path="/explorar/comidas/area" component={ OriginExplore } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
+        <Route exact path="/comidas/:id" component={ MealDetails } />
       </LoginProvider>
     </Switch>
   );
