@@ -38,7 +38,8 @@ function DoneRecipesCards() {
               onClick={ () => history.push(`/${recipe.type}/${recipe.id}`) }
              />
           </button>
-          <span data-testid={`${index}-${recipe.tag}-horizontal-tag`}>{ recipe.tag }</span>
+          <span data-testid={`${index}-${recipe.tag[0]}-horizontal-tag`}>{ recipe.tag[0] }</span>
+          <span data-testid={`${index}-${recipe.tag[1]}-horizontal-tag`}>{ recipe.tag[1] }</span>
         </div>
       ))}
     </div>
