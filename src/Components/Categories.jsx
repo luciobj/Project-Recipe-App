@@ -56,23 +56,24 @@ export default function Categories(props) {
   return (
     <div>
       { loading ? <p>Carregando categorias</p>
-        : <label htmlFor="categories">
-          { categories && categories
-            .map((category) => (
-              <label htmlFor={ category.strCategory } key={ category.strCategory }>
-                { category.strCategory }
-                <input
-                  name="categories"
-                  id={ category.strCategory }
-                  type="radio"
-                  data-testid={ `${category.strCategory}-category-filter` }
-                  value={ category.strCategory }
-                  onClick={ handleClick }
-                />
-              </label>
-            )).slice(0, maxRender) }
-        </label>
-      }
+        : (
+          <label htmlFor="categories">
+            { categories && categories
+              .map((category) => (
+                <label htmlFor={ category.strCategory } key={ category.strCategory }>
+                  { category.strCategory }
+                  <input
+                    name="categories"
+                    id={ category.strCategory }
+                    type="radio"
+                    data-testid={ `${category.strCategory}-category-filter` }
+                    value={ category.strCategory }
+                    onClick={ handleClick }
+                  />
+                </label>
+              )).slice(0, maxRender) }
+          </label>
+        ) }
     </div>
   );
 }
