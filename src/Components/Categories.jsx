@@ -70,8 +70,7 @@ export default function Categories(props) {
                   onClick={ handleClick }
                 />
               </label>
-            )).slice(0, maxRender)
-          }
+            )).slice(0, maxRender) }
         </label> }
     </div>
   );
