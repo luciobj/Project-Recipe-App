@@ -64,6 +64,7 @@ function DoneRecipesCards() {
     }, oneSecond)
   };
 
+  // as informações serão obtidas do localStorage 👇
   // const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
   return (
     <div>
