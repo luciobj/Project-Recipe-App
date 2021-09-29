@@ -18,7 +18,7 @@ const Drinks = (props) => {
         <Footer />
       </div>
     </RecipesProvider>
-  )
+  );
 };
 
 export default Drinks;

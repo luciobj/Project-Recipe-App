@@ -104,7 +104,8 @@ describe('Requisito 27 - Checa os botões para filtro por categoria', () => {
   it('Testa se há apenas cinco opções renderizadas(ou seis com opção All)', async () => {
     renderWithRouter(<Drinks />);
     const categoriesInput = await screen.findAllByTestId(/-category-filter/i);
-    const categoriesInputMinusAll = categoriesInput.filter((input) => input.value !== 'All')
+    const categoriesInputMinusAll = categoriesInput
+      .filter((input) => input.value !== 'All');
     const expectedRender = 5;
     expect(categoriesInputMinusAll.length).toBe(expectedRender);
   });
@@ -165,14 +166,14 @@ describe('Requisito 30 - Garante que apenas uma opção possa ser selecionada', 
   beforeEach(() => {
     renderWithRouter(<Drinks />);
   });
-  it('Testa se dois botões sejam selecionados, apenas um recebe o \'check\'', async () => {
+  it('Testa se dois botões sejam selecionados, apenas um tem o \'check\'', async () => {
     const categoriesInput = await screen.findAllByTestId(/-category-filter/i);
     userEvent.click(categoriesInput[1]);
     userEvent.click(categoriesInput[4]);
     const checkedInputs = categoriesInput.filter((category) => category.checked === true);
     expect(checkedInputs.length).toBe(1);
   });
-  it('Testa se continua o mesmo resultado, caso outro botão seja selecionado', async () => {
+  it('Testa se continua o mesmo resultado, se outro botão seja selecionado', async () => {
     const recipeCards = await screen.findAllByTestId(/-recipe-card/i);
     const categoriesInput = await screen.findAllByTestId(/-category-filter/i);
     userEvent.click(categoriesInput[3]);
@@ -202,18 +203,20 @@ describe('Requisito 31 - Checa o botão \'All\' para filtro por todas categoria'
 
 describe('Requisito 32 - Verifica o redirecionamento para página de detalhes', () => {
   it('Testa se é redirecionado corretamente', async () => {
-    const { history } =renderWithRouter(<Drinks />);
+    const { history } = renderWithRouter(<Drinks />);
     const recipeCards = await screen.findAllByTestId(/-recipe-card/i);
-    // console.log(recipeCards[10]);
-    const chosenCard = String(recipeCards[10].innerHTML);
+    const chosenCardIndex = 10;
+    const chosenCard = String(recipeCards[chosenCardIndex].innerHTML);
     const chosenCardIdIndex = chosenCard.indexOf(' id=');
-    const chosenCardId = chosenCard[chosenCardIdIndex + 5] +
-    chosenCard[chosenCardIdIndex + 6] + 
-    chosenCard[chosenCardIdIndex + 7] +
-    chosenCard[chosenCardIdIndex + 8] +
-    chosenCard[chosenCardIdIndex + 9];
-    userEvent.click(recipeCards[10]);
+    const indexFinderAuxiliar = 5;
+    const indexFinderSecondAuxiliar = 8;
+    const chosenCardId = chosenCard[chosenCardIdIndex - indexFinderAuxiliar]
+    + chosenCard[chosenCardIdIndex + indexFinderAuxiliar + 1]
+    + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar - 1]
+    + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar]
+    + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar + 1];
+    userEvent.click(recipeCards[chosenCardIndex]);
     const { pathname } = history.location;
-    expect(pathname).toBe(`/bebidas/${ chosenCardId }`);
+    expect(pathname).toBe(`/bebidas/${chosenCardId}`);
   });
 });

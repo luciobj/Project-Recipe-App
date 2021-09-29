@@ -5,14 +5,14 @@ import RecipesContext from '../context/recipesContext';
 
 function MealsCards() {
   const maxLength = 12;
-  const { meals } = useContext(RecipesContext);
+  const { meals, search } = useContext(RecipesContext);
 
   if (meals === null || meals === undefined) {
     return global.alert(
       'Sinto muito, não encontramos nenhuma receita para esses filtros.',
     );
   }
-  if (meals.length === 1) {
+  if (meals.length === 1 && search === 'bar') {
     return <Redirect to={ `/comidas/${meals[0].idMeal}` } />;
   }
 
@@ -23,7 +23,7 @@ function MealsCards() {
           <Link
             data-testid={ `${index}-recipe-card` }
             key={ idMeal }
-            to={ `/comidas/${ idMeal }` }
+            to={ `/comidas/${idMeal}` }
           >
             <img
               src={ strMealThumb }
@@ -34,7 +34,9 @@ function MealsCards() {
               data-testid={ `${index}-card-name` }
               category={ strCategory }
               id={ idMeal }
-            >{ strMeal }</h3>
+            >
+              { strMeal }
+            </h3>
           </Link>
         )).slice(0, maxLength) : <p>Carregando comidas</p>}
     </div>

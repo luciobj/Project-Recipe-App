@@ -18,7 +18,7 @@ function SearchBar() {
   // declarei a variável 'firstLetter pois o lint reclamou que a string estava sendo duplicada;
   const firstLetter = 'first-letter';
 
-  const { setMeals, setDrinks } = useContext(RecipesContext);
+  const { setMeals, setDrinks, setSearch } = useContext(RecipesContext);
   const [searchWord, setSearchWord] = useState('');
   const [typeOfFilter, setTypeOfFilter] = useState('');
 
@@ -29,14 +29,17 @@ function SearchBar() {
     if (typeOfFilter === 'ingredient') {
       const data = await fetchMealByIngredient(searchWord);
       setMeals(data);
+      setSearch('bar');
     }
     if (typeOfFilter === 'name') {
       const data = await fetchMealByName(searchWord);
       setMeals(data);
+      setSearch('bar');
     }
     if (typeOfFilter === firstLetter) {
       const data = await fetchMealByFirstLetter(searchWord);
       setMeals(data);
+      setSearch('bar');
     }
   };
 
@@ -47,14 +50,17 @@ function SearchBar() {
     if (typeOfFilter === 'ingredient') {
       const data = await fetchDrinkByIngredient(searchWord);
       setDrinks(data);
+      setSearch('bar');
     }
     if (typeOfFilter === 'name') {
       const data = await fetchDrinkByName(searchWord);
       setDrinks(data);
+      setSearch('bar');
     }
     if (typeOfFilter === firstLetter) {
       const data = await fetchDrinkByFirstLetter(searchWord);
       setDrinks(data);
+      setSearch('bar');
     }
   };
 

@@ -9,7 +9,7 @@ export default function Categories(props) {
   const [loading, toggleLoading] = useState(true);
   const [initialResults, setInitialResults] = useState([]);
   const [filtered, setFiltered] = useState('');
-  const { setMeals, setDrinks } = useContext(RecipesContext);
+  const { setMeals, setDrinks, setSearch } = useContext(RecipesContext);
 
   useEffect(() => {
     const { mealOrDrink } = props;
@@ -36,20 +36,11 @@ export default function Categories(props) {
 
   const handleClick = ({ target }) => {
     const { value } = target;
-    const inputs = document.getElementsByName('categories');
-    if (filtered === '') {
+    if (filtered === '' || filtered !== value) {
       setFiltered(value);
-      for (let index = 0; index < inputs.length; index += 1) {
-        if (inputs[index].value !== target.value) {
-          inputs[index].disabled = true;
-        }
-      }
-    } else {
+    } else if (filtered === value) {
       target.checked = false;
       setFiltered('');
-      for (let index = 0; index < inputs.length; index += 1) {
-        inputs[index].disabled = false;
-      }
     }
   };
 
@@ -58,39 +49,40 @@ export default function Categories(props) {
     if (mealOrDrink === 'meal') {
       if (filtered === '' || filtered === 'All') {
         setMeals(initialResults);
+        setSearch('');
       } else {
         fetchCategoriesFilteredResults(mealOrDrink, filtered)
           .then((result) => setMeals(result.meals));
-      }
+        setSearch('');
+        }
     } else {
-      if (filtered === '' || filtered === 'All') {
-        setDrinks(initialResults);
-      } else {
-        fetchCategoriesFilteredResults(mealOrDrink, filtered)
-          .then((result) => setDrinks(result.drinks));
-      }
+      filtered === '' || filtered === 'All' ?
+        setDrinks(initialResults) :
+      fetchCategoriesFilteredResults(mealOrDrink, filtered)
+        .then((result) => setDrinks(result.drinks));
+      setSearch('');
     }
-  }, [props, filtered, initialResults, setMeals, setDrinks]);
+  }, [props, filtered, initialResults, setMeals, setDrinks, setSearch]);
 
   const maxRender = 6;
   return (
     <div>
       { loading ? <p>Carregando categorias</p> : 
       <label htmlFor="categories">
-        { categories && categories
-          .map((category) => (
-            <label htmlFor={ category.strCategory } key={ category.strCategory }>
-              { category.strCategory }
-              <input
-                name="categories"
-                id={ category.strCategory }
-                type="radio"
-                data-testid={ `${category.strCategory}-category-filter` }
-                value={ category.strCategory }
-                onClick={ handleClick }
-              />
-            </label>
-          )).slice(0, maxRender) }
+      { categories && categories
+        .map((category) => (
+          <label htmlFor={ category.strCategory } key={ category.strCategory }>
+            { category.strCategory }
+            <input
+              name="categories"
+              id={ category.strCategory }
+              type="radio"
+              data-testid={ `${category.strCategory}-category-filter` }
+              value={ category.strCategory }
+              onClick={ handleClick }
+            />
+          </label>
+        )).slice(0, maxRender) }
       </label>
       }
     </div>
@@ -98,5 +90,5 @@ export default function Categories(props) {
 }
 
 Categories.propTypes = {
-  mealOrDrink: PropTypes.shape({ mealOrDrink: PropTypes.string }),
+  props: PropTypes.shape({ mealOrDrink: PropTypes.string }),
 }.isRequired;
