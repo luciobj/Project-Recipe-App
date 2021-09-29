@@ -13,7 +13,7 @@ function DoneRecipesCards() {
     name: 'Spicy Arrabiata Penne',
     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
     doneDate: '29/09/2021',
-    tags: ['Pasta,Curry']
+    tags: ['Pasta','Curry']
   }, 
   {
     id: 52768,
@@ -24,7 +24,7 @@ function DoneRecipesCards() {
     name: 'Apple Frangipan Tart',
     image: 'https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg',
     doneDate: '29/09/2021',
-    tags: ['Tart,Baking,Fruity']
+    tags: ['Tart','Baking','Fruity']
   },
   {
     id: 178339,
@@ -64,6 +64,10 @@ function DoneRecipesCards() {
     }, oneSecond)
   };
 
+  const handleRedirect = (type, id) => {
+    history.push(`/${type}s/${id}`)
+  }
+
   // as informações serão obtidas do localStorage 👇
   // const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
   return (
@@ -74,12 +78,12 @@ function DoneRecipesCards() {
             src={ recipe.image }
             alt={ recipe.name }
             data-testid={`${index}-horizontal-image`}
-            onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
+            onClick={ () => handleRedirect(recipe.type, recipe.id) }
           />
           <p data-testid={`${index}-horizontal-top-text`}>{ recipe.category }</p>
           <h2
             data-testid={`${index}-horizontal-name`}
-            onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
+            onClick={ () => handleRedirect(recipe.type, recipe.id) }
           >
               { recipe.name }
           </h2>
@@ -92,8 +96,8 @@ function DoneRecipesCards() {
              />
           </button>
           { showCopyText && <span>Link copiado! </span> }
-          <span data-testid={`${index}-${recipe.tags}-horizontal-tag`}>{ recipe.tags[0] }</span>
-          <span data-testid={`${index}-${recipe.tags}-horizontal-tag`}>{ recipe.tags[1] }</span>
+          <span data-testid={`${index}-${recipe.tags[0]}-horizontal-tag`}>{ recipe.tags[0] }</span>
+          <span data-testid={`${index}-${recipe.tags[1]}-horizontal-tag`}>{ recipe.tags[1] }</span>
         </div>
       ))}
     </div>
