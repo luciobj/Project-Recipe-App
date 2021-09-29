@@ -24,17 +24,6 @@ function App() {
       <LoginProvider>
         <Route exact path="/" component={ Login } />
         <Route path="/perfil" component={ Profile } />
-        {/* <Route exact path="/comidas" component={ MealsPage } /> */}
-        <Route
-          exact
-          path="/comidas/52787"
-          component={ FoodDetail }
-        />
-        <Route
-          exact
-          path="/bebidas/11007"
-          component={ DrinkDetail }
-        />
         <Route exact path="/receitas-feitas" component={ RecipesMade } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route exact path="/comidas" component={ Meals } />

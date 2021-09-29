@@ -1,9 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import logoProfile from '../images/profileIcon.svg';
-// import logoDrink from '../images/drinkIcon.svg';
-// import logoExplore from '../images/exploreIcon.svg';
-// import logoMeal from '../images/mealIcon.svg';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
@@ -16,7 +12,6 @@ export default function Profile(props) {
       return email;
     } return '';
   }
-
   // const user = localStorage.getItem('user');
   const { history } = props;
   return (
