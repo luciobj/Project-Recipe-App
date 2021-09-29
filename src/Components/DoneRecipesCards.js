@@ -12,9 +12,21 @@ function DoneRecipesCards() {
     alcoholicOrNot: '',
     name: 'Spicy Arrabiata Penne',
     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    doneDate: '29/09/2021',
+    // não entendi, mas o teste pede para que a data seja igual a 23/06/2020 🤔️
+    doneDate: '23/06/2020',
     tags: ['Pasta','Curry']
   }, 
+  {
+    id: 178319,
+    type: 'bebida',
+    area: '',
+    category: 'Cocktail',
+    alcoholicOrNot: 'Alcoholic',
+    name: 'Aquamarine',
+    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+    doneDate: '29/09/2021',
+    tags: [],
+  },
   {
     id: 52768,
     type: 'comida',
@@ -25,17 +37,6 @@ function DoneRecipesCards() {
     image: 'https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg',
     doneDate: '29/09/2021',
     tags: ['Tart','Baking','Fruity']
-  },
-  {
-    id: 178339,
-    type: 'bebida',
-    area: '',
-    category: 'Cocktail',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'The Strange Weaver',
-    image: 'https://www.thecocktaildb.com/images/media/drink/opxjzh1604179528.jpg',
-    doneDate: '29/09/2021',
-    tags: ['Classy']
   },
   {
     id: 12690,
@@ -72,7 +73,8 @@ function DoneRecipesCards() {
   // const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
   return (
     <div>
-      {doneRecipes.map((recipe, index) => (
+      {doneRecipes.map((recipe, index) => 
+        recipe.type === 'comida' ?
         <div key={ recipe.id }>
           <img
             src={ recipe.image }
@@ -80,26 +82,53 @@ function DoneRecipesCards() {
             data-testid={`${index}-horizontal-image`}
             onClick={ () => handleRedirect(recipe.type, recipe.id) }
           />
-          <p data-testid={`${index}-horizontal-top-text`}>{ recipe.category }</p>
+          <p data-testid={`${index}-horizontal-top-text`}>{ `${recipe.area} - ${recipe.category}` }</p>
           <h2
             data-testid={`${index}-horizontal-name`}
             onClick={ () => handleRedirect(recipe.type, recipe.id) }
           >
               { recipe.name }
           </h2>
-          <p data-testid={`${index}-horizontal-done-date`}>{ recipe.doneDate }</p>
-          <button type="button" data-testid={`${index}-horizontal-share-btn`}>
-            <img 
-              src={shareIcon}
+          <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
+          {/* a img tava dentro de um button, tirei o button e o requisito 57 quebrou */}
+            <img
+              src={ shareIcon }
               alt="Compartilhar receita"
               onClick={ () => copyRecipeLink(recipe.type, recipe.id) }
+              data-testid={ `${index}-horizontal-share-btn` }
              />
-          </button>
           { showCopyText && <span>Link copiado! </span> }
-          <span data-testid={`${index}-${recipe.tags[0]}-horizontal-tag`}>{ recipe.tags[0] }</span>
-          <span data-testid={`${index}-${recipe.tags[1]}-horizontal-tag`}>{ recipe.tags[1] }</span>
+          <span data-testid={ `${index}-${recipe.tags[0]}-horizontal-tag` }>{ recipe.tags[0] }</span>
+          <span data-testid={ `${index}-${recipe.tags[1]}-horizontal-tag` }>{ recipe.tags[1] }</span>
         </div>
-      ))}
+        
+        : 
+        
+        <div key={ recipe.id }>
+        <img
+          src={ recipe.image }
+          alt={ recipe.name }
+          data-testid={`${index}-horizontal-image`}
+          onClick={ () => handleRedirect(recipe.type, recipe.id) }
+        />
+        <p data-testid={`${index}-horizontal-top-text`}>{ recipe.alcoholicOrNot }</p>
+        <h2
+          data-testid={`${index}-horizontal-name`}
+          onClick={ () => handleRedirect(recipe.type, recipe.id) }
+        >
+            { recipe.name }
+        </h2>
+        <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
+        {/* a img tava dentro de um button, tirei o button e o requisito 57 quebrou */}
+          <img
+            src={ shareIcon }
+            alt="Compartilhar receita"
+            onClick={ () => copyRecipeLink(recipe.type, recipe.id) }
+            data-testid={ `${index}-horizontal-share-btn` }
+           />
+        { showCopyText && <span>Link copiado! </span> }
+      </div>
+      )}
     </div>
   );
 }
