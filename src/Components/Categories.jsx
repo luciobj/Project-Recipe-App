@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/recipesContext';
-import fetchCategoriesFilteredResults from '../services/fetchCategories';
+import { fetchCategoriesFilteredResultsMeals,
+  fetchCategoriesFilteredResultsDrinks } from '../services/fetchCategories';
 
 export default function Categories(props) {
   const [categories, setCategories] = useState([{ strCategory: 'All' }]);
@@ -41,11 +42,11 @@ export default function Categories(props) {
   useEffect(() => {
     const { mealOrDrink } = props;
     if (mealOrDrink === 'meal') {
-      fetchCategoriesFilteredResults(mealOrDrink, filtered)
+      fetchCategoriesFilteredResultsMeals(mealOrDrink, filtered)
         .then((result) => setMeals(result.meals));
       setSearch('');
     } else {
-      fetchCategoriesFilteredResults(mealOrDrink, filtered)
+      fetchCategoriesFilteredResultsDrinks(mealOrDrink, filtered)
         .then((result) => setDrinks(result.drinks));
       setSearch('');
     }
@@ -54,24 +55,23 @@ export default function Categories(props) {
   const maxRender = 6;
   return (
     <div>
-      { loading ? <p>Carregando categorias</p> : 
-      <label htmlFor="categories">
-      { categories && categories
-        .map((category) => (
-          <label htmlFor={ category.strCategory } key={ category.strCategory }>
-            { category.strCategory }
-            <input
-              name="categories"
-              id={ category.strCategory }
-              type="radio"
-              data-testid={ `${category.strCategory}-category-filter` }
-              value={ category.strCategory }
-              onClick={ handleClick }
-            />
-          </label>
-        )).slice(0, maxRender) }
-      </label>
-      }
+      { loading ? <p>Carregando categorias</p>
+        : <label htmlFor="categories">
+        { categories && categories
+          .map((category) => (
+            <label htmlFor={ category.strCategory } key={ category.strCategory }>
+              { category.strCategory }
+              <input
+                name="categories"
+                id={ category.strCategory }
+                type="radio"
+                data-testid={ `${category.strCategory}-category-filter` }
+                value={ category.strCategory }
+                onClick={ handleClick }
+              />
+            </label>
+          )).slice(0, maxRender) }
+        </label> }
     </div>
   );
 }

@@ -225,10 +225,13 @@ describe('Requisito 32 - Verifica o redirecionamento para página de detalhes', 
     const chosenCard = String(recipeCards[chosenCardIndex].innerHTML);
     const chosenCardIdIndex = chosenCard.indexOf(' id=');
     const chosenCardId = chosenCard[chosenCardIdIndex + 5]
-    + chosenCard[chosenCardIdIndex + 6]
-    + chosenCard[chosenCardIdIndex + 7]
-    + chosenCard[chosenCardIdIndex + 8]
-    + chosenCard[chosenCardIdIndex + 9];
+    const indexFinderAuxiliar = 5;
+    const indexFinderSecondAuxiliar = 8;
+    const chosenCardId = chosenCard[chosenCardIdIndex - indexFinderAuxiliar]
+    + chosenCard[chosenCardIdIndex + indexFinderAuxiliar + 1]
+    + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar - 1]
+    + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar]
+    + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar + 1];
     userEvent.click(recipeCards[chosenCardIndex]);
     const { pathname } = history.location;
     expect(pathname).toBe(`/comidas/${chosenCardId}`);
