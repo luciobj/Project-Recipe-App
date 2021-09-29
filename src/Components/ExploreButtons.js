@@ -14,15 +14,14 @@ function ExploreButtons() {
       const data = await fetchRandomMeal();
       setRandomMeal(data);
     };
-    getRandomMeal();
-  }, []);
 
-  useEffect(() => {
     const getRandomDrink = async () => {
       const data = await fetchRandomDrink();
       setRandomDrink(data);
     };
+
     getRandomDrink();
+    getRandomMeal();
   }, []);
 
   const handleSurpriseClick = () => {
