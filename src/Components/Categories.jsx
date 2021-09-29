@@ -42,11 +42,11 @@ export default function Categories(props) {
   useEffect(() => {
     const { mealOrDrink } = props;
     if (mealOrDrink === 'meal') {
-      fetchCategoriesFilteredResultsMeals(mealOrDrink, filtered)
+      fetchCategoriesFilteredResultsMeals(filtered)
         .then((result) => setMeals(result.meals));
       setSearch('');
     } else {
-      fetchCategoriesFilteredResultsDrinks(mealOrDrink, filtered)
+      fetchCategoriesFilteredResultsDrinks(filtered)
         .then((result) => setDrinks(result.drinks));
       setSearch('');
     }
