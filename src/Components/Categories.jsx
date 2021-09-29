@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/recipesContext';
-import { fetchCategoriesFilteredResults, fetchCategoriesInitialResults } from '../services/fetchCategories';
+import { fetchCategoriesFilteredResults,
+  fetchCategoriesInitialResults } from '../services/fetchCategories';
 
 export default function Categories(props) {
   const [categories, setCategories] = useState([{ strCategory: 'All' }]);
+  const [loading, toggleLoading] = useState(true);
   const [initialResults, setInitialResults] = useState([]);
   const [filtered, setFiltered] = useState('');
   const { setMeals, setDrinks } = useContext(RecipesContext);
@@ -23,8 +25,14 @@ export default function Categories(props) {
         .then((result) => setCategories((prevState) => [...prevState, ...result.drinks]));
       fetchCategoriesInitialResults(mealOrDrink)
         .then((data) => setInitialResults(data.drinks));
-    };
+    }
   }, [props, setCategories]);
+
+  useEffect(() => {
+    if (categories.length > 1) {
+      toggleLoading(false);
+    }
+  }, [categories, toggleLoading]);
 
   const handleClick = ({ target }) => {
     const { value } = target;
@@ -47,19 +55,19 @@ export default function Categories(props) {
 
   useEffect(() => {
     const { mealOrDrink } = props;
-    if (mealOrDrink === 'meal'){
+    if (mealOrDrink === 'meal') {
       if (filtered === '' || filtered === 'All') {
         setMeals(initialResults);
       } else {
         fetchCategoriesFilteredResults(mealOrDrink, filtered)
-          .then((result) => setMeals(result.meals))
+          .then((result) => setMeals(result.meals));
       }
     } else {
       if (filtered === '' || filtered === 'All') {
         setDrinks(initialResults);
       } else {
         fetchCategoriesFilteredResults(mealOrDrink, filtered)
-          .then((result) => setDrinks(result.drinks))
+          .then((result) => setDrinks(result.drinks));
       }
     }
   }, [props, filtered, initialResults, setMeals, setDrinks]);
@@ -67,6 +75,7 @@ export default function Categories(props) {
   const maxRender = 6;
   return (
     <div>
+      { loading ? <p>Carregando categorias</p> : 
       <label htmlFor="categories">
         { categories && categories
           .map((category) => (
@@ -83,6 +92,7 @@ export default function Categories(props) {
             </label>
           )).slice(0, maxRender) }
       </label>
+      }
     </div>
   );
 }
