@@ -13,7 +13,7 @@ function RecipesProvider({ children }) {
     drinks,
     setDrinks,
     search,
-    setSearch
+    setSearch,
   };
 
   return (

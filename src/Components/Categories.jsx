@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/recipesContext';
-import { fetchCategoriesFilteredResults,
-  fetchCategoriesInitialResults } from '../services/fetchCategories';
+import fetchCategoriesFilteredResults from '../services/fetchCategories';
 
 export default function Categories(props) {
   const [categories, setCategories] = useState([{ strCategory: 'All' }]);
   const [loading, toggleLoading] = useState(true);
-  const [initialResults, setInitialResults] = useState([]);
   const [filtered, setFiltered] = useState('');
   const { setMeals, setDrinks, setSearch } = useContext(RecipesContext);
 
@@ -17,14 +15,10 @@ export default function Categories(props) {
       fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
         .then((data) => data.json())
         .then((result) => setCategories((prevState) => [...prevState, ...result.meals]));
-      fetchCategoriesInitialResults(mealOrDrink)
-        .then((data) => setInitialResults(data.meals));
     } else if (mealOrDrink === 'drink') {
       fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
         .then((data) => data.json())
         .then((result) => setCategories((prevState) => [...prevState, ...result.drinks]));
-      fetchCategoriesInitialResults(mealOrDrink)
-        .then((data) => setInitialResults(data.drinks));
     }
   }, [props, setCategories]);
 
@@ -47,22 +41,15 @@ export default function Categories(props) {
   useEffect(() => {
     const { mealOrDrink } = props;
     if (mealOrDrink === 'meal') {
-      if (filtered === '' || filtered === 'All') {
-        setMeals(initialResults);
-        setSearch('');
-      } else {
-        fetchCategoriesFilteredResults(mealOrDrink, filtered)
-          .then((result) => setMeals(result.meals));
-        setSearch('');
-        }
+      fetchCategoriesFilteredResults(mealOrDrink, filtered)
+        .then((result) => setMeals(result.meals));
+      setSearch('');
     } else {
-      filtered === '' || filtered === 'All' ?
-        setDrinks(initialResults) :
       fetchCategoriesFilteredResults(mealOrDrink, filtered)
         .then((result) => setDrinks(result.drinks));
       setSearch('');
     }
-  }, [props, filtered, initialResults, setMeals, setDrinks, setSearch]);
+  }, [props, filtered, setMeals, setDrinks, setSearch]);
 
   const maxRender = 6;
   return (
