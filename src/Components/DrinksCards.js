@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import RecipesContext from '../context/recipesContext';
-import PropTypes from 'prop-types';
 
-function DrinksCards(props) {
+function DrinksCards() {
   const maxLength = 12;
   const { drinks } = useContext(RecipesContext);
 
@@ -12,21 +12,20 @@ function DrinksCards(props) {
       'Sinto muito, não encontramos nenhuma receita para esses filtros.',
     );
   }
+
   if (drinks.length === 1) {
     return <Redirect to={ `/bebidas/${drinks[0].idDrink}` } />;
   }
-
-  const { history } = props;
 
   return (
     <div>
       {drinks.length > 0 ? drinks
         .map(({ idDrink, strDrinkThumb, strDrink, strCategory }, index) => (
-          <div
+          <Link
             data-testid={ `${index}-recipe-card` }
             key={ idDrink }
-            onClick={ () => history.push(`/bebidas/${idDrink}`) }
-            >
+            to={ `/bebidas/${idDrink}` }
+          >
             <img
               src={ strDrinkThumb }
               alt={ strDrink }
@@ -37,16 +36,10 @@ function DrinksCards(props) {
               category={ strCategory }
               id={ idDrink }
             >{ strDrink }</h3>
-          </div>
+          </Link>
         )).slice(0, maxLength) : <p>Carregando bebidas</p> }
     </div>
   );
 }
 
 export default DrinksCards;
-
-DrinksCards.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }),
-}.isRequired;

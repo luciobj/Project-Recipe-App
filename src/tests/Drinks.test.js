@@ -1,9 +1,95 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { wait } from '@testing-library/dom';
 import renderWithRouter from '../utils/renderWithRouter';
 import Drinks from '../pages/Drinks';
+
+// describe('Requisito 13 - Implementa barra de busca', () => {
+//   it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
+//     renderWithRouter(<Drinks />);
+//     const ingredientSearch = screen.getByTestId('ingredient-search-radio');
+//     const nameSearch = screen.getByTestId('name-search-radio');
+//     const firstLetterSearch = screen.getByTestId('first-letter-search-radio');
+//     const searchButton = screen.getByTestId('exec-search-btn');
+//     expect(ingredientSearch).toBeInTheDocument();
+//     expect(nameSearch).toBeInTheDocument();
+//     expect(firstLetterSearch).toBeInTheDocument();
+//     expect(searchButton).toBeInTheDocument();
+//   });
+
+//   it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
+//     renderWithRouter(<Drinks />);
+//     const ingredientSearch = screen.getByText(/Comidas/i);
+//     expect(ingredientSearch).toBeInTheDocument();
+//   });
+
+//   it('Verifica se os inputs e o botão possuem os textos corretos', () => {
+//     renderWithRouter(<Drinks />);
+//     const ingredientText = screen.getByText(/ingrediente/i);
+//     const nameText = screen.getByText(/nome/i);
+//     const firstLetterText = screen.getByText(/primeira letra/i);
+//     const searchText = screen.getByText(/buscar/i);
+//     expect(ingredientText).toBeInTheDocument();
+//     expect(nameText).toBeInTheDocument();
+//     expect(firstLetterText).toBeInTheDocument();
+//     expect(searchText).toBeInTheDocument();
+//   });
+// });
+
+// describe('Requisito 14 - radio buttons para filtragem', () => {
+//   it('Verifica se o botão de busca do header existe', () => {
+//     renderWithRouter(<Drinks />);
+//     const headerSearchButton = screen.getByTestId(searchTopBtn);
+//     expect(headerSearchButton).toBeInTheDocument();
+//   });
+//   it('Verifica se a busca por INGREDIENTE é feita corretamente', async () => {
+//     const drinks = {
+//       idMeal: '52782',
+//       strMeal: 'Lamb tomato and sweet spices',
+//       strMealThumb:
+//         'https://www.themealdb.com/images/media/drinks/qtwtss1468572261.jpg',
+//     };
+//     const result = {
+//       json: () => drinks,
+//     };
+//     jest.spyOn(global, 'fetch');
+//     global.fetch.mockResolvedValue({
+//       json: jest.fn().mockResolvedValue(result),
+//     });
+
+//     renderWithRouter(<Drinks />);
+//     const headerSearchButton = screen.getByTestId(searchTopBtn);
+//     const searchInput = screen.getByTestId('search-input');
+//     const ingredientRadioInput = screen.getByLabelText('Ingrediente');
+//     const searchButton = screen.getByText('Buscar');
+//     fireEvent.change(searchInput, { target: { value: 'potato' } });
+//     expect(searchInput).toHaveValue('potato');
+//     fireEvent.click(ingredientRadioInput);
+//     expect(ingredientRadioInput.checked).toBe(true);
+//     fireEvent.click(searchButton);
+//     expect(global.fetch).toBeCalled();
+//     expect(global.fetch).toBeCalledWith(
+//       'https://www.themealdb.com/api/json/v1/1/filter.php?i=potato',
+//     );
+//   });
+
+//   it('Dispara alerta caso a pesquisa por primeira letra seja feita com mais de uma letra',
+//     async () => {
+//       renderWithRouter(<Drinks />);
+//       global.alert = jest.fn();
+//       const searchInput = screen.getByTestId('search-input');
+//       const firstLetterRadioInput = screen.getByLabelText('Primeira letra');
+//       const searchButton = screen.getByText('Buscar');
+//       fireEvent.change(searchInput, { target: { value: 'po' } });
+//       expect(searchInput.value.length).toBe(2);
+//       fireEvent.click(firstLetterRadioInput);
+//       expect(firstLetterRadioInput.checked).toBe(true);
+//       fireEvent.click(searchButton);
+//       expect(window.alert).toBeCalledWith(
+//         'Sua busca deve conter somente 1 (um) caracter',
+//       );
+//     });
+// });
 
 describe('Requisito 26 - Carregue as 12 primeiras receitas, uma em cada card', () => {
   it('Testa se há 12 cards renderizados na tela', async () => {
@@ -117,8 +203,8 @@ describe('Requisito 31 - Checa o botão \'All\' para filtro por todas categoria'
 describe('Requisito 32 - Verifica o redirecionamento para página de detalhes', () => {
   it('Testa se é redirecionado corretamente', async () => {
     const { history } =renderWithRouter(<Drinks />);
-    const { pathname } = history.location;
     const recipeCards = await screen.findAllByTestId(/-recipe-card/i);
+    // console.log(recipeCards[10]);
     const chosenCard = String(recipeCards[10].innerHTML);
     const chosenCardIdIndex = chosenCard.indexOf(' id=');
     const chosenCardId = chosenCard[chosenCardIdIndex + 5] +
@@ -126,7 +212,8 @@ describe('Requisito 32 - Verifica o redirecionamento para página de detalhes', 
     chosenCard[chosenCardIdIndex + 7] +
     chosenCard[chosenCardIdIndex + 8] +
     chosenCard[chosenCardIdIndex + 9];
-    // userEvent.click(recipeCards[10]);
+    userEvent.click(recipeCards[10]);
+    const { pathname } = history.location;
     expect(pathname).toBe(`/bebidas/${ chosenCardId }`);
   });
 });
