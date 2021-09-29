@@ -71,7 +71,8 @@ export default function Categories(props) {
                 />
               </label>
             )).slice(0, maxRender) }
-      </label> }
+        </label>
+      }
     </div>
   );
 }
