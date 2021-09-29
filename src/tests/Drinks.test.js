@@ -210,7 +210,7 @@ describe('Requisito 32 - Verifica o redirecionamento para página de detalhes', 
     const chosenCardIdIndex = chosenCard.indexOf(' id=');
     const indexFinderAuxiliar = 5;
     const indexFinderSecondAuxiliar = 8;
-    const chosenCardId = chosenCard[chosenCardIdIndex - indexFinderAuxiliar]
+    const chosenCardId = chosenCard[chosenCardIdIndex + indexFinderAuxiliar]
     + chosenCard[chosenCardIdIndex + indexFinderAuxiliar + 1]
     + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar - 1]
     + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar]
