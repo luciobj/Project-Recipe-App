@@ -73,59 +73,76 @@ function DoneRecipesCards() {
   // const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
   return (
     <div>
-      {doneRecipes.map((recipe, index) => 
-        recipe.type === 'comida' ?
-        <div key={ recipe.id }>
+      {doneRecipes.map((
+        {
+          id,
+          type,
+          area,
+          category,
+          alcoholicOrNot,
+          name,
+          image,
+          doneDate,
+          tags,
+        }, index) => 
+        
+        type === 'comida' ?
+        
+        <div key={ id }>
           <img
-            src={ recipe.image }
-            alt={ recipe.name }
+            src={ image }
+            alt={ name }
             data-testid={`${index}-horizontal-image`}
-            onClick={ () => handleRedirect(recipe.type, recipe.id) }
+            onClick={ () => handleRedirect(type, id) }
           />
-          <p data-testid={`${index}-horizontal-top-text`}>{ `${recipe.area} - ${recipe.category}` }</p>
-          <h2
+          <p data-testid={`${index}-horizontal-top-text`}>{ `${area} - ${category}` }</p>
+          <h3
             data-testid={`${index}-horizontal-name`}
-            onClick={ () => handleRedirect(recipe.type, recipe.id) }
+            onClick={ () => handleRedirect(type, id) }
           >
-              { recipe.name }
-          </h2>
-          <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
-          {/* a img tava dentro de um button, tirei o button e o requisito 57 quebrou */}
+              { name }
+          </h3>
+          <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
+          <button>
             <img
               src={ shareIcon }
               alt="Compartilhar receita"
-              onClick={ () => copyRecipeLink(recipe.type, recipe.id) }
+              onClick={ () => copyRecipeLink(type, id) }
               data-testid={ `${index}-horizontal-share-btn` }
              />
+          </button>
           { showCopyText && <span>Link copiado! </span> }
-          <span data-testid={ `${index}-${recipe.tags[0]}-horizontal-tag` }>{ recipe.tags[0] }</span>
-          <span data-testid={ `${index}-${recipe.tags[1]}-horizontal-tag` }>{ recipe.tags[1] }</span>
+          <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
+          <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
         </div>
         
         : 
         
-        <div key={ recipe.id }>
+        <div key={ id }>
         <img
-          src={ recipe.image }
-          alt={ recipe.name }
+          src={ image }
+          alt={ name }
           data-testid={`${index}-horizontal-image`}
-          onClick={ () => handleRedirect(recipe.type, recipe.id) }
+          onClick={ () => handleRedirect(type, id) }
         />
-        <p data-testid={`${index}-horizontal-top-text`}>{ recipe.alcoholicOrNot }</p>
-        <h2
+        <p data-testid={`${index}-horizontal-top-text`}>
+          { alcoholicOrNot ? alcoholicOrNot : `Non Alcoholic` }
+        </p>
+        <h3
           data-testid={`${index}-horizontal-name`}
-          onClick={ () => handleRedirect(recipe.type, recipe.id) }
+          onClick={ () => handleRedirect(type, id) }
         >
-            { recipe.name }
-        </h2>
-        <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
-        {/* a img tava dentro de um button, tirei o button e o requisito 57 quebrou */}
+            { name }
+        </h3>
+        <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
+        <button>
           <img
             src={ shareIcon }
             alt="Compartilhar receita"
-            onClick={ () => copyRecipeLink(recipe.type, recipe.id) }
+            onClick={ () => copyRecipeLink(type, id) }
             data-testid={ `${index}-horizontal-share-btn` }
            />
+        </button>
         { showCopyText && <span>Link copiado! </span> }
       </div>
       )}
