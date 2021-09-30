@@ -95,14 +95,18 @@ function DoneRecipesCards() {
               data-testid={ `${index}-horizontal-image` }
               onClick={ () => handleRedirect(type, id) }
             />
-            <p data-testid={ `${index}-horizontal-top-text` }>{ `${area} - ${category}` }</p>
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              { `${area} - ${category}` }
+            </p>
             <h3
               data-testid={ `${index}-horizontal-name` }
               onClick={ () => handleRedirect(type, id) }
             >
               { name }
             </h3>
-            <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
+            <p data-testid={ `${index}-horizontal-done-date` }>
+              Feita em: { doneDate }
+            </p>
             <button type="button">
               <img
                 src={ shareIcon }
@@ -115,9 +119,7 @@ function DoneRecipesCards() {
             <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
             <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
           </div>
-
           :
-
           <div key={ id }>
             <img
               src={ image }
@@ -134,19 +136,20 @@ function DoneRecipesCards() {
             >
               { name }
             </h3>
-            <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
+            <p data-testid={ `${index}-horizontal-done-date` }>
+              Feita em: { doneDate }
+            </p>
             <button type="button">
-            <img
-              src={ shareIcon }
-              alt="Compartilhar receita"
-              onClick={ () => copyRecipeLink(type, id) }
-              data-testid={ `${index}-horizontal-share-btn` }
-             />
+              <img
+                src={ shareIcon }
+                alt="Compartilhar receita"
+                onClick={ () => copyRecipeLink(type, id) }
+                data-testid={ `${index}-horizontal-share-btn` }
+              />
             </button>
           { showCopyText && <span>Link copiado!</span> }
-        </div>
-      )}
-    </div>
+        </div>)}
+</div>
   );
 }
 
