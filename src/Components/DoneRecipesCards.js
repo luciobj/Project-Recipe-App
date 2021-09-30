@@ -100,10 +100,10 @@ function DoneRecipesCards() {
               data-testid={ `${index}-horizontal-name` }
               onClick={ () => handleRedirect(type, id) }
             >
-                { name }
+              { name }
             </h3>
             <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
-            <button>
+            <button type="button">
               <img
                 src={ shareIcon }
                 alt="Compartilhar receita"
@@ -116,33 +116,33 @@ function DoneRecipesCards() {
             <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
           </div>
 
-        :
-        
+          :
+
           <div key={ id }>
-          <img
-            src={ image }
-            alt={ name }
-            data-testid={ `${index}-horizontal-image` }
-            onClick={ () => handleRedirect(type, id) }
-          />
-          <p data-testid={ `${index}-horizontal-top-text` }>
-            { alcoholicOrNot ? alcoholicOrNot : `Non Alcoholic` }
-          </p>
-          <h3
-            data-testid={ `${index}-horizontal-name` }
-            onClick={ () => handleRedirect(type, id) }
-          >
-            { name }
-          </h3>
-          <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
-          <button>
+            <img
+              src={ image }
+              alt={ name }
+              data-testid={ `${index}-horizontal-image` }
+              onClick={ () => handleRedirect(type, id) }
+            />
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              { alcoholicOrNot ? alcoholicOrNot : `Non Alcoholic` }
+            </p>
+            <h3
+              data-testid={ `${index}-horizontal-name` }
+              onClick={ () => handleRedirect(type, id) }
+            >
+              { name }
+            </h3>
+            <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
+            <button type="button">
             <img
               src={ shareIcon }
               alt="Compartilhar receita"
               onClick={ () => copyRecipeLink(type, id) }
               data-testid={ `${index}-horizontal-share-btn` }
              />
-          </button>
+            </button>
           { showCopyText && <span>Link copiado!</span> }
         </div>
       )}
