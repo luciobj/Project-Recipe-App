@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router";
-import shareIcon from "../images/shareIcon.svg";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import shareIcon from '../images/shareIcon.svg';
 
 function DoneRecipesCards() {
 //   Estrutura de DoneRecipes no localStorage:
@@ -14,8 +14,8 @@ function DoneRecipesCards() {
     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
     // não entendi, mas o teste pede para que a data seja igual a 23/06/2020 🤔️
     doneDate: '23/06/2020',
-    tags: ['Pasta','Curry']
-  }, 
+    tags: ['Pasta', 'Curry'],
+  },
   {
     id: 178319,
     type: 'bebida',
@@ -24,7 +24,7 @@ function DoneRecipesCards() {
     alcoholicOrNot: 'Alcoholic',
     name: 'Aquamarine',
     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    doneDate: '29/09/2021',
+    doneDate: '20/09/2021',
     tags: [],
   },
   {
@@ -36,7 +36,7 @@ function DoneRecipesCards() {
     name: 'Apple Frangipan Tart',
     image: 'https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg',
     doneDate: '29/09/2021',
-    tags: ['Tart','Baking','Fruity']
+    tags: ['Tart', 'Baking', 'Fruity'],
   },
   {
     id: 12690,
@@ -62,12 +62,12 @@ function DoneRecipesCards() {
 
     setTimeout(() => {
       setShowCopyText(false);
-    }, oneSecond)
+    }, oneSecond);
   };
 
   const handleRedirect = (type, id) => {
-    history.push(`/${type}s/${id}`)
-  }
+    history.push(`/${type}s/${id}`);
+  };
 
   // as informações serão obtidas do localStorage 👇
   // const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
@@ -84,23 +84,55 @@ function DoneRecipesCards() {
           image,
           doneDate,
           tags,
-        }, index) => 
-        
+        }, index) =>
+
         type === 'comida' ?
         
-        <div key={ id }>
+          <div key={ id }>
+            <img
+              src={ image }
+              alt={ name }
+              data-testid={ `${index}-horizontal-image` }
+              onClick={ () => handleRedirect(type, id) }
+            />
+            <p data-testid={ `${index}-horizontal-top-text` }>{ `${area} - ${category}` }</p>
+            <h3
+              data-testid={ `${index}-horizontal-name` }
+              onClick={ () => handleRedirect(type, id) }
+            >
+                { name }
+            </h3>
+            <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
+            <button>
+              <img
+                src={ shareIcon }
+                alt="Compartilhar receita"
+                onClick={ () => copyRecipeLink(type, id) }
+                data-testid={ `${index}-horizontal-share-btn` }
+              />
+            </button>
+            { showCopyText && <span>Link copiado! </span> }
+            <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
+            <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
+          </div>
+
+        :
+        
+          <div key={ id }>
           <img
             src={ image }
             alt={ name }
-            data-testid={`${index}-horizontal-image`}
+            data-testid={ `${index}-horizontal-image` }
             onClick={ () => handleRedirect(type, id) }
           />
-          <p data-testid={`${index}-horizontal-top-text`}>{ `${area} - ${category}` }</p>
+          <p data-testid={ `${index}-horizontal-top-text` }>
+            { alcoholicOrNot ? alcoholicOrNot : `Non Alcoholic` }
+          </p>
           <h3
-            data-testid={`${index}-horizontal-name`}
+            data-testid={ `${index}-horizontal-name` }
             onClick={ () => handleRedirect(type, id) }
           >
-              { name }
+            { name }
           </h3>
           <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
           <button>
@@ -111,40 +143,8 @@ function DoneRecipesCards() {
               data-testid={ `${index}-horizontal-share-btn` }
              />
           </button>
-          { showCopyText && <span>Link copiado! </span> }
-          <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
-          <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
+          { showCopyText && <span>Link copiado!</span> }
         </div>
-        
-        : 
-        
-        <div key={ id }>
-        <img
-          src={ image }
-          alt={ name }
-          data-testid={`${index}-horizontal-image`}
-          onClick={ () => handleRedirect(type, id) }
-        />
-        <p data-testid={`${index}-horizontal-top-text`}>
-          { alcoholicOrNot ? alcoholicOrNot : `Non Alcoholic` }
-        </p>
-        <h3
-          data-testid={`${index}-horizontal-name`}
-          onClick={ () => handleRedirect(type, id) }
-        >
-            { name }
-        </h3>
-        <p data-testid={ `${index}-horizontal-done-date` }>Feita em: { doneDate }</p>
-        <button>
-          <img
-            src={ shareIcon }
-            alt="Compartilhar receita"
-            onClick={ () => copyRecipeLink(type, id) }
-            data-testid={ `${index}-horizontal-share-btn` }
-           />
-        </button>
-        { showCopyText && <span>Link copiado! </span> }
-      </div>
       )}
     </div>
   );
