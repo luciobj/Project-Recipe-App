@@ -52,6 +52,7 @@ function DoneRecipesCards() {
   }];
 
   const [showCopyText, setShowCopyText] = useState(false);
+  const [filter, setFilter] = useState('all');
   const history = useHistory();
 
   const copyRecipeLink = (type, id) => {
@@ -72,7 +73,33 @@ function DoneRecipesCards() {
   // as informações serão obtidas do localStorage 👇
   // const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
   return (
+    
     <div>
+      <button
+        type="button"
+        name='all'
+        onClick={ ({ target }) => setFilter(target.name) }
+        data-testid="filter-by-all-btn"
+      >
+        Todas as receitas
+      </button>
+      <button
+        type="button"
+        name="comidas"
+        onClick={ ({ target }) => setFilter(target.name) }
+        data-testid="filter-by-food-btn"
+      >
+        Comidas
+      </button>
+      <button
+        type="button"
+        name="bebidas"
+        onClick={ ({ target }) => setFilter(target.name) }
+        data-testid="filter-by-drink-btn"
+      >
+        Bebidas
+      </button>
+
       {doneRecipes.map((
         {
           id,
@@ -87,7 +114,7 @@ function DoneRecipesCards() {
         }, index) =>
 
         type === 'comida' ?
-        
+
           <div key={ id }>
             <img
               src={ image }
@@ -105,7 +132,8 @@ function DoneRecipesCards() {
               { name }
             </h3>
             <p data-testid={ `${index}-horizontal-done-date` }>
-              Feita em: { doneDate }
+              Feita em: 
+              { doneDate }
             </p>
             <button type="button">
               <img
@@ -115,7 +143,7 @@ function DoneRecipesCards() {
                 data-testid={ `${index}-horizontal-share-btn` }
               />
             </button>
-            { showCopyText && <span>Link copiado! </span> }
+            { showCopyText && <span>Link copiado!</span> }
             <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
             <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
           </div>
@@ -128,7 +156,7 @@ function DoneRecipesCards() {
               onClick={ () => handleRedirect(type, id) }
             />
             <p data-testid={ `${index}-horizontal-top-text` }>
-              { alcoholicOrNot ? alcoholicOrNot : `Non Alcoholic` }
+              { alcoholicOrNot ? alcoholicOrNot : 'Non Alcoholic' }
             </p>
             <h3
               data-testid={ `${index}-horizontal-name` }
@@ -137,7 +165,8 @@ function DoneRecipesCards() {
               { name }
             </h3>
             <p data-testid={ `${index}-horizontal-done-date` }>
-              Feita em: { doneDate }
+              Feita em: 
+              { doneDate }
             </p>
             <button type="button">
               <img
@@ -147,9 +176,9 @@ function DoneRecipesCards() {
                 data-testid={ `${index}-horizontal-share-btn` }
               />
             </button>
-          { showCopyText && <span>Link copiado!</span> }
-        </div>)}
-</div>
+            { showCopyText && <span>Link copiado!</span> }
+          </div>)}
+    </div>
   );
 }
 
