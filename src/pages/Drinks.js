@@ -9,8 +9,8 @@ const Drinks = () => (
   <RecipesProvider>
     <div>
       <Header title="Bebidas" />
-      <Footer />
       <DrinksCards />
+      <Footer />
     </div>
   </RecipesProvider>
 );
