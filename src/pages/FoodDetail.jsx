@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import logoShare from '../images/shareIcon.svg';
 import logoFavorite from '../images/whiteHeartIcon.svg';
+import logoFavoriteChecked from '../images/blackHeartIcon.svg';
+import Carousel from '../Components/Carousel';
 import '../Styles/FoodDetail.css';
 
 export default function FoodDetail(props) {
+  const favoriteRecipes = [];
   const { history } = props;
   const [recipe, setRecipe] = useState({});
   const [drinks, setDrinks] = useState({});
-
+  const [copied, setCopied] = useState(false);
+  const [recipeFavorited, setRecipeFavorited] = useState(false);
 
   function getIdRecipesDetails() {
     const id = history.location.pathname.replace('/comidas/', '');
@@ -52,13 +56,6 @@ export default function FoodDetail(props) {
     return idVideo;
   }
 
-  // async function fetchRecommendedDrinks() {
-  //   const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-  //   const object = await response.json();
-  //   setDrinks(object);
-  //   console.log(drinks);
-  // }
-
   useEffect(() => {
     const fetchRecommendedDrinks = async () => {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
@@ -70,6 +67,22 @@ export default function FoodDetail(props) {
 
 
   const { meals } = recipe;
+
+  useEffect(() => {
+    meals && meals.map((meal) => {
+      if (localStorage.getItem('favoriteRecipes')) {
+        const idRecipeFavorite = JSON
+          .parse(localStorage.getItem('favoriteRecipes'))[0].id;
+        if (idRecipeFavorite === meal.idMeal){
+         setRecipeFavorited(true);
+        } else {
+          setRecipeFavorited(false);
+        }
+        return idRecipeFavorite;
+      }
+      return '';
+    });
+  }, [meals]);
 
   return (
     <div>
@@ -87,13 +100,49 @@ export default function FoodDetail(props) {
             type="image"
             src={ logoShare }
             alt="share-icon"
+            //Referência para implementar link de compartilhar:  https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard?rq=1
+            onClick={() => {
+              const timer = 2000;
+              navigator.clipboard.writeText('http://localhost:3000' + history.location.pathname);
+              setCopied(true)
+              setTimeout(() => setCopied(false), timer)
+            }}
           />
-          <input
-            data-testid="favorite-btn"
-            type="image"
-            src={ logoFavorite }
-            alt="favorite-icon"
-          />
+          {
+            !recipeFavorited ?
+            <input
+              data-testid="favorite-btn"
+              type="image"
+              src={ logoFavorite }
+              onClick={ () => {
+                favoriteRecipes.push({
+                  id: recipeSelected.idMeal,
+                  type: 'comida',
+                  area: recipeSelected.strArea,
+                  category: recipeSelected.strCategory,
+                  alcoholicOrNot: '',
+                  name: recipeSelected.strMeal,
+                  image: recipeSelected.strMealThumb,
+                });
+                localStorage
+                  .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+                setRecipeFavorited(!recipeFavorited);
+              } }
+              alt="favorite-icon"
+            /> :
+            <input
+              data-testid="favorite-btn"
+              type="image"
+              src={ logoFavoriteChecked }
+              onClick={ () => {
+                setRecipeFavorited(!recipeFavorited);
+                localStorage.removeItem('favoriteRecipes');
+              } }
+              alt="favorite-icon"
+            /> 
+          }
+
+          { copied && <p>Link copiado!</p> }
 
           <h1>Ingredients:</h1>
           {
@@ -121,19 +170,15 @@ export default function FoodDetail(props) {
         </div>
       )) }
       <h1>Recomendadas</h1>
-      <div>
-        {
-          drinks['drinks'] && drinks['drinks'].map((drink) => (
-            <div key={ drink.idDrink }>
-              <img src={drink.strDrinkThumb} alt={drink.strDrink} />
-            </div>
-          ))
-        }
-      </div>
+      { drinks['drinks'] && <Carousel recipes={ drinks } /> }
       <button
         id="start-recipe"
         data-testid="start-recipe-btn"
         type="button"
+        onClick={ () => { 
+          const idRecipe = getIdRecipesDetails();
+          history.push(`/comidas/${idRecipe}/in-progress`)
+        } }
       >
         Iniciar Receita
       </button>

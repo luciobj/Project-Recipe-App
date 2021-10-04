@@ -1,0 +1,14 @@
+.carousel {
+  display: flex;
+  flex-direction: row;
+  width: 330px;
+  height: auto;
+  overflow-x: scroll;
+  margin-bottom: 100px;
+}
+
+.image-recomended {
+  width: 150px;
+  width: 150px;
+  padding: 10px;
+}
