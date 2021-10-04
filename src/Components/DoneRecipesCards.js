@@ -26,29 +26,6 @@ function DoneRecipesCards() {
     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
     doneDate: '20/09/2021',
     tags: [],
-  },
-  {
-    id: 52768,
-    type: 'comida',
-    area: 'British',
-    category: 'Dessert',
-    alcoholicOrNot: '',
-    name: 'Apple Frangipan Tart',
-    image: 'https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg',
-    doneDate: '29/09/2021',
-    tags: ['Tart', 'Baking', 'Fruity'],
-  },
-  {
-    id: 12690,
-    type: 'bebida',
-    area: '',
-    category: 'Other/Unknown',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'Lassi - A South Indian Drink',
-    image: 'https://www.thecocktaildb.com/images/media/drink/iq6scx1487603980.jpg',
-    doneDate: '29/09/2021',
-    tags: [],
-    // FAZER REGRA PARA CASO ALGUMA DESSAS INFORMAÇÕES SEJAM NULL
   }];
 
   const [showCopyText, setShowCopyText] = useState(false);
@@ -73,11 +50,11 @@ function DoneRecipesCards() {
   // as informações serão obtidas do localStorage 👇
   // const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
   return (
-    
+
     <div>
       <button
         type="button"
-        name='all'
+        name="all"
         onClick={ ({ target }) => setFilter(target.name) }
         data-testid="filter-by-all-btn"
       >
@@ -85,7 +62,7 @@ function DoneRecipesCards() {
       </button>
       <button
         type="button"
-        name="comidas"
+        name="comida"
         onClick={ ({ target }) => setFilter(target.name) }
         data-testid="filter-by-food-btn"
       >
@@ -93,14 +70,14 @@ function DoneRecipesCards() {
       </button>
       <button
         type="button"
-        name="bebidas"
+        name="bebida"
         onClick={ ({ target }) => setFilter(target.name) }
         data-testid="filter-by-drink-btn"
       >
         Bebidas
       </button>
 
-      {doneRecipes.map((
+      {doneRecipes.filter(({ type }) => type.includes(filter) || filter === 'all').map((
         {
           id,
           type,
@@ -111,40 +88,41 @@ function DoneRecipesCards() {
           image,
           doneDate,
           tags,
-        }, index) =>
+        }, index
+        ) => (
 
-          <div key={ id }>
+        <div key={ id }>
+          <img
+            src={ image }
+            alt={ name }
+            data-testid={ `${index}-horizontal-image` }
+            onClick={ () => handleRedirect(type, id) }
+          />
+          <p data-testid={ `${index}-horizontal-top-text` }>
+            { alcoholicOrNot || `${area} - ${category}` }
+          </p>
+          <h3
+            data-testid={ `${index}-horizontal-name` }
+            onClick={ () => handleRedirect(type, id) }
+          >
+            { name }
+          </h3>
+          <p data-testid={ `${index}-horizontal-done-date` }>
+            Feita em:
+            { doneDate }
+          </p>
+          <button type="button">
             <img
-              src={ image }
-              alt={ name }
-              data-testid={ `${index}-horizontal-image` }
-              onClick={ () => handleRedirect(type, id) }
+              src={ shareIcon }
+              alt="Compartilhar receita"
+              onClick={ () => copyRecipeLink(type, id) }
+              data-testid={ `${index}-horizontal-share-btn` }
             />
-            <p data-testid={ `${index}-horizontal-top-text` }>
-              { alcoholicOrNot || `${area} - ${category}` }
-            </p>
-            <h3
-              data-testid={ `${index}-horizontal-name` }
-              onClick={ () => handleRedirect(type, id) }
-            >
-              { name }
-            </h3>
-            <p data-testid={ `${index}-horizontal-done-date` }>
-              Feita em: 
-              { doneDate }
-            </p>
-            <button type="button">
-              <img
-                src={ shareIcon }
-                alt="Compartilhar receita"
-                onClick={ () => copyRecipeLink(type, id) }
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
-            { showCopyText && <span>Link copiado!</span> }
-            <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
-            <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
-          </div>)}
+          </button>
+          { showCopyText && <span>Link copiado!</span> }
+          <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
+          <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
+        </div>))}
     </div>
   );
 }
