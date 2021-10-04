@@ -21,8 +21,8 @@ function MealsCards() {
       {meals.length > 0 ? meals
         .map(({ idMeal, strMealThumb, strMeal, strCategory }, index) => (
           <Link
-          key={ idMeal }
-          to={ `/comidas/${idMeal}` }
+            key={ idMeal }
+            to={ `/comidas/${idMeal}` }
           >
             <div data-testid={ `${index}-recipe-card` }>
               <img
