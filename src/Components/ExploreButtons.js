@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { fetchRandomMeal, fetchRandomDrink } from '../Services/randomRecipeAPI';
+import { fetchRandomMeal, fetchRandomDrink } from '../services/randomRecipeAPI';
 
 function ExploreButtons() {
   const url = window.location.pathname.replace('/explorar/', '');
