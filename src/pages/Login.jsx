@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-
-import LoginContext from '../utils/LoginContext';
+import LoginContext from '../context/LoginContext';
 
 export default function Login() {
   const { email, setEmail, password, setPassword } = useContext(LoginContext);

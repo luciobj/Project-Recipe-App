@@ -5,12 +5,15 @@ import RecipesContext from './recipesContext';
 function RecipesProvider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [search, setSearch] = useState('');
 
   const contextValue = {
     meals,
     setMeals,
-    setDrinks,
     drinks,
+    setDrinks,
+    search,
+    setSearch,
   };
 
   return (
