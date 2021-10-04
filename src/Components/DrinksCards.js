@@ -21,22 +21,23 @@ function DrinksCards() {
       {drinks.length > 0 ? drinks
         .map(({ idDrink, strDrinkThumb, strDrink, strCategory }, index) => (
           <Link
-            data-testid={ `${index}-recipe-card` }
             key={ idDrink }
             to={ `/bebidas/${idDrink}` }
           >
-            <img
-              src={ strDrinkThumb }
-              alt={ strDrink }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3
-              data-testid={ `${index}-card-name` }
-              category={ strCategory }
-              id={ idDrink }
-            >
-              { strDrink }
-            </h3>
+            <div data-testid={ `${index}-recipe-card` }>
+              <img
+                src={ strDrinkThumb }
+                alt={ strDrink }
+                data-testid={ `${index}-card-img` }
+              />
+              <h3
+                data-testid={ `${index}-card-name` }
+                category={ strCategory }
+                id={ idDrink }
+              >
+                { strDrink }
+              </h3>
+            </div>
           </Link>
         )).slice(0, maxLength) : <p>Carregando bebidas</p> }
     </div>

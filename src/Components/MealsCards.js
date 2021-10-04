@@ -21,22 +21,23 @@ function MealsCards() {
       {meals.length > 0 ? meals
         .map(({ idMeal, strMealThumb, strMeal, strCategory }, index) => (
           <Link
-            data-testid={ `${index}-recipe-card` }
-            key={ idMeal }
-            to={ `/comidas/${idMeal}` }
+          key={ idMeal }
+          to={ `/comidas/${idMeal}` }
           >
-            <img
-              src={ strMealThumb }
-              alt={ strMeal }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3
-              data-testid={ `${index}-card-name` }
-              category={ strCategory }
-              id={ idMeal }
-            >
-              { strMeal }
-            </h3>
+            <div data-testid={ `${index}-recipe-card` }>
+              <img
+                src={ strMealThumb }
+                alt={ strMeal }
+                data-testid={ `${index}-card-img` }
+              />
+              <h3
+                data-testid={ `${index}-card-name` }
+                category={ strCategory }
+                id={ idMeal }
+              >
+                { strMeal }
+              </h3>
+            </div>
           </Link>
         )).slice(0, maxLength) : <p>Carregando comidas</p>}
     </div>
