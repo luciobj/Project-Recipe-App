@@ -10,7 +10,7 @@ const drink0 = {
   category: 'Ordinary Drink',
   alcoholicOrNot: 'Alcoholic',
   name: 'Margarita',
-  image: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg'
+  image: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg',
 };
 const drink1 = {
   id: '12776',
@@ -19,7 +19,7 @@ const drink1 = {
   category: 'Coffee / Tea',
   alcoholicOrNot: 'Non alcoholic',
   name: 'Coffee mug',
-  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
+  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg',
 };
 const meal0 = {
   id: '53015',
@@ -28,27 +28,26 @@ const meal0 = {
   category: 'Dessert',
   alcoholicOrNot: '',
   name: 'Krispy Kreme Donut',
-  image: 'https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg'
+  image: 'https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg',
 };
 const storeDrinks = [drink0, drink1];
 const storeMeals = [meal0, drink1];
 const storeFull = [drink0, meal0, drink1];
 
-localStorageMock = {
-  store: storeDrinks,
-  getItem: (key) => localStorage.store[key],
-  setItem: (key, value) => { localStorage.store[key] = value.toString() },
-  clear: () => { localStorage.store = {} },
-  removeItem: (key) => { delete localStorage.store[key] },
-};
-
-describe('Requisito 61 - Checa os elementos do card de comida renderizados', () => {
+describe('Requisito 61 - Checa os elementos dos cards renderizados', () => {
   beforeEach(() => {
     renderWithRouter(<FavoriteRecipes />);
   });
   // Reference for mock:
   // * https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
   // * https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
+  const localStorageMock = {
+    store: storeMeals,
+    getItem: (key) => localStorage.store[key],
+    setItem: (key, value) => { localStorage.store[key] = value.toString(); },
+    clear: () => { localStorage.store = {}; },
+    removeItem: (key) => { delete localStorage.store[key]; },
+  };
   Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
   afterAll(() => {
@@ -77,9 +76,9 @@ describe('Requisito 61 - Checa os elementos do card de comida renderizados', () 
     const recipeArea = screen.getAllByTestId(/-horizontal-area/);
     const expectedLength = 2;
     const expectedText0 = `${window.localStorage
-      .store[0].area} - ${ window.localStorage.store[0].category }`;
+      .store[0].area} - ${window.localStorage.store[0].category}`;
     const expectedText1 = `${window.localStorage
-      .store[1].area} - ${ window.localStorage.store[1].category }`;
+      .store[1].area} - ${window.localStorage.store[1].category}`;
     expect(recipeArea.length).toBe(expectedLength);
     expect(recipeArea[0]).toBeInTheDocument();
     expect(recipeArea[0].innerHTML).toBe(expectedText0);
@@ -98,73 +97,17 @@ describe('Requisito 61 - Checa os elementos do card de comida renderizados', () 
   });
 });
 
-describe('Requisito 62 - Checa os elementos do card de bedida renderizados', () => {
-  beforeEach(() => {
-    renderWithRouter(<FavoriteRecipes />);
-  });
-  localStorageMock = {
-    store: storeMeals,
-    getItem: (key) => localStorage.store[key],
-    setItem: (key, value) => { localStorage.store[key] = value.toString() },
-    clear: () => { localStorage.store = {} },
-    removeItem: (key) => { delete localStorage.store[key] },
-  };
-  Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-
-  afterAll(() => {
-    window.localStorage.clear();
-  });
-
-  it('A foto da receita está renderizada corretamente', () => {
-    const recipeImg = screen.getAllByTestId(/-horizontal-img/);
-    const expectedLength = 2;
-    expect(recipeImg.length).toBe(expectedLength);
-    expect(recipeImg[0]).toBeInTheDocument();
-    expect(recipeImg[0].src).toBe(window.localStorage.store[0].image);
-    expect(recipeImg[1]).toBeInTheDocument();
-    expect(recipeImg[1].src).toBe(window.localStorage.store[1].image);
-  });
-  it('O nome da receita está renderizado corretamente', () => {
-    const recipeName = screen.getAllByTestId(/-horizontal-name/);
-    const expectedLength = 2;
-    expect(recipeName.length).toBe(expectedLength);
-    expect(recipeName[0]).toBeInTheDocument();
-    expect(recipeName[0].innerHTML).toBe(window.localStorage.store[0].name);
-    expect(recipeName[1]).toBeInTheDocument();
-    expect(recipeName[1].innerHTML).toBe(window.localStorage.store[1].name);
-  });
-  it('A area da receita está renderizada corretamente', () => {
-    const recipeArea = screen.getAllByTestId(/-horizontal-area/);
-    const expectedLength = 2;
-    expect(recipeArea.length).toBe(expectedLength);
-    expect(recipeArea[0]).toBeInTheDocument();
-    expect(recipeArea[0].innerHTML).toBe(window.localStorage.store[0].area);
-    expect(recipeArea[1]).toBeInTheDocument();
-    expect(recipeArea[1].innerHTML).toBe(window.localStorage.store[1].area);
-  });
-  it('O botão de compartilhar da receita está renderizado corretamente', () => {
-    const recipeShareBtn = screen.getAllByTestId(/-horizontal-share-btn/);
-    const expectedLength = 2;
-    expect(recipeShareBtn.length).toBe(expectedLength);
-  });
-  it('O botão de \'desfavoritar\' está renderizado corretamente', () => {
-    const recipeUnfavoriteBtn = screen.getAllByTestId(/-horizontal-favorite-btn/);
-    const expectedLength = 2;
-    expect(recipeUnfavoriteBtn.length).toBe(expectedLength);
-  });
-});
-
-describe('Requisito 63 - Checa se a lógica do botão compartilhar funciona corretamente', () => {
+describe('Requisito 63 - Checa a lógica do botão compartilhar', () => {
   beforeEach(() => {
     renderWithRouter(<FavoriteRecipes />);
     const recipeShareBtn = screen.getAllByTestId(/-horizontal-share-btn/);
     userEvent.click(recipeShareBtn[0]);
   });
-  
+
   Object.defineProperty(navigator, 'clipboard', { value: {
-    writeText: jest.fn(() => null)
+    writeText: jest.fn(() => null),
   } });
-  
+
   const detailUrl0 = 'http://localhost:3000/bebidas/11007';
   it('A função para salvar o url é chamada corretamente', () => {
     expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
@@ -182,9 +125,9 @@ describe('Requisito 64 - Checa se a lógica de desfavoritar funciona corretament
   const localStorageMock = {
     store: storeMeals,
     getItem: (key) => localStorage.store[key],
-    setItem: (key, value) => { localStorage.store[key] = value.toString() },
-    clear: () => { localStorage.store = {} },
-    removeItem: (key) => { delete localStorage.store[key] },
+    setItem: (key, value) => { localStorage.store[key] = value.toString(); },
+    clear: () => { localStorage.store = {}; },
+    removeItem: (key) => { delete localStorage.store[key]; },
   };
   Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
@@ -209,9 +152,9 @@ describe('Requisito 65 - Checa os botões de filtro', () => {
   const localStorageMock = {
     store: storeFull,
     getItem: (key) => localStorage.store[key],
-    setItem: (key, value) => { localStorage.store[key] = value.toString() },
-    clear: () => { localStorage.store = {} },
-    removeItem: (key) => { delete localStorage.store[key] },
+    setItem: (key, value) => { localStorage.store[key] = value.toString(); },
+    clear: () => { localStorage.store = {}; },
+    removeItem: (key) => { delete localStorage.store[key]; },
   };
   Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
@@ -241,7 +184,8 @@ describe('Requisito 65 - Checa os botões de filtro', () => {
     userEvent.click(drinkFilterBtn);
     userEvent.click(clearFilterBtn);
     const recipeCards = screen.getAllByTestId(/-recipe-card/i);
-    expect(recipeCards.length).toBe(3);
+    const expectedCards = 3;
+    expect(recipeCards.length).toBe(expectedCards);
   });
 });
 
@@ -249,9 +193,9 @@ describe('Requisito 66 - Verifica o redirecionamento para página de detalhes', 
   const localStorageMock = {
     store: storeMeals,
     getItem: (key) => localStorage.store[key],
-    setItem: (key, value) => { localStorage.store[key] = value.toString() },
-    clear: () => { localStorage.store = {} },
-    removeItem: (key) => { delete localStorage.store[key] },
+    setItem: (key, value) => { localStorage.store[key] = value.toString(); },
+    clear: () => { localStorage.store = {}; },
+    removeItem: (key) => { delete localStorage.store[key]; },
   };
   Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 

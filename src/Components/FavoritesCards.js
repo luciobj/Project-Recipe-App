@@ -60,7 +60,7 @@ function FavoriteCards() {
             />
             <div data-testid={ `${index}-horizontal-top-text` }>
               <p data-testid={ `${index}-horizontal-area` }>
-                { `${ area } - ${ category }` }
+                { `${area} - ${category}` }
               </p>
               <p data-testid={ `${index}-horizontal-alcoholic` }>{ alcoholicOrNot }</p>
             </div>
@@ -96,7 +96,7 @@ function FavoriteCards() {
 
   useEffect(() => {
     const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if(localFavorites !== null && localFavorites !== undefined) {
+    if (localFavorites !== null && localFavorites !== undefined) {
       setFavorites(localFavorites);
     }
   }, [localStorageChange]);
