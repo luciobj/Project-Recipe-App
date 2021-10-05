@@ -1,7 +1,8 @@
-// import React from 'react';
-// import App from '../App';
-// import renderWithRouter from './renderWithRouter';
+import React from 'react';
 
-// test('Farewell, front-end', () => {
-//   renderWithRouter(<App />);
-// });
+import renderWithRouter from '../utils/renderWithRouter';
+import App from '../App';
+
+test('Farewell, front-end', () => {
+  renderWithRouter(<App />);
+});

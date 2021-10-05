@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../Styles/Header.css';
+import '../styles/Header.css';
 import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
