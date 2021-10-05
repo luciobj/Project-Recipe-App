@@ -15,7 +15,7 @@ function RecipesProvider({ children }) {
     setDrinks,
     search,
     setSearch,
-    areas, 
+    areas,
     setAreas,
   };
 

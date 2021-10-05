@@ -10,18 +10,19 @@ function ExploreArea() {
   const MaxLength = 12;
 
   useEffect(() => {
-    const getAreas = async () => setAreas( await fetchAreas());
-    
+    const getAreas = async () => setAreas(await fetchAreas());
+
     getAreas();
   }, [setAreas]);
 
   useEffect(() => {
-    const getMealsByArea = async () => setMealsByArea( await fetchMealByArea(selectedArea));
-
+    const getMealsByArea = async () => {
+      setMealsByArea(await fetchMealByArea(selectedArea));
+    }
     getMealsByArea();
   }, [setMealsByArea, selectedArea]);
-  
-  return(
+
+  return (
     <div>
       <select
         name="area"
@@ -34,20 +35,20 @@ function ExploreArea() {
             key={ strArea }
             value={ strArea }
             data-testid={ `${strArea}-option` }
-          > 
-            { strArea } 
+          >
+            { strArea }
           </option>
         ))}
       </select>
       {mealsByArea && mealsByArea.map(({ strMeal, strMealThumb, idMeal }, index) => (
-        <Link key={ idMeal } to={ `/comidas/${idMeal}` } >
+        <Link key={ idMeal } to={ `/comidas/${idMeal}` }>
           <div
             key={ idMeal }
-            data-testid={`${index}-recipe-card`}
+            data-testid={ `${index}-recipe-card` }
           >
             <img
               style={ { width: '300px' } }
-              src={ strMealThumb } 
+              src={ strMealThumb }
               alt={ strMeal }
               data-testid={ `${index}-card-img` }
             />
