@@ -18,7 +18,7 @@ function ExploreArea() {
   useEffect(() => {
     const getMealsByArea = async () => {
       setMealsByArea(await fetchMealByArea(selectedArea));
-    }
+    };
     getMealsByArea();
   }, [setMealsByArea, selectedArea]);
 
