@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../Styles/Carousel.css';
+import '../styles/Carousel.css';
 
 export default function Carousel(props) {
   const { recipes } = props;

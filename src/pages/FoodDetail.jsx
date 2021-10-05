@@ -4,7 +4,7 @@ import logoShare from '../images/shareIcon.svg';
 import logoFavorite from '../images/whiteHeartIcon.svg';
 import logoFavoriteChecked from '../images/blackHeartIcon.svg';
 import Carousel from '../Components/Carousel';
-import '../Styles/FoodDetail.css';
+import '../styles/FoodDetail.css';
 
 export default function FoodDetail(props) {
   const favoriteRecipes = [];
