@@ -4,6 +4,7 @@ import logoShare from '../images/shareIcon.svg';
 import logoFavorite from '../images/whiteHeartIcon.svg';
 import logoFavoriteChecked from '../images/blackHeartIcon.svg';
 import Carousel from '../Components/Carousel';
+
 export default function DrinkDetail(props) {
   const favoriteRecipes = [];
   const { history } = props;
@@ -11,7 +12,6 @@ export default function DrinkDetail(props) {
   const [foods, setFoods] = useState({});
   const [copied, setCopied] = useState(false);
   const [recipeFavorited, setRecipeFavorited] = useState(false);
-
 
   function getIdRecipesDetails() {
     const id = history.location.pathname.replace('/bebidas/', '');
@@ -62,19 +62,21 @@ export default function DrinkDetail(props) {
   const { drinks } = recipe;
 
   useEffect(() => {
-    drinks && drinks.map((drink) => {
-      if (localStorage.getItem('favoriteRecipes')) {
-        const idRecipeFavorite = JSON
-          .parse(localStorage.getItem('favoriteRecipes'))[0].id;
-        if (idRecipeFavorite === drink.idDrink){
-          setRecipeFavorited(true);
-        } else {
-          setRecipeFavorited(false);
+    if (drinks) {
+      drinks.map((drink) => {
+        if (localStorage.getItem('favoriteRecipes')) {
+          const idRecipeFavorite = JSON
+            .parse(localStorage.getItem('favoriteRecipes'))[0].id;
+          if (idRecipeFavorite === drink.idDrink) {
+            setRecipeFavorited(true);
+          } else {
+            setRecipeFavorited(false);
+          }
+          return idRecipeFavorite;
         }
-        return idRecipeFavorite;
-      }
-      return '';
-    });
+        return '';
+      });
+    }
   }, [drinks]);
 
   return (
@@ -93,24 +95,24 @@ export default function DrinkDetail(props) {
             type="image"
             src={ logoShare }
             alt="share-icon"
-            //Referência para implementar link de compartilhar:  https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard?rq=1
-            onClick={() => {
+            // Referência para implementar link de compartilhar:  https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard?rq=1
+            onClick={ () => {
               const timer = 2000;
-              navigator.clipboard.writeText('http://localhost:3000' + history.location.pathname);
-              setCopied(true)
-              setTimeout(() => setCopied(false), timer)
-            }}
-          />          
+              const path = history.location.pathname;
+              navigator.clipboard.writeText(`http://localhost:3000${path}`);
+              setCopied(true);
+              setTimeout(() => setCopied(false), timer);
+            } }
+          />
           {
-            !recipeFavorited ?
-            <input
+            !recipeFavorited ? <input
               data-testid="favorite-btn"
               type="image"
               src={ logoFavorite }
               onClick={ () => {
                 favoriteRecipes.push({
                   id: recipeSelected.idDrink,
-                  type: "bebida",
+                  type: 'bebida',
                   area: '',
                   category: recipeSelected.strCategory,
                   alcoholicOrNot: recipeSelected.strAlcoholic,
@@ -122,19 +124,18 @@ export default function DrinkDetail(props) {
                 setRecipeFavorited(!recipeFavorited);
               } }
               alt="favorite-icon"
-            /> :
-            <input
+            /> : <input
               data-testid="favorite-btn"
               type="image"
               src={ logoFavoriteChecked }
               onClick={ () => {
                 setRecipeFavorited(!recipeFavorited);
-                localStorage.removeItem('favoriteRecipes');             
+                localStorage.removeItem('favoriteRecipes');
               } }
               alt="favorite-icon"
             />
           }
-          
+
           { copied && <p>Link copiado!</p> }
 
           <h1>Ingredients:</h1>
@@ -151,18 +152,20 @@ export default function DrinkDetail(props) {
                 ))
               ))
           }
+          <h3>Instructions:</h3>
           <p data-testid="instructions">{ recipeSelected.strInstructions }</p>
         </div>
       )) }
       <h1>Recomendadas</h1>
-      { foods['meals'] && <Carousel recipes={ foods } /> }
+      { foods.meals && <Carousel recipes={ foods } /> }
       <button
         id="start-recipe"
+        className="start-recipe"
         data-testid="start-recipe-btn"
         type="button"
-        onClick={ () => { 
-          const idRecipe = getIdRecipesDetails();
-          history.push(`/bebidas/${idRecipe}/in-progress`)
+        onClick={ () => {
+          // const idRecipe = getIdRecipesDetails();
+          history.push(`/bebidas/${idRecipe}/in-progress`);
         } }
       >
         Iniciar Receita
@@ -173,6 +176,7 @@ export default function DrinkDetail(props) {
 
 DrinkDetail.propTypes = {
   history: PropTypes.shape({
+    push: PropTypes.func,
     location: PropTypes.shape({
       pathname: PropTypes.string,
     }),

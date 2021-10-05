@@ -65,23 +65,24 @@ export default function FoodDetail(props) {
     fetchRecommendedDrinks();
   }, []);
 
-
   const { meals } = recipe;
 
   useEffect(() => {
-    meals && meals.map((meal) => {
-      if (localStorage.getItem('favoriteRecipes')) {
-        const idRecipeFavorite = JSON
-          .parse(localStorage.getItem('favoriteRecipes'))[0].id;
-        if (idRecipeFavorite === meal.idMeal){
-         setRecipeFavorited(true);
-        } else {
-          setRecipeFavorited(false);
+    if (meals) {
+      meals.map((meal) => {
+        if (localStorage.getItem('favoriteRecipes')) {
+          const idRecipeFavorite = JSON
+            .parse(localStorage.getItem('favoriteRecipes'))[0].id;
+          if (idRecipeFavorite === meal.idMeal) {
+            setRecipeFavorited(true);
+          } else {
+            setRecipeFavorited(false);
+          }
+          return idRecipeFavorite;
         }
-        return idRecipeFavorite;
-      }
-      return '';
-    });
+        return '';
+      });
+    }
   }, [meals]);
 
   return (
@@ -100,17 +101,17 @@ export default function FoodDetail(props) {
             type="image"
             src={ logoShare }
             alt="share-icon"
-            //Referência para implementar link de compartilhar:  https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard?rq=1
-            onClick={() => {
+            // Referência para implementar link de compartilhar:  https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard?rq=1
+            onClick={ () => {
               const timer = 2000;
-              navigator.clipboard.writeText('http://localhost:3000' + history.location.pathname);
-              setCopied(true)
-              setTimeout(() => setCopied(false), timer)
-            }}
+              const path = history.location.pathname;
+              navigator.clipboard.writeText(`http://localhost:3000${path}`);
+              setCopied(true);
+              setTimeout(() => setCopied(false), timer);
+            } }
           />
           {
-            !recipeFavorited ?
-            <input
+            !recipeFavorited ? <input
               data-testid="favorite-btn"
               type="image"
               src={ logoFavorite }
@@ -129,8 +130,7 @@ export default function FoodDetail(props) {
                 setRecipeFavorited(!recipeFavorited);
               } }
               alt="favorite-icon"
-            /> :
-            <input
+            /> : <input
               data-testid="favorite-btn"
               type="image"
               src={ logoFavoriteChecked }
@@ -139,7 +139,7 @@ export default function FoodDetail(props) {
                 localStorage.removeItem('favoriteRecipes');
               } }
               alt="favorite-icon"
-            /> 
+            />
           }
 
           { copied && <p>Link copiado!</p> }
@@ -158,6 +158,7 @@ export default function FoodDetail(props) {
                 ))
               ))
           }
+          <h3>Instructions:</h3>
           <p data-testid="instructions">{ recipeSelected.strInstructions }</p>
           <h1>Video</h1>
           <div className="video-responsive">
@@ -170,14 +171,15 @@ export default function FoodDetail(props) {
         </div>
       )) }
       <h1>Recomendadas</h1>
-      { drinks['drinks'] && <Carousel recipes={ drinks } /> }
+      { drinks.drinks && <Carousel recipes={ drinks } /> }
       <button
         id="start-recipe"
+        className="start-recipe"
         data-testid="start-recipe-btn"
         type="button"
-        onClick={ () => { 
-          const idRecipe = getIdRecipesDetails();
-          history.push(`/comidas/${idRecipe}/in-progress`)
+        onClick={ () => {
+          // const idRecipe = getIdRecipesDetails();
+          history.push(`/comidas/${idRecipe}/in-progress`);
         } }
       >
         Iniciar Receita
@@ -188,6 +190,7 @@ export default function FoodDetail(props) {
 
 FoodDetail.propTypes = {
   history: PropTypes.shape({
+    push: PropTypes.func,
     location: PropTypes.shape({
       pathname: PropTypes.string,
     }),

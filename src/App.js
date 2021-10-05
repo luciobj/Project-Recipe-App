@@ -46,8 +46,16 @@ function App() {
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
         <Route exact path="/comidas/:id" component={ FoodDetail } />
         <Route exact path="/bebidas/:id" component={ DrinkDetail } />
-        <Route exact path="comidas/comidas/:id/in-progress" component={ MealInProgress } />
-        <Route exact path="bebidas/bebidas/:id/in-progress" component={ DrinkInProgress } />
+        <Route
+          exact
+          path="comidas/comidas/:id/in-progress"
+          component={ MealInProgress }
+        />
+        <Route
+          exact
+          path="bebidas/bebidas/:id/in-progress"
+          component={ DrinkInProgress }
+        />
       </LoginProvider>
     </Switch>
   );
