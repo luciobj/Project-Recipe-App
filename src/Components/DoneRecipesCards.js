@@ -93,46 +93,45 @@ function DoneRecipesCards() {
         }, index,
       ) => (
 
-          <div key={ id }>
-            <Link to={ `/${type}s/${id}` }>
-              <img
-              // req 59 só passou no cy depois que eu mudei o tamanho da imagem, o cy não estava reconhecendo pois a imagem estava muito grande
-                style={ { width: '300px' } }
-                src={ image }
-                alt={ name }
-                data-testid={ `${index}-horizontal-image` }
-                // onClick={ () => handleRedirect(type, id) }
-              />
-            </Link>
-            <p data-testid={ `${index}-horizontal-top-text` }>
-              { alcoholicOrNot || `${area} - ${category}` }
-            </p>
-            <Link to={ `/${type}s/${id}` }>
-              <h3
-                data-testid={ `${index}-horizontal-name` }
-                // onClick={ () => handleRedirect(type, id) }
-              >
-              { name }
-              </h3>
-            </Link>
-            <p data-testid={ `${index}-horizontal-done-date` }>
-              Feita em:
-              { doneDate }
-            </p>
-            <button type="button">
-              <img
-                src={ shareIcon }
-                alt="Compartilhar receita"
-                onClick={ () => copyRecipeLink(type, id) }
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
-            { showCopyText && <span>Link copiado!</span> }
-            <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
-            <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
-          </div>))}
-      </div>
+        <div key={ id }>
+          <Link to={ `/${type}s/${id}` }>
+            <img
+            // req 59 só passou no cy depois que eu mudei o tamanho da imagem, o cy não estava reconhecendo pois a imagem estava muito grande
+              style={ { width: '300px' } }
+              src={ image }
+              alt={ name }
+              data-testid={ `${index}-horizontal-image` }
+              // onClick={ () => handleRedirect(type, id) }
+            />
+          </Link>
+          <p data-testid={ `${index}-horizontal-top-text` }>
+            { alcoholicOrNot || `${area} - ${category}` }
+          </p>
+          <Link to={ `/${type}s/${id}` }>
+            <h3
+              data-testid={ `${index}-horizontal-name` }
+              // onClick={ () => handleRedirect(type, id) }
+            >
+                { name }
+            </h3>
+          </Link>
+          <p data-testid={ `${index}-horizontal-done-date` }>
+            Feita em:
+            { doneDate }
+          </p>
+          <button type="button" onClick={ () => copyRecipeLink(type, id) }>
+            <img
+              src={ shareIcon }
+              alt="Compartilhar receita"
+              data-testid={ `${index}-horizontal-share-btn` }
+            />
+          </button>
+          { showCopyText && <span>Link copiado!</span> }
+          <span data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{ tags[0] }</span>
+          <span data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{ tags[1] }</span>
+        </div>))}
+    </div>
   );
 }
- 
+
 export default DoneRecipesCards;
