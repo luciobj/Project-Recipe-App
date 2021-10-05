@@ -37,6 +37,15 @@ function FavoriteCards() {
   // }];
   // localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesMock));
 
+  const handleUnfavorite = ({ target }) => {
+    const { id } = target;
+    const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const newFavorites = localFavorites.filter((recipe) => recipe.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    console.log(newFavorites);
+    alterLocalStorageChange((prevState) => !prevState);
+  };
+
   const cardsMap = (array) => (
     array.map(({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
       <div key={ id }>
@@ -51,9 +60,7 @@ function FavoriteCards() {
             />
             <div data-testid={ `${index}-horizontal-top-text` }>
               <p data-testid={ `${index}-horizontal-area` }>
-                { area } 
-                - 
-                { category }
+                { `${ area } - ${ category }` }
               </p>
               <p data-testid={ `${index}-horizontal-alcoholic` }>{ alcoholicOrNot }</p>
             </div>
@@ -81,38 +88,27 @@ function FavoriteCards() {
           onClick={ handleUnfavorite }
           src={ likeIcon }
         >
-          <img src={ likeIcon } alt="Like Icon" />
+          <img id={ id } src={ likeIcon } alt="Like Icon" />
         </button>
       </div>
     ))
   );
 
-  const updateFavorites = () => {
-    const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    setFavorites(localFavorites);
-  };
-
   useEffect(() => {
-    updateFavorites();
+    const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if(localFavorites !== null && localFavorites !== undefined) {
+      setFavorites(localFavorites);
+    }
   }, [localStorageChange]);
 
   const handleFilters = ({ target }) => {
     const { name } = target;
     const types = {
       Todos: [],
-      Comidas: () => { favorites.filter((recipe) => recipe.type === 'comida') },
-      Bebidas: () => { favorites.filter((recipe) => recipe.type === 'bebida') },
+      Comidas: (favorites.filter((recipe) => recipe.type === 'comida')),
+      Bebidas: (favorites.filter((recipe) => recipe.type === 'bebida')),
     };
-    const filter = types[name];
-    return setFiltered(filter);
-  };
-
-  const handleUnfavorite = ({ target }) => {
-    const { id } = target;
-    const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const newFavorites = localFavorites.filter((recipe) => recipe.id !== id);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    alterLocalStorageChange((prevState) => !prevState);
+    setFiltered(types[name]);
   };
 
   return (
@@ -121,9 +117,9 @@ function FavoriteCards() {
         <FavoriteFilters onClick={ handleFilters } text="Todos" />
         <FavoriteFilters onClick={ handleFilters } text="Comidas" />
         <FavoriteFilters onClick={ handleFilters } text="Bebidas" />
-        { favorites.length > 0 ?
-          (filtered.length > 0 ? cardsMap(filtered) : cardsMap(favorites)) :
-          <p>Você ainda não tem nenhuma receita favoritada!</p> }
+        { !favorites.length > 0 && <p>Você ainda não tem nenhuma receita favoritada!</p> }
+        { !filtered.length > 0 && favorites.length > 0 && cardsMap(favorites) }
+        { filtered.length > 0 && cardsMap(filtered) }
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ function FavoriteFilters(props) {
 
 export default FavoriteFilters;
 
-FavoriteFilters.porpTypes ={
+FavoriteFilters.propTypes = {
   text: PropTypes.string,
   onClick: PropTypes.func,
 }.isRequired;

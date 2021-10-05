@@ -3,8 +3,7 @@ import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../utils/renderWithRouter';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
-
-const storeDrinks = [{
+const drink0 = {
   id: '11007',
   type: 'bebida',
   area: '',
@@ -12,7 +11,8 @@ const storeDrinks = [{
   alcoholicOrNot: 'Alcoholic',
   name: 'Margarita',
   image: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg'
-  }, {
+};
+const drink1 = {
   id: '12776',
   type: 'bebida',
   area: '',
@@ -20,8 +20,8 @@ const storeDrinks = [{
   alcoholicOrNot: 'Non alcoholic',
   name: 'Coffee mug',
   image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
-}];
-const storeMeals = [{
+};
+const meal0 = {
   id: '53015',
   type: 'comida',
   area: 'American',
@@ -29,58 +29,18 @@ const storeMeals = [{
   alcoholicOrNot: '',
   name: 'Krispy Kreme Donut',
   image: 'https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg'
-  }, {
-  id: '12776',
-  type: 'bebida',
-  area: '',
-  category: 'Coffee / Tea',
-  alcoholicOrNot: 'Non alcoholic',
-  name: 'Coffee mug',
-  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
-}];
-const storeMixed = [{
-  id: '11007',
-  type: 'bebida',
-  area: '',
-  category: 'Ordinary Drink',
-  alcoholicOrNot: 'Alcoholic',
-  name: 'Margarita',
-  image: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg'
-  }, {
-  id: '12776',
-  type: 'bebida',
-  area: '',
-  category: 'Coffee / Tea',
-  alcoholicOrNot: 'Non alcoholic',
-  name: 'Coffee mug',
-  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
-}];
-const storeFull = [{
-  id: '11007',
-  type: 'bebida',
-  area: '',
-  category: 'Ordinary Drink',
-  alcoholicOrNot: 'Alcoholic',
-  name: 'Margarita',
-  image: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg'
-  }, {
-  id: '53015',
-  type: 'comida',
-  area: 'American',
-  category: 'Dessert',
-  alcoholicOrNot: '',
-  name: 'Krispy Kreme Donut',
-  image: 'https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg'
-  }, {
-  id: '12776',
-  type: 'bebida',
-  area: '',
-  category: 'Coffee / Tea',
-  alcoholicOrNot: 'Non alcoholic',
-  name: 'Coffee mug',
-  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
-}];
+};
+const storeDrinks = [drink0, drink1];
+const storeMeals = [meal0, drink1];
+const storeFull = [drink0, meal0, drink1];
 
+localStorageMock = {
+  store: storeDrinks,
+  getItem: (key) => localStorage.store[key],
+  setItem: (key, value) => { localStorage.store[key] = value.toString() },
+  clear: () => { localStorage.store = {} },
+  removeItem: (key) => { delete localStorage.store[key] },
+};
 
 describe('Requisito 61 - Checa os elementos do card de comida renderizados', () => {
   beforeEach(() => {
@@ -89,13 +49,6 @@ describe('Requisito 61 - Checa os elementos do card de comida renderizados', () 
   // Reference for mock:
   // * https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
   // * https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
-  localStorageMock = {
-    store: storeDrinks,
-    getItem: (key) => localStorage.store[key],
-    setItem: (key, value) => { localStorage.store[key] = value.toString() },
-    clear: () => { localStorage.store = {} },
-    removeItem: (key) => { delete localStorage.store[key] },
-  };
   Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
   afterAll(() => {
@@ -227,7 +180,7 @@ describe('Requisito 64 - Checa se a lógica de desfavoritar funciona corretament
   });
 
   const localStorageMock = {
-    store: storeMixed,
+    store: storeMeals,
     getItem: (key) => localStorage.store[key],
     setItem: (key, value) => { localStorage.store[key] = value.toString() },
     clear: () => { localStorage.store = {} },
@@ -294,7 +247,7 @@ describe('Requisito 65 - Checa os botões de filtro', () => {
 
 describe('Requisito 66 - Verifica o redirecionamento para página de detalhes', () => {
   const localStorageMock = {
-    store: storeMixed,
+    store: storeMeals,
     getItem: (key) => localStorage.store[key],
     setItem: (key, value) => { localStorage.store[key] = value.toString() },
     clear: () => { localStorage.store = {} },
