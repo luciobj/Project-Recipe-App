@@ -3,6 +3,7 @@ import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../utils/renderWithRouter';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+
 const drink0 = {
   id: '11007',
   type: 'bebida',
@@ -30,7 +31,6 @@ const meal0 = {
   name: 'Krispy Kreme Donut',
   image: 'https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg',
 };
-const storeDrinks = [drink0, drink1];
 const storeMeals = [meal0, drink1];
 const storeFull = [drink0, meal0, drink1];
 
@@ -180,7 +180,7 @@ describe('Requisito 65 - Checa os botões de filtro', () => {
   });
   it('A lógica de remover os filtros está desenvolvida corretamente', () => {
     const drinkFilterBtn = screen.getByTestId(/filter-by-drinks-btn/);
-    const clearFilterBtn = screen.getByTestId(/filter-by-all-btn/)
+    const clearFilterBtn = screen.getByTestId(/filter-by-all-btn/);
     userEvent.click(drinkFilterBtn);
     userEvent.click(clearFilterBtn);
     const recipeCards = screen.getAllByTestId(/-recipe-card/i);
