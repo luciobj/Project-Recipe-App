@@ -13,6 +13,8 @@ export default function FoodDetail(props) {
   const [drinks, setDrinks] = useState({});
   const [copied, setCopied] = useState(false);
   const [recipeFavorited, setRecipeFavorited] = useState(false);
+  const [recipeFinished, setRecipeFinished] = useState(false);
+  const [recipeInProgress, setRecipeInProgress] = useState(false);
 
   function getIdRecipesDetails() {
     const id = history.location.pathname.replace('/comidas/', '');
@@ -84,6 +86,37 @@ export default function FoodDetail(props) {
       });
     }
   }, [meals]);
+
+  function handleDoneRecipes() {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const recipesProg = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (doneRecipes) {
+      const finishedRecipe = doneRecipes
+        .filter((finished) => finished.id === idRecipe);
+      if (finishedRecipe.length !== 0) {
+        setRecipeFinished(true);
+      }
+    } else if (recipesProg) {
+      const inProgress = recipesProg
+        .filter((progress) => progress.id === idRecipe);
+      if (inProgress) {
+        setRecipeInProgress(true);
+      }
+    }
+    return (
+      <button
+        id="start-recipe"
+        className="start-recipe"
+        data-testid="start-recipe-btn"
+        type="button"
+        onClick={ () => {
+          history.push(`/bebidas/${idRecipe}/in-progress`);
+        } }
+      >
+        { recipeInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+      </button>
+    );
+  }
 
   return (
     <div>
@@ -172,18 +205,7 @@ export default function FoodDetail(props) {
       )) }
       <h1>Recomendadas</h1>
       { drinks.drinks && <Carousel recipes={ drinks } /> }
-      <button
-        id="start-recipe"
-        className="start-recipe"
-        data-testid="start-recipe-btn"
-        type="button"
-        onClick={ () => {
-          // const idRecipe = getIdRecipesDetails();
-          history.push(`/comidas/${idRecipe}/in-progress`);
-        } }
-      >
-        Iniciar Receita
-      </button>
+      { !recipeFinished && handleDoneRecipes() }
     </div>
   );
 }
