@@ -14,6 +14,7 @@ import OriginExplore from './pages/OriginExplore';
 import RecipesMade from './pages/RecipesMade';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import MealDetails from './pages/MealDetails';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           component={ IngredientsExplore }
         />
         <Route exact path="/explorar/comidas/area" component={ OriginExplore } />
+        <Route exact path="/explorar/bebidas/area" component={ PageNotFound } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
         <Route exact path="/comidas/:id" component={ MealDetails } />
       </LoginProvider>
