@@ -4,32 +4,93 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../utils/renderWithRouter';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 
+const storeDrinks = [{
+  id: '11007',
+  type: 'bebida',
+  area: '',
+  category: 'Ordinary Drink',
+  alcoholicOrNot: 'Alcoholic',
+  name: 'Margarita',
+  image: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg'
+  }, {
+  id: '12776',
+  type: 'bebida',
+  area: '',
+  category: 'Coffee / Tea',
+  alcoholicOrNot: 'Non alcoholic',
+  name: 'Coffee mug',
+  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
+}];
+const storeMeals = [{
+  id: '53015',
+  type: 'comida',
+  area: 'American',
+  category: 'Dessert',
+  alcoholicOrNot: '',
+  name: 'Krispy Kreme Donut',
+  image: 'https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg'
+  }, {
+  id: '12776',
+  type: 'bebida',
+  area: '',
+  category: 'Coffee / Tea',
+  alcoholicOrNot: 'Non alcoholic',
+  name: 'Coffee mug',
+  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
+}];
+const storeMixed = [{
+  id: '11007',
+  type: 'bebida',
+  area: '',
+  category: 'Ordinary Drink',
+  alcoholicOrNot: 'Alcoholic',
+  name: 'Margarita',
+  image: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg'
+  }, {
+  id: '12776',
+  type: 'bebida',
+  area: '',
+  category: 'Coffee / Tea',
+  alcoholicOrNot: 'Non alcoholic',
+  name: 'Coffee mug',
+  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
+}];
+const storeFull = [{
+  id: '11007',
+  type: 'bebida',
+  area: '',
+  category: 'Ordinary Drink',
+  alcoholicOrNot: 'Alcoholic',
+  name: 'Margarita',
+  image: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg'
+  }, {
+  id: '53015',
+  type: 'comida',
+  area: 'American',
+  category: 'Dessert',
+  alcoholicOrNot: '',
+  name: 'Krispy Kreme Donut',
+  image: 'https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg'
+  }, {
+  id: '12776',
+  type: 'bebida',
+  area: '',
+  category: 'Coffee / Tea',
+  alcoholicOrNot: 'Non alcoholic',
+  name: 'Coffee mug',
+  image: 'https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg'
+}];
+
+
 describe('Requisito 61 - Checa os elementos do card de comida renderizados', () => {
   beforeEach(() => {
     renderWithRouter(<FavoriteRecipes />);
   });
-
   // Reference for mock:
   // * https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
   // * https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
-  const localStorageMock = {
-    store: [{
-      id: "11007",
-      type: "bebida",
-      area: "",
-      category: "Ordinary Drink",
-      alcoholicOrNot: "Alcoholic",
-      name: "Margarita",
-      image: "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
-    }, {
-      id: "12776",
-      type: "bebida",
-      area: "",
-      category: "Coffee / Tea",
-      alcoholicOrNot: "Non alcoholic",
-      name: "Coffee mug",
-      image: "https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg"
-    }],
+  localStorageMock = {
+    store: storeDrinks,
     getItem: (key) => localStorage.store[key],
     setItem: (key, value) => { localStorage.store[key] = value.toString() },
     clear: () => { localStorage.store = {} },
@@ -50,7 +111,6 @@ describe('Requisito 61 - Checa os elementos do card de comida renderizados', () 
     expect(recipeImg[1]).toBeInTheDocument();
     expect(recipeImg[1].src).toBe(window.localStorage.store[1].image);
   });
-
   it('O nome da receita está renderizado corretamente', () => {
     const recipeName = screen.getAllByTestId(/-horizontal-name/);
     const expectedLength = 2;
@@ -60,7 +120,6 @@ describe('Requisito 61 - Checa os elementos do card de comida renderizados', () 
     expect(recipeName[1]).toBeInTheDocument();
     expect(recipeName[1].innerHTML).toBe(window.localStorage.store[1].name);
   });
-
   it('A area e categoria da receita estão renderizadas corretamente', () => {
     const recipeArea = screen.getAllByTestId(/-horizontal-area/);
     const expectedLength = 2;
@@ -74,14 +133,12 @@ describe('Requisito 61 - Checa os elementos do card de comida renderizados', () 
     expect(recipeArea[1]).toBeInTheDocument();
     expect(recipeArea[1].innerHTML).toBe(expectedText1);
   });
-
   it('O botão de compartilhar da receita está renderizado corretamente', () => {
     const recipeShareBtn = screen.getAllByTestId(/-horizontal-share-btn/);
     const expectedLength = 2;
     expect(recipeShareBtn.length).toBe(expectedLength);
   });
-
-  it('O botão de "desfavoritar" está renderizado corretamente', () => {
+  it('O botão de \'desfavoritar\' está renderizado corretamente', () => {
     const recipeUnfavoriteBtn = screen.getAllByTestId(/-horizontal-favorite-btn/);
     const expectedLength = 2;
     expect(recipeUnfavoriteBtn.length).toBe(expectedLength);
@@ -92,28 +149,8 @@ describe('Requisito 62 - Checa os elementos do card de bedida renderizados', () 
   beforeEach(() => {
     renderWithRouter(<FavoriteRecipes />);
   });
-
-  // Reference for mock:
-  // * https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
-  // * https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
-  const localStorageMock = {
-    store: [{
-      id: "53015",
-      type: "comida",
-      area: "American",
-      category: "Dessert",
-      alcoholicOrNot: "",
-      name: "Krispy Kreme Donut",
-      image: "https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg"
-    }, {
-      id: "12776",
-      type: "bebida",
-      area: "",
-      category: "Coffee / Tea",
-      alcoholicOrNot: "Non alcoholic",
-      name: "Coffee mug",
-      image: "https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg"
-    }],
+  localStorageMock = {
+    store: storeMeals,
     getItem: (key) => localStorage.store[key],
     setItem: (key, value) => { localStorage.store[key] = value.toString() },
     clear: () => { localStorage.store = {} },
@@ -134,7 +171,6 @@ describe('Requisito 62 - Checa os elementos do card de bedida renderizados', () 
     expect(recipeImg[1]).toBeInTheDocument();
     expect(recipeImg[1].src).toBe(window.localStorage.store[1].image);
   });
-
   it('O nome da receita está renderizado corretamente', () => {
     const recipeName = screen.getAllByTestId(/-horizontal-name/);
     const expectedLength = 2;
@@ -144,7 +180,6 @@ describe('Requisito 62 - Checa os elementos do card de bedida renderizados', () 
     expect(recipeName[1]).toBeInTheDocument();
     expect(recipeName[1].innerHTML).toBe(window.localStorage.store[1].name);
   });
-
   it('A area da receita está renderizada corretamente', () => {
     const recipeArea = screen.getAllByTestId(/-horizontal-area/);
     const expectedLength = 2;
@@ -154,14 +189,12 @@ describe('Requisito 62 - Checa os elementos do card de bedida renderizados', () 
     expect(recipeArea[1]).toBeInTheDocument();
     expect(recipeArea[1].innerHTML).toBe(window.localStorage.store[1].area);
   });
-
   it('O botão de compartilhar da receita está renderizado corretamente', () => {
     const recipeShareBtn = screen.getAllByTestId(/-horizontal-share-btn/);
     const expectedLength = 2;
     expect(recipeShareBtn.length).toBe(expectedLength);
   });
-
-  it('O botão de "desfavoritar" está renderizado corretamente', () => {
+  it('O botão de \'desfavoritar\' está renderizado corretamente', () => {
     const recipeUnfavoriteBtn = screen.getAllByTestId(/-horizontal-favorite-btn/);
     const expectedLength = 2;
     expect(recipeUnfavoriteBtn.length).toBe(expectedLength);
@@ -194,23 +227,7 @@ describe('Requisito 64 - Checa se a lógica de desfavoritar funciona corretament
   });
 
   const localStorageMock = {
-    store: [{
-      id: "11007",
-      type: "bebida",
-      area: "",
-      category: "Ordinary Drink",
-      alcoholicOrNot: "Alcoholic",
-      name: "Margarita",
-      image: "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
-    }, {
-      id: "12776",
-      type: "bebida",
-      area: "",
-      category: "Coffee / Tea",
-      alcoholicOrNot: "Non alcoholic",
-      name: "Coffee mug",
-      image: "https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg"
-    }],
+    store: storeMixed,
     getItem: (key) => localStorage.store[key],
     setItem: (key, value) => { localStorage.store[key] = value.toString() },
     clear: () => { localStorage.store = {} },
@@ -237,31 +254,7 @@ describe('Requisito 65 - Checa os botões de filtro', () => {
   });
 
   const localStorageMock = {
-    store: [{
-      id: "11007",
-      type: "bebida",
-      area: "",
-      category: "Ordinary Drink",
-      alcoholicOrNot: "Alcoholic",
-      name: "Margarita",
-      image: "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
-    }, {
-      id: "53015",
-      type: "comida",
-      area: "American",
-      category: "Dessert",
-      alcoholicOrNot: "",
-      name: "Krispy Kreme Donut",
-      image: "https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg"
-    }, {
-      id: "12776",
-      type: "bebida",
-      area: "",
-      category: "Coffee / Tea",
-      alcoholicOrNot: "Non alcoholic",
-      name: "Coffee mug",
-      image: "https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg"
-    }],
+    store: storeFull,
     getItem: (key) => localStorage.store[key],
     setItem: (key, value) => { localStorage.store[key] = value.toString() },
     clear: () => { localStorage.store = {} },
@@ -301,23 +294,7 @@ describe('Requisito 65 - Checa os botões de filtro', () => {
 
 describe('Requisito 66 - Verifica o redirecionamento para página de detalhes', () => {
   const localStorageMock = {
-    store: [{
-      id: "53015",
-      type: "comida",
-      area: "American",
-      category: "Dessert",
-      alcoholicOrNot: "",
-      name: "Krispy Kreme Donut",
-      image: "https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg"
-    }, {
-      id: "12776",
-      type: "bebida",
-      area: "",
-      category: "Coffee / Tea",
-      alcoholicOrNot: "Non alcoholic",
-      name: "Coffee mug",
-      image: "https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg"
-    }],
+    store: storeMixed,
     getItem: (key) => localStorage.store[key],
     setItem: (key, value) => { localStorage.store[key] = value.toString() },
     clear: () => { localStorage.store = {} },

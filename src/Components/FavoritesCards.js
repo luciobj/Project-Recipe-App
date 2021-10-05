@@ -37,50 +37,55 @@ function FavoriteCards() {
   // }];
   // localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesMock));
 
-  const cardsMap = (array) => {
-    return (
-      array.map(({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
-        <div key={ id }>
-          <Link to={`/${type}s/${id}`}>
-            <div data-testid={ `${index}-horizontal-card` }>
-              <img
-                src={ image }
-                alt={ name }
-                data-testid={ `${index}-horizontal-image` }
-                width= "200px"
-                height= "200px"
-              />
-              <div data-testid={ `${index}-horizontal-top-text` }>
-                <p data-testid={ `${index}-horizontal-area` }>{ area } - { category }</p>
-                <p data-testid={ `${index}-horizontal-alcoholic` }>{ alcoholicOrNot }</p>
-              </div>
-              <h4 data-testid={ `${index}-horizontal-name` }>{ name }</h4>
+  const cardsMap = (array) => (
+    array.map(({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
+      <div key={ id }>
+        <Link to={ `/${type}s/${id}` }>
+          <div data-testid={ `${index}-horizontal-card` }>
+            <img
+              src={ image }
+              alt={ name }
+              data-testid={ `${index}-horizontal-image` }
+              width="200px"
+              height="200px"
+            />
+            <div data-testid={ `${index}-horizontal-top-text` }>
+              <p data-testid={ `${index}-horizontal-area` }>
+                { area } 
+                - 
+                { category }
+              </p>
+              <p data-testid={ `${index}-horizontal-alcoholic` }>{ alcoholicOrNot }</p>
             </div>
-          </Link>
-          <button
-            type='button'
-            data-testid={ `${index}-horizontal-share-btn` }
-            onClick={ () => {
-              const timer = 2000;
-              navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`);
-              setCopied(true);
-              setTimeout(() => setCopied(false), timer);
-            } }
-            src={ shareIcon }
-          >
-            { copied && <p>Link copiado!</p> }
-          </button>
-          <button
-            type='button'
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            id={ id } 
-            onClick={ handleUnfavorite }
-            src={ likeIcon }
-          />
-        </div>
-      ))
-    );
-  };
+            <h4 data-testid={ `${index}-horizontal-name` }>{ name }</h4>
+          </div>
+        </Link>
+        <button
+          type="button"
+          data-testid={ `${index}-horizontal-share-btn` }
+          onClick={ () => {
+            const timer = 2000;
+            navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`);
+            setCopied(true);
+            setTimeout(() => setCopied(false), timer);
+          } }
+          src={ shareIcon }
+        >
+          <img src={ shareIcon } alt="Share Icon" />
+          { copied && <p>Link copiado!</p> }
+        </button>
+        <button
+          type="button"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          id={ id }
+          onClick={ handleUnfavorite }
+          src={ likeIcon }
+        >
+          <img src={ likeIcon } alt="Like Icon" />
+        </button>
+      </div>
+    ))
+  );
 
   const updateFavorites = () => {
     const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -94,13 +99,9 @@ function FavoriteCards() {
   const handleFilters = ({ target }) => {
     const { name } = target;
     const types = {
-      "Todos": [],
-      "Comidas":  () => {
-        return favorites.filter((recipe) => recipe.type === "comida")
-      },
-      "Bebidas":  () => {
-        return favorites.filter((recipe) => recipe.type === "bebida")
-      },
+      Todos: [],
+      Comidas: () => { favorites.filter((recipe) => recipe.type === 'comida') },
+      Bebidas: () => { favorites.filter((recipe) => recipe.type === 'bebida') },
     };
     const filter = types[name];
     return setFiltered(filter);

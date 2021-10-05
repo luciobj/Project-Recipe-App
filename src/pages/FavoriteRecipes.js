@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../Components/Header';
-import FavoriteCards from '../Components/FavoritesCards'
+import FavoriteCards from '../Components/FavoritesCards';
 
 const FavoriteRecipes = () => (
   <div>
