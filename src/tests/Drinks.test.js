@@ -2,13 +2,11 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../utils/renderWithRouter';
-import Meals from '../pages/Meals';
-
-// const searchTopBtn = 'search-top-btn';
+import Drinks from '../pages/Drinks';
 
 // describe('Requisito 13 - Implementa barra de busca', () => {
 //   it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
-//     renderWithRouter(<Meals />);
+//     renderWithRouter(<Drinks />);
 //     const ingredientSearch = screen.getByTestId('ingredient-search-radio');
 //     const nameSearch = screen.getByTestId('name-search-radio');
 //     const firstLetterSearch = screen.getByTestId('first-letter-search-radio');
@@ -20,13 +18,13 @@ import Meals from '../pages/Meals';
 //   });
 
 //   it('Verifica se os ratio-buttons e botão de busca são renderizados', () => {
-//     renderWithRouter(<Meals />);
+//     renderWithRouter(<Drinks />);
 //     const ingredientSearch = screen.getByText(/Comidas/i);
 //     expect(ingredientSearch).toBeInTheDocument();
 //   });
 
 //   it('Verifica se os inputs e o botão possuem os textos corretos', () => {
-//     renderWithRouter(<Meals />);
+//     renderWithRouter(<Drinks />);
 //     const ingredientText = screen.getByText(/ingrediente/i);
 //     const nameText = screen.getByText(/nome/i);
 //     const firstLetterText = screen.getByText(/primeira letra/i);
@@ -40,26 +38,26 @@ import Meals from '../pages/Meals';
 
 // describe('Requisito 14 - radio buttons para filtragem', () => {
 //   it('Verifica se o botão de busca do header existe', () => {
-//     renderWithRouter(<Meals />);
+//     renderWithRouter(<Drinks />);
 //     const headerSearchButton = screen.getByTestId(searchTopBtn);
 //     expect(headerSearchButton).toBeInTheDocument();
 //   });
 //   it('Verifica se a busca por INGREDIENTE é feita corretamente', async () => {
-//     const meals = {
+//     const drinks = {
 //       idMeal: '52782',
 //       strMeal: 'Lamb tomato and sweet spices',
 //       strMealThumb:
-//         'https://www.themealdb.com/images/media/meals/qtwtss1468572261.jpg',
+//         'https://www.themealdb.com/images/media/drinks/qtwtss1468572261.jpg',
 //     };
 //     const result = {
-//       json: () => meals,
+//       json: () => drinks,
 //     };
 //     jest.spyOn(global, 'fetch');
 //     global.fetch.mockResolvedValue({
 //       json: jest.fn().mockResolvedValue(result),
 //     });
 
-//     renderWithRouter(<Meals />);
+//     renderWithRouter(<Drinks />);
 //     const headerSearchButton = screen.getByTestId(searchTopBtn);
 //     const searchInput = screen.getByTestId('search-input');
 //     const ingredientRadioInput = screen.getByLabelText('Ingrediente');
@@ -77,7 +75,7 @@ import Meals from '../pages/Meals';
 
 //   it('Dispara alerta caso a pesquisa por primeira letra seja feita com mais de uma letra',
 //     async () => {
-//       renderWithRouter(<Meals />);
+//       renderWithRouter(<Drinks />);
 //       global.alert = jest.fn();
 //       const searchInput = screen.getByTestId('search-input');
 //       const firstLetterRadioInput = screen.getByLabelText('Primeira letra');
@@ -93,23 +91,9 @@ import Meals from '../pages/Meals';
 //     });
 // });
 
-// describe('Requisito 15 - Testa se a página de drinks é renderizada', () => {
-//   it('verifica página de drinks', () => {
-//     renderWithRouter(<Meals />);
-//     const ingredientSearch = screen.getByTestId('ingredient-search-radio');
-//     const nameSearch = screen.getByTestId('name-search-radio');
-//     const firstLetterSearch = screen.getByTestId('first-letter-search-radio');
-//     const searchButton = screen.getByTestId('exec-search-btn');
-//     expect(ingredientSearch).toBeInTheDocument();
-//     expect(nameSearch).toBeInTheDocument();
-//     expect(firstLetterSearch).toBeInTheDocument();
-//     expect(searchButton).toBeInTheDocument();
-//   });
-// });
-
 describe('Requisito 26 - Carregue as 12 primeiras receitas, uma em cada card', () => {
   it('Testa se há 12 cards renderizados na tela', async () => {
-    renderWithRouter(<Meals />);
+    renderWithRouter(<Drinks />);
     const recipeCards = await screen.findAllByTestId(/-recipe-card/i);
     const expectedRender = 12;
     expect(recipeCards.length).toBe(expectedRender);
@@ -118,7 +102,7 @@ describe('Requisito 26 - Carregue as 12 primeiras receitas, uma em cada card', (
 
 describe('Requisito 27 - Checa os botões para filtro por categoria', () => {
   it('Testa se há apenas cinco opções renderizadas(ou seis com opção All)', async () => {
-    renderWithRouter(<Meals />);
+    renderWithRouter(<Drinks />);
     const categoriesInput = await screen.findAllByTestId(/-category-filter/i);
     const categoriesInputMinusAll = categoriesInput
       .filter((input) => input.value !== 'All');
@@ -129,7 +113,7 @@ describe('Requisito 27 - Checa os botões para filtro por categoria', () => {
 
 describe('Requisito 28 - Checa se os botões para filtro funcionam corretamente', () => {
   beforeEach(() => {
-    renderWithRouter(<Meals />);
+    renderWithRouter(<Drinks />);
   });
 
   it('Testa se são renderizados outros 12 cards na tela após o clique', async () => {
@@ -166,7 +150,7 @@ describe('Requisito 28 - Checa se os botões para filtro funcionam corretamente'
 
 describe('Requisito 29 - Checa o filtro como um toggle', () => {
   it('Testa se ao clicar duas vezes, o filtro volta ao inicial', async () => {
-    renderWithRouter(<Meals />);
+    renderWithRouter(<Drinks />);
     const recipeCards = await screen.findAllByTestId(/-recipe-card/i);
     const categoriesInput = await screen.findAllByTestId(/-category-filter/i);
     const firstBatch = recipeCards.filter((inputs) => inputs);
@@ -180,7 +164,7 @@ describe('Requisito 29 - Checa o filtro como um toggle', () => {
 
 describe('Requisito 30 - Garante que apenas uma opção possa ser selecionada', () => {
   beforeEach(() => {
-    renderWithRouter(<Meals />);
+    renderWithRouter(<Drinks />);
   });
   it('Testa se dois botões sejam selecionados, apenas um tem o \'check\'', async () => {
     const categoriesInput = await screen.findAllByTestId(/-category-filter/i);
@@ -202,7 +186,7 @@ describe('Requisito 30 - Garante que apenas uma opção possa ser selecionada', 
 
 describe('Requisito 31 - Checa o botão \'All\' para filtro por todas categoria', () => {
   beforeEach(() => {
-    renderWithRouter(<Meals />);
+    renderWithRouter(<Drinks />);
   });
   it('Testa se o botão com testo \'All\' existe na tela', async () => {
     const allInput = await screen.findByTestId(/all-category-filter/i);
@@ -219,7 +203,7 @@ describe('Requisito 31 - Checa o botão \'All\' para filtro por todas categoria'
 
 describe('Requisito 32 - Verifica o redirecionamento para página de detalhes', () => {
   it('Testa se é redirecionado corretamente', async () => {
-    const { history } = renderWithRouter(<Meals />);
+    const { history } = renderWithRouter(<Drinks />);
     const recipeCards = await screen.findAllByTestId(/-recipe-card/i);
     const chosenCardIndex = 10;
     const chosenCard = String(recipeCards[chosenCardIndex].innerHTML);
@@ -233,6 +217,6 @@ describe('Requisito 32 - Verifica o redirecionamento para página de detalhes', 
     + chosenCard[chosenCardIdIndex + indexFinderSecondAuxiliar + 1];
     userEvent.click(recipeCards[chosenCardIndex]);
     const { pathname } = history.location;
-    expect(pathname).toBe(`/comidas/${chosenCardId}`);
+    expect(pathname).toBe(`/bebidas/${chosenCardId}`);
   });
 });
