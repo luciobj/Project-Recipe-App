@@ -112,7 +112,7 @@ function DoneRecipesCards() {
               data-testid={ `${index}-horizontal-name` }
               // onClick={ () => handleRedirect(type, id) }
             >
-                { name }
+              { name }
             </h3>
           </Link>
           <p data-testid={ `${index}-horizontal-done-date` }>
