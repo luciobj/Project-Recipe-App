@@ -14,11 +14,12 @@ import OriginExplore from './pages/OriginExplore';
 import RecipesMade from './pages/RecipesMade';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import MealDetails from './pages/MealDetails';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
-    <Switch>
-      <LoginProvider>
+    <LoginProvider>
+      <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/perfil" component={ Profile } />
         <Route exact path="/receitas-feitas" component={ RecipesMade } />
@@ -40,8 +41,9 @@ function App() {
         <Route exact path="/explorar/comidas/area" component={ OriginExplore } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
         <Route exact path="/comidas/:id" component={ MealDetails } />
-      </LoginProvider>
-    </Switch>
+        <Route component={ PageNotFound } />
+      </Switch>
+    </LoginProvider>
   );
 }
 
