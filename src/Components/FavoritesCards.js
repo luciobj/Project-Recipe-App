@@ -10,33 +10,6 @@ function FavoriteCards() {
   const [copied, setCopied] = useState(false);
   const [filtered, setFiltered] = useState([]);
 
-  // const favoritesMock = [{
-  //   id: "11007",
-  //   type: "bebida",
-  //   area: "",
-  //   category: "Ordinary Drink",
-  //   alcoholicOrNot: "Alcoholic",
-  //   name: "Margarita",
-  //   image: "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
-  // }, {
-  //   id: "53015",
-  //   type: "comida",
-  //   area: "American",
-  //   category: "Dessert",
-  //   alcoholicOrNot: "",
-  //   name: "Krispy Kreme Donut",
-  //   image: "https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg"
-  // }, {
-  //   id: "12776",
-  //   type: "bebida",
-  //   area: "",
-  //   category: "Coffee / Tea",
-  //   alcoholicOrNot: "Non alcoholic",
-  //   name: "Coffee mug",
-  //   image: "https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg"
-  // }];
-  // localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesMock));
-
   const handleUnfavorite = ({ target }) => {
     const { id } = target;
     const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
