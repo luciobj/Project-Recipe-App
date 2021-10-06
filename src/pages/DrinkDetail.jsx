@@ -7,7 +7,7 @@ import Carousel from '../Components/Carousel';
 
 export default function DrinkDetail(props) {
   let favoriteRecipes = [];
-  const STORED = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const stored = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const { history } = props;
   const [recipe, setRecipe] = useState({});
   const [foods, setFoods] = useState({});
@@ -163,8 +163,8 @@ export default function DrinkDetail(props) {
                   name: recipeSelected.strDrink,
                   image: recipeSelected.strDrinkThumb,
                 };
-                if (STORED) {
-                  favoriteRecipes = [...STORED, newFavorited];
+                if (stored) {
+                  favoriteRecipes = [...stored, newFavorited];
                   localStorage
                     .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
                   setRecipeFavorited(!recipeFavorited);
@@ -181,8 +181,8 @@ export default function DrinkDetail(props) {
               type="image"
               src={ logoFavoriteChecked }
               onClick={ () => {
-                if (STORED) {
-                  const updateStorage = STORED
+                if (stored) {
+                  const updateStorage = stored
                     .filter((favorite) => Number(favorite.id) !== idRecipe);
                   localStorage
                     .setItem('favoriteRecipes', JSON.stringify(updateStorage));
@@ -193,7 +193,7 @@ export default function DrinkDetail(props) {
             />
           }
           { copied && <p>Link copiado!</p> }
-          <h1>Ingredients:</h1>
+          <h1>Ingredientes:</h1>
           {
             setIngredientsByQuantity(recipeSelected)
               .map((infoRecipes) => (
@@ -207,7 +207,7 @@ export default function DrinkDetail(props) {
                 ))
               ))
           }
-          <h3>Instructions:</h3>
+          <h3>Instruções:</h3>
           <p data-testid="instructions">{ recipeSelected.strInstructions }</p>
         </div>
       )) }

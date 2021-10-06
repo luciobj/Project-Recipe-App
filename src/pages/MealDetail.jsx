@@ -6,9 +6,9 @@ import logoFavoriteChecked from '../images/blackHeartIcon.svg';
 import Carousel from '../Components/Carousel';
 import '../styles/FoodDetail.css';
 
-export default function FoodDetail(props) {
+export default function MealDetail(props) {
   let favoriteRecipes = [];
-  const STORED = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const stored = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const { history } = props;
   const [recipe, setRecipe] = useState({});
   const [drinks, setDrinks] = useState({});
@@ -168,8 +168,8 @@ export default function FoodDetail(props) {
                   name: recipeSelected.strMeal,
                   image: recipeSelected.strMealThumb,
                 };
-                if (STORED) {
-                  favoriteRecipes = [...STORED, newFavorited];
+                if (stored) {
+                  favoriteRecipes = [...stored, newFavorited];
                   localStorage
                     .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
                   setRecipeFavorited(!recipeFavorited);
@@ -186,8 +186,8 @@ export default function FoodDetail(props) {
               type="image"
               src={ logoFavoriteChecked }
               onClick={ () => {
-                if (STORED) {
-                  const updateStorage = STORED
+                if (stored) {
+                  const updateStorage = stored
                     .filter((favorite) => Number(favorite.id) !== idRecipe);
                   localStorage
                     .setItem('favoriteRecipes', JSON.stringify(updateStorage));
@@ -200,7 +200,7 @@ export default function FoodDetail(props) {
 
           { copied && <p>Link copiado!</p> }
 
-          <h1>Ingredients:</h1>
+          <h1>Ingredientes:</h1>
           {
             setIngredientsByQuantity(recipeSelected)
               .map((infoRecipes) => (
@@ -214,7 +214,7 @@ export default function FoodDetail(props) {
                 ))
               ))
           }
-          <h3>Instructions:</h3>
+          <h3>Instruções:</h3>
           <p data-testid="instructions">{ recipeSelected.strInstructions }</p>
           <h1>Video</h1>
           <div className="video-responsive">
@@ -233,7 +233,7 @@ export default function FoodDetail(props) {
   );
 }
 
-FoodDetail.propTypes = {
+MealDetail.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
     location: PropTypes.shape({

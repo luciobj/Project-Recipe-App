@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-import FoodDetail from './pages/FoodDetail';
+import MealDetail from './pages/MealDetail';
 import DrinkDetail from './pages/DrinkDetail';
 import LoginProvider from './context/LoginProvider';
 import Explore from './pages/Explore';
@@ -43,7 +43,7 @@ function App() {
         />
         <Route exact path="/explorar/comidas/area" component={ OriginExplore } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
-        <Route exact path="/comidas/:id" component={ FoodDetail } />
+        <Route exact path="/comidas/:id" component={ MealDetail } />
         <Route exact path="/bebidas/:id" component={ DrinkDetail } />
         <Route
           exact
