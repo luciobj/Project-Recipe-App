@@ -18,12 +18,13 @@ import RecipesMade from './pages/RecipesMade';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import MealInProgress from './pages/MealInProgress';
 import DrinkInProgress from './pages/DrinkInProgress';
-// import MealDetails from './pages/MealDetails';
+import PageNotFound from './pages/PageNotFound';
+
 
 function App() {
   return (
-    <Switch>
-      <LoginProvider>
+    <LoginProvider>
+      <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/perfil" component={ Profile } />
         <Route exact path="/receitas-feitas" component={ RecipesMade } />
@@ -56,8 +57,9 @@ function App() {
           path="bebidas/bebidas/:id/in-progress"
           component={ DrinkInProgress }
         />
-      </LoginProvider>
-    </Switch>
+        <Route component={ PageNotFound } />
+      </Switch>
+    </LoginProvider>
   );
 }
 
