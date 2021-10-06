@@ -19,7 +19,6 @@ export default function Login() {
     localStorage.setItem('user', JSON.stringify({ email }));
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
-    console.log(localStorage.getItem('user'));
     history.push('/comidas');
   };
 
