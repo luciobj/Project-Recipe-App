@@ -13,7 +13,7 @@ export default function DrinkDetail(props) {
   const [copied, setCopied] = useState(false);
   const [recipeFavorited, setRecipeFavorited] = useState(false);
   const [recipeFinished, setRecipeFinished] = useState(false);
-  const [recipeInProgress, setRecipeInProgress] = useState(false);
+  // const [recipeInProgress, setRecipeInProgress] = useState(false);
 
   function getIdRecipesDetails() {
     const id = history.location.pathname.replace('/bebidas/', '');
@@ -83,32 +83,26 @@ export default function DrinkDetail(props) {
 
   function handleDoneRecipes() {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    const recipesProg = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(doneRecipes);
     if (doneRecipes) {
       const finishedRecipe = doneRecipes
-        .filter((finished) => finished.id === idRecipe);
-      if (finishedRecipe.length !== 0) {
-        setRecipeFinished(true);
-      }
-    } else if (recipesProg) {
-      const inProgress = recipesProg
-        .filter((progress) => progress.id === idRecipe);
-      if (inProgress) {
-        setRecipeInProgress(true);
+        .filter((finished) => Number(finished.id) === idRecipe);
+      if (finishedRecipe) {
+        setRecipeFinished(!recipeFinished);
       }
     }
+
     return (
       <button
         id="start-recipe"
         className="start-recipe"
         data-testid="start-recipe-btn"
+        hidden={ recipeFinished }
         type="button"
         onClick={ () => {
           history.push(`/bebidas/${idRecipe}/in-progress`);
         } }
       >
-        { recipeInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+        Iniciar Receita
       </button>
     );
   }
