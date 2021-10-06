@@ -12,37 +12,13 @@ function DrinksCards() {
       'Sinto muito, não encontramos nenhuma receita para esses filtros.',
     );
   }
+
   if (drinks.length === 1 && search === 'bar') {
     return <Redirect to={ `/bebidas/${drinks[0].idDrink}` } />;
   }
 
-  function drinksGeneralCards() {
-    return (drinks.length > 0 ? drinks
-      .map(({ idDrink, strDrinkThumb, strDrink, strCategory }, index) => (
-        <Link
-          key={ idDrink }
-          to={ `/bebidas/${idDrink}` }
-        >
-          <div data-testid={ `${index}-recipe-card` }>
-            <img
-              src={ strDrinkThumb }
-              alt={ strDrink }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3
-              data-testid={ `${index}-card-name` }
-              category={ strCategory }
-              id={ idDrink }
-            >
-              { strDrink }
-            </h3>
-          </div>
-        </Link>
-      )).slice(0, maxLength) : <p>Carregando bebidas</p>);
-  }
-
-  function drinksByIngredientsCards() {
-    return (drinksIngredients.length > 0 ? drinksIngredients
+  function drinksGenerateCards(item) {
+    return (item.length > 0 ? item
       .map(({ idDrink, strDrinkThumb, strDrink, strCategory }, index) => (
         <Link
           key={ idDrink }
@@ -68,7 +44,9 @@ function DrinksCards() {
 
   return (
     <div>
-      {drinksIngredients.length > 0 ? drinksByIngredientsCards() : drinksGeneralCards() }
+      {drinksIngredients.length > 0
+        ? drinksGenerateCards(drinksIngredients)
+        : drinksGenerateCards(drinks) }
     </div>
   );
 }

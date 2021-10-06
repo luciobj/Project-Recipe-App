@@ -16,33 +16,8 @@ function MealsCards() {
     return <Redirect to={ `/comidas/${meals[0].idMeal}` } />;
   }
 
-  function mealsCards() {
-    return (meals.length > 0 ? meals
-      .map(({ idMeal, strMealThumb, strMeal, strCategory }, index) => (
-        <Link
-          key={ idMeal }
-          to={ `/comidas/${idMeal}` }
-        >
-          <div data-testid={ `${index}-recipe-card` }>
-            <img
-              src={ strMealThumb }
-              alt={ strMeal }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3
-              data-testid={ `${index}-card-name` }
-              category={ strCategory }
-              id={ idMeal }
-            >
-              { strMeal }
-            </h3>
-          </div>
-        </Link>
-      )).slice(0, maxLength) : <p>Carregando comidas</p>);
-  }
-
-  function mealsIngredientsCards() {
-    return (mealsIngredients.length > 0 ? mealsIngredients
+  function mealsCards(item) {
+    return (item.length > 0 ? item
       .map(({ idMeal, strMealThumb, strMeal, strCategory }, index) => (
         <Link
           key={ idMeal }
@@ -68,7 +43,7 @@ function MealsCards() {
 
   return (
     <div>
-      {mealsIngredients.length > 0 ? mealsIngredientsCards() : mealsCards()}
+      {mealsIngredients.length > 0 ? mealsCards(mealsIngredients) : mealsCards(meals)}
     </div>
   );
 }
