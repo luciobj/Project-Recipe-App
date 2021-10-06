@@ -1,23 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import IngredientsMealsCards from '../Components/IngredientsMealsCards';
 import IngredientsDrinksCards from '../Components/IngredientsDrinksCards';
-import RecipesProvider from '../context/recipesProvider';
 
-const URL = window.location.pathname;
-function IngredientsExplore() {
+function IngredientsExplore(props) {
+  const { mealOrDrink } = props;
   return (
-    <RecipesProvider>
-      <div>
-        <Header title="Explorar Ingredientes" containBtnSearch />
-        {URL === '/explorar/bebidas/ingredientes'
-          ? <IngredientsDrinksCards />
-          : <IngredientsMealsCards />}
-        <Footer />
-      </div>
-    </RecipesProvider>
+    <div>
+      <Header title="Explorar Ingredientes" containBtnSearch />
+      {mealOrDrink === 'Drinks' && <IngredientsDrinksCards />}
+      {mealOrDrink === 'Meals' && <IngredientsMealsCards />}
+      <Footer />
+    </div>
   );
 }
 
 export default IngredientsExplore;
+
+IngredientsExplore.propTypes = {
+  props: PropTypes.shape({ mealOrDrink: PropTypes.string }),
+}.isRequired;

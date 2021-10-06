@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../context/recipesContext';
+import { fetchMealByIngredient } from '../services/mealsAPI';
 
 const API_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const maxLength = 12;
 
 function IngredientsMealsCards() {
-  // const history = useHistory();
   const { setMealsIngredients } = useContext(RecipesContext);
   const [mealsItems, setMealsItems] = useState([]);
 
@@ -21,13 +21,10 @@ function IngredientsMealsCards() {
     fetchMealsIngredients();
   }, []);
 
-  // function handleClick(item) {
-  //   if (item) {
-  //     setMealsIngredients(item);
-  //     // history.push('/comidas');
-  //     console.log(mealsIngredients);
-  //   }
-  // }
+  async function handleClick(item) {
+    const meals = await fetchMealByIngredient(item);
+    setMealsIngredients(meals);
+  }
 
   return (
     <>
@@ -35,9 +32,10 @@ function IngredientsMealsCards() {
         <Link
           to="/comidas"
           key={ index }
-          value={ strIngredient }
           data-testid={ `${index}-ingredient-card` }
-          onClick={ ({ target }) => setMealsIngredients(target.value) }
+          onClick={ () => {
+            handleClick(strIngredient);
+          } }
         >
           <img
             src={ `${IMAGE_API_URL}${strIngredient}-Small.png` }

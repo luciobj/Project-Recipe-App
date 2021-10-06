@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../context/recipesContext';
+import { fetchDrinkByIngredient } from '../services/drinksAPI';
 
 const API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
 const maxLength = 12;
@@ -19,6 +20,10 @@ function IngredientsDrinksCards() {
     fetchDrinksIngredients();
   }, []);
 
+  async function handleClick(item) {
+    const meals = await fetchDrinkByIngredient(item);
+    setDrinksIngredients(meals);
+  }
   return (
     <>
       {drinksItems.map(({ strIngredient1 }, index) => (
@@ -26,7 +31,7 @@ function IngredientsDrinksCards() {
           to="/bebidas"
           key={ index }
           data-testid={ `${index}-ingredient-card` }
-          onClick={ () => setDrinksIngredients(strIngredient1) }
+          onClick={ () => handleClick(strIngredient1) }
         >
           <img
             src={ `${IMAGE_API_URL}${strIngredient1}-Small.png` }
