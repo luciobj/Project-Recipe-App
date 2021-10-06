@@ -42,7 +42,6 @@ function FavoriteCards() {
     const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const newFavorites = localFavorites.filter((recipe) => recipe.id !== id);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    console.log(newFavorites);
     alterLocalStorageChange((prevState) => !prevState);
   };
 
