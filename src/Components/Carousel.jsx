@@ -8,7 +8,6 @@ export default function Carousel(props) {
   function recomendations() {
     const recipesRecommended = [];
     for (let index = 0; index <= maxRecomendations; index += 1) {
-      // console.log(recipes[index]);
       if (recipes.meals) {
         recipesRecommended.push(recipes.meals[index]);
       } else {

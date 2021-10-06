@@ -20,7 +20,6 @@ import MealInProgress from './pages/MealInProgress';
 import DrinkInProgress from './pages/DrinkInProgress';
 import PageNotFound from './pages/PageNotFound';
 
-
 function App() {
   return (
     <LoginProvider>

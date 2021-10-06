@@ -15,7 +15,6 @@ export default function FoodDetail(props) {
   const [copied, setCopied] = useState(false);
   const [recipeFavorited, setRecipeFavorited] = useState(false);
   const [recipeFinished, setRecipeFinished] = useState(false);
-  // const [recipeInProgress, setRecipeInProgress] = useState(false);
 
   function getIdRecipesDetails() {
     const id = history.location.pathname.replace('/comidas/', '');
