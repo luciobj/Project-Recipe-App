@@ -8,6 +8,7 @@ function RecipesProvider({ children }) {
   const [search, setSearch] = useState('');
   const [mealsIngredients, setMealsIngredients] = useState([]);
   const [drinksIngredients, setDrinksIngredients] = useState([]);
+  const [areas, setAreas] = useState([]);
 
   const contextValue = {
     meals,
@@ -20,6 +21,8 @@ function RecipesProvider({ children }) {
     setMealsIngredients,
     drinksIngredients,
     setDrinksIngredients,
+    areas,
+    setAreas,
   };
 
   return (
