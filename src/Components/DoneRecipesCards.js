@@ -72,7 +72,7 @@ function DoneRecipesCards() {
       >
         Bebidas
       </button>
-
+      
       {doneRecipes === null && <p>Você ainda não tem receitas feitas</p>}
 
       {doneRecipes && doneRecipes.filter(({ type }) => type.includes(filter) || filter === 'all').map((
