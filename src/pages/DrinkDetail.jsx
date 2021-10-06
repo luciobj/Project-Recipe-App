@@ -6,7 +6,8 @@ import logoFavoriteChecked from '../images/blackHeartIcon.svg';
 import Carousel from '../Components/Carousel';
 
 export default function DrinkDetail(props) {
-  const favoriteRecipes = [];
+  let favoriteRecipes = [];
+  const STORED = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const { history } = props;
   const [recipe, setRecipe] = useState({});
   const [foods, setFoods] = useState({});
@@ -81,6 +82,22 @@ export default function DrinkDetail(props) {
     }
   }, [drinks]);
 
+  function handleInProgress() {
+    const inProgress = JSON
+      .parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgress) {
+      const keysInProgres = Object.keys(inProgress.cocktails);
+      if (keysInProgres) {
+        if (keysInProgres.filter((key) => Number(key) === idRecipe)) {
+          return true;
+        }
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
   function handleDoneRecipes() {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     if (doneRecipes) {
@@ -102,7 +119,7 @@ export default function DrinkDetail(props) {
           history.push(`/bebidas/${idRecipe}/in-progress`);
         } }
       >
-        Iniciar Receita
+        { handleInProgress() ? 'Continuar Receita' : 'Iniciar Receita' }
       </button>
     );
   }
@@ -138,7 +155,7 @@ export default function DrinkDetail(props) {
               type="image"
               src={ logoFavorite }
               onClick={ () => {
-                favoriteRecipes.push({
+                const newFavorited = {
                   id: recipeSelected.idDrink,
                   type: 'bebida',
                   area: '',
@@ -146,10 +163,18 @@ export default function DrinkDetail(props) {
                   alcoholicOrNot: recipeSelected.strAlcoholic,
                   name: recipeSelected.strDrink,
                   image: recipeSelected.strDrinkThumb,
-                });
-                localStorage
-                  .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-                setRecipeFavorited(!recipeFavorited);
+                };
+                if (STORED) {
+                  favoriteRecipes = [...STORED, newFavorited];
+                  localStorage
+                    .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+                  setRecipeFavorited(!recipeFavorited);
+                } else {
+                  favoriteRecipes.push(newFavorited);
+                  localStorage
+                    .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+                  setRecipeFavorited(!recipeFavorited);
+                }
               } }
               alt="favorite-icon"
             /> : <input
@@ -157,8 +182,13 @@ export default function DrinkDetail(props) {
               type="image"
               src={ logoFavoriteChecked }
               onClick={ () => {
-                setRecipeFavorited(!recipeFavorited);
-                localStorage.removeItem('favoriteRecipes');
+                if (STORED) {
+                  const updateStorage = STORED
+                    .filter((favorite) => Number(favorite.id) !== idRecipe);
+                  localStorage
+                    .setItem('favoriteRecipes', JSON.stringify(updateStorage));
+                  setRecipeFavorited(!recipeFavorited);
+                }
               } }
               alt="favorite-icon"
             />

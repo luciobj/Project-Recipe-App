@@ -7,7 +7,8 @@ import Carousel from '../Components/Carousel';
 import '../styles/FoodDetail.css';
 
 export default function FoodDetail(props) {
-  const favoriteRecipes = [];
+  let favoriteRecipes = [];
+  const STORED = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const { history } = props;
   const [recipe, setRecipe] = useState({});
   const [drinks, setDrinks] = useState({});
@@ -87,6 +88,22 @@ export default function FoodDetail(props) {
     }
   }, [meals]);
 
+  function handleInProgress() {
+    const inProgress = JSON
+      .parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgress) {
+      const keysInProgres = Object.keys(inProgress.meals);
+      if (keysInProgres) {
+        if (keysInProgres.filter((key) => Number(key) === idRecipe)) {
+          return true;
+        }
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
   function handleDoneRecipes() {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     if (doneRecipes) {
@@ -107,7 +124,7 @@ export default function FoodDetail(props) {
           history.push(`/comidas/${idRecipe}/in-progress`);
         } }
       >
-        Iniciar Receita
+        { handleInProgress() ? 'Continuar Receita' : 'Iniciar Receita' }
       </button>
     );
   }
@@ -143,7 +160,7 @@ export default function FoodDetail(props) {
               type="image"
               src={ logoFavorite }
               onClick={ () => {
-                favoriteRecipes.push({
+                const newFavorited = {
                   id: recipeSelected.idMeal,
                   type: 'comida',
                   area: recipeSelected.strArea,
@@ -151,10 +168,18 @@ export default function FoodDetail(props) {
                   alcoholicOrNot: '',
                   name: recipeSelected.strMeal,
                   image: recipeSelected.strMealThumb,
-                });
-                localStorage
-                  .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-                setRecipeFavorited(!recipeFavorited);
+                };
+                if (STORED) {
+                  favoriteRecipes = [...STORED, newFavorited];
+                  localStorage
+                    .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+                  setRecipeFavorited(!recipeFavorited);
+                } else {
+                  favoriteRecipes.push(newFavorited);
+                  localStorage
+                    .setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+                  setRecipeFavorited(!recipeFavorited);
+                }
               } }
               alt="favorite-icon"
             /> : <input
@@ -162,8 +187,13 @@ export default function FoodDetail(props) {
               type="image"
               src={ logoFavoriteChecked }
               onClick={ () => {
-                setRecipeFavorited(!recipeFavorited);
-                localStorage.removeItem('favoriteRecipes');
+                if (STORED) {
+                  const updateStorage = STORED
+                    .filter((favorite) => Number(favorite.id) !== idRecipe);
+                  localStorage
+                    .setItem('favoriteRecipes', JSON.stringify(updateStorage));
+                  setRecipeFavorited(!recipeFavorited);
+                }
               } }
               alt="favorite-icon"
             />
