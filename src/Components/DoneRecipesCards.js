@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
@@ -31,7 +30,6 @@ function DoneRecipesCards() {
 
   const [showCopyText, setShowCopyText] = useState(false);
   const [filter, setFilter] = useState('all');
-  // const history = useHistory();
 
   const copyRecipeLink = (type, id) => {
     const oneSecond = 1000;
@@ -43,11 +41,6 @@ function DoneRecipesCards() {
       setShowCopyText(false);
     }, oneSecond);
   };
-
-  // função inutilizada pois ela redireciona automaticamente ao abrir a página, devido ao uso do history.push
-  // const handleRedirect = (type, id) => {
-  //   history.push(`/${type}s/${id}`);
-  // };
 
   // as informações serão obtidas do localStorage 👇
   // const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
@@ -78,6 +71,7 @@ function DoneRecipesCards() {
       >
         Bebidas
       </button>
+      
 
       {doneRecipes.filter(({ type }) => type.includes(filter) || filter === 'all').map((
         {
@@ -96,12 +90,10 @@ function DoneRecipesCards() {
         <div key={ id }>
           <Link to={ `/${type}s/${id}` }>
             <img
-            // req 59 só passou no cy depois que eu mudei o tamanho da imagem, o cy não estava reconhecendo pois a imagem estava muito grande
               style={ { width: '300px' } }
               src={ image }
               alt={ name }
               data-testid={ `${index}-horizontal-image` }
-              // onClick={ () => handleRedirect(type, id) }
             />
           </Link>
           <p data-testid={ `${index}-horizontal-top-text` }>
@@ -110,7 +102,6 @@ function DoneRecipesCards() {
           <Link to={ `/${type}s/${id}` }>
             <h3
               data-testid={ `${index}-horizontal-name` }
-              // onClick={ () => handleRedirect(type, id) }
             >
               { name }
             </h3>
