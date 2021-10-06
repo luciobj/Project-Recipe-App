@@ -6,37 +6,49 @@ const API_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const maxLength = 12;
 
 function IngredientsMealsCards() {
-  const [mealsIngredients, setMealsIngredients] = useState([]);
-  const { setMeals } = useContext(RecipesContext);
+  // const history = useHistory();
+  const { setMealsIngredients } = useContext(RecipesContext);
+  const [mealsItems, setMealsItems] = useState([]);
+
+  const IMAGE_API_URL = 'https://www.themealdb.com/images/ingredients/';
 
   useEffect(() => {
     async function fetchMealsIngredients() {
       const { meals } = await fetch(API_URL)
         .then((res) => res.json());
-      setMealsIngredients(meals);
+      setMealsItems(meals);
     }
     fetchMealsIngredients();
   }, []);
 
+  // function handleClick(item) {
+  //   if (item) {
+  //     setMealsIngredients(item);
+  //     // history.push('/comidas');
+  //     console.log(mealsIngredients);
+  //   }
+  // }
+
   return (
     <>
-      {mealsIngredients.map((elements, index) => (
+      {mealsItems.map(({ strIngredient }, index) => (
         <Link
           to="/comidas"
           key={ index }
+          value={ strIngredient }
           data-testid={ `${index}-ingredient-card` }
-          onClick={ () => setMeals(elements.strIngredient) }
+          onClick={ ({ target }) => setMealsIngredients(target.value) }
         >
           <img
-            src={ `https://www.themealdb.com/images/ingredients/${elements.strIngredient}-Small.png` }
-            alt={ `${elements.strIngredient}` }
+            src={ `${IMAGE_API_URL}${strIngredient}-Small.png` }
+            alt={ `${strIngredient}` }
             data-testid={ `${index}-card-img` }
           />
           <p
             key={ index }
             data-testid={ `${index}-card-name` }
           >
-            {elements.strIngredient}
+            {strIngredient}
           </p>
         </Link>)).splice(0, maxLength)}
     </>
