@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import RecipesContext from '../context/recipesContext';
 import { fetchDrinkByIngredient } from '../services/drinksAPI';
 
-const API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
-const IMAGE_API_URL = 'https://www.thecocktaildb.com/images/ingredients/';
+const apiUrl = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+const imageApiUrl = 'https://www.thecocktaildb.com/images/ingredients/';
 const maxLength = 12;
 
 function IngredientsDrinksCards() {
@@ -13,7 +13,7 @@ function IngredientsDrinksCards() {
 
   useEffect(() => {
     async function fetchDrinksIngredients() {
-      const { drinks } = await fetch(API_URL)
+      const { drinks } = await fetch(apiUrl)
         .then((res) => res.json());
       setdrinksItems(drinks);
     }
@@ -34,7 +34,7 @@ function IngredientsDrinksCards() {
           onClick={ () => handleClick(strIngredient1) }
         >
           <img
-            src={ `${IMAGE_API_URL}${strIngredient1}-Small.png` }
+            src={ `${imageApiUrl}${strIngredient1}-Small.png` }
             alt={ `${strIngredient1}` }
             data-testid={ `${index}-card-img` }
           />

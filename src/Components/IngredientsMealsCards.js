@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import RecipesContext from '../context/recipesContext';
 import { fetchMealByIngredient } from '../services/mealsAPI';
 
-const API_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
-const IMAGE_API_URL = 'https://www.themealdb.com/images/ingredients/';
+const apiUrl = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+const imageApiUrl = 'https://www.themealdb.com/images/ingredients/';
 const maxLength = 12;
 
 function IngredientsMealsCards() {
@@ -13,7 +13,7 @@ function IngredientsMealsCards() {
 
   useEffect(() => {
     async function fetchMealsIngredients() {
-      const { meals } = await fetch(API_URL)
+      const { meals } = await fetch(apiUrl)
         .then((res) => res.json());
       setMealsItems(meals);
     }
@@ -37,7 +37,7 @@ function IngredientsMealsCards() {
           } }
         >
           <img
-            src={ `${IMAGE_API_URL}${strIngredient}-Small.png` }
+            src={ `${imageApiUrl}${strIngredient}-Small.png` }
             alt={ `${strIngredient}` }
             data-testid={ `${index}-card-img` }
           />
