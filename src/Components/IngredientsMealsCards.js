@@ -4,13 +4,12 @@ import RecipesContext from '../context/recipesContext';
 import { fetchMealByIngredient } from '../services/mealsAPI';
 
 const API_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+const IMAGE_API_URL = 'https://www.themealdb.com/images/ingredients/';
 const maxLength = 12;
 
 function IngredientsMealsCards() {
   const { setMealsIngredients } = useContext(RecipesContext);
   const [mealsItems, setMealsItems] = useState([]);
-
-  const IMAGE_API_URL = 'https://www.themealdb.com/images/ingredients/';
 
   useEffect(() => {
     async function fetchMealsIngredients() {

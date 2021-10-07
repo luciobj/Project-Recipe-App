@@ -4,8 +4,8 @@ import RecipesContext from '../context/recipesContext';
 import { fetchDrinkByIngredient } from '../services/drinksAPI';
 
 const API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
-const maxLength = 12;
 const IMAGE_API_URL = 'https://www.thecocktaildb.com/images/ingredients/';
+const maxLength = 12;
 
 function IngredientsDrinksCards() {
   const [drinksItems, setdrinksItems] = useState([]);
