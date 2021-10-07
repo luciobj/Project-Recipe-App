@@ -25,7 +25,7 @@ function IngredientsDrinksCards() {
     setDrinksIngredients(meals);
   }
   return (
-    <>
+    <div>
       {drinksItems.map(({ strIngredient1 }, index) => (
         <Link
           to="/bebidas"
@@ -45,7 +45,7 @@ function IngredientsDrinksCards() {
             {strIngredient1}
           </p>
         </Link>)).splice(0, maxLength)}
-    </>
+    </div>
   );
 }
 
