@@ -58,29 +58,6 @@ describe('Requisitos 3 a 5 - Testa se a validação dos campos', () => {
 });
 
 describe('Requisito 6- Testa se os tokens são salvos no localStorage', () => {
-  // Reference for mock:
-  // * https://javascript.plainenglish.io/testing-local-storage-with-testing-library-580f74e8805b
-  // * https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
-  // const localStorageMock = {
-  //   store: {},
-  //   getItem: (key) => store[key],
-  //   setItem: (key, value) => {
-  //     store[key] = value.toString();
-  //   },
-  //   clear: () => {
-  //     store = {};
-  //   },
-  //   removeItem: (key) => {
-  //     delete store[key];
-  //   },
-  // };
-
-  // Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-
-  // afterEach(() => {
-  //   window.localStorage.clear();
-  // });
-
   Object.defineProperty(window, 'localStorage', {
     value: {
       getItem: jest.fn(() => null),

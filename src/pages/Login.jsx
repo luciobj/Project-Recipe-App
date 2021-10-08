@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-
-import LoginContext from '../utils/LoginContext';
+import LoginContext from '../context/LoginContext';
 
 export default function Login() {
   const { email, setEmail, password, setPassword } = useContext(LoginContext);
@@ -20,7 +19,6 @@ export default function Login() {
     localStorage.setItem('user', JSON.stringify({ email }));
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
-    console.log(localStorage.getItem('user'));
     history.push('/comidas');
   };
 
