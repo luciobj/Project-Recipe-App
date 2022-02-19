@@ -2,8 +2,6 @@
 
 ## Context
 
----
-
 This project was made as a work assignment in during the Trybe web developer course.
 
 The goal was to create a fully operational recipes app, using two diferent API's, and fully utilize the learnings from the frontend module.
@@ -30,13 +28,9 @@ Copy the ssh from the project `git@github.com:luciobj/Project-Recipes-App.git`
 
 ## Development
 
----
-
 This project was developed using the TDD method by my part, while my colegues opted for doing the tests after the features were fully completed. Also, we used Kanban and Scrum tecninques during the development.
 
 ### Tecnologys
-
----
 
 In this project the focus was solely on frontend development, and as such the tecnologys used were React and Jest.
 
