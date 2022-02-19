@@ -1,4 +1,4 @@
-# Welcome to the Recipe APP
+# Welcome to the Recipes APP
 
 ## Context
 
@@ -17,12 +17,12 @@ The final result was recorded briefly on this gif:
 For this project, you will need to have installed:
 - NPM
 
-Copy the ssh from the project `git@github.com:luciobj/Project-Recipe-App.git`
+Copy the ssh from the project `git@github.com:luciobj/Project-Recipes-App.git`
 
 * Open a terminal int your machine and type the following commands in order:
 
-  * `git clone git@github.com:luciobj/Project-Recipe-App.git`
-  * `cd Project-Recipe-App`
+  * `git clone git@github.com:luciobj/Project-Recipes-App.git`
+  * `cd Project-Recipes-App`
   * `npm install`
   * `npm start`
 
