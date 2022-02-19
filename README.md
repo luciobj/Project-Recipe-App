@@ -30,6 +30,8 @@ Copy the ssh from the project `git@github.com:luciobj/Project-Recipes-App.git`
 
 This project was developed using the TDD method by my part, while my colegues opted for doing the tests after the features were fully completed. Also, we used Kanban and Scrum tecninques during the development.
 
+---
+
 ### Tecnologys
 
 In this project the focus was solely on frontend development, and as such the tecnologys used were React and Jest.
