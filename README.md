@@ -4,7 +4,11 @@
 
 This project was made as a work assignment in during the Trybe web developer course.
 
-The goal was to create a fully operational recipes app, using two diferent API's, and fully utilize the learnings from the frontend module.
+The goal was to create a fully operational recipes app, using two diferent API's, and fully utilize the learnings from the frontend module. The state management was made by use of Context API and React Hooks.
+
+The final result was recorded briefly on this gif:
+
+![Final Gif](./public/final.gif)
 
 ---
 
@@ -13,12 +17,12 @@ The goal was to create a fully operational recipes app, using two diferent API's
 For this project, you will need to have installed:
 - NPM
 
-Copy the ssh from the project `git@github.com:luciobj/Project-Recipes-App.git`
+Copy the ssh from the project `git@github.com:luciobj/Project-Recipe-App.git`
 
-* Open a terminal int your machine and type the following commands in ordedr:
+* Open a terminal int your machine and type the following commands in order:
 
-  * `git clone git@github.com:luciobj/Project-Recipes-App.git`
-  * `cd Project-Recipes-App`
+  * `git clone git@github.com:luciobj/Project-Recipe-App.git`
+  * `cd Project-Recipe-App`
   * `npm install`
   * `npm start`
 
@@ -32,9 +36,9 @@ This project was developed using the TDD method by my part, while my colegues op
 
 ---
 
-### Tecnologys
+### Technologies
 
-In this project the focus was solely on frontend development, and as such the tecnologys used were React and Jest.
+In this project the focus was solely on frontend development, and as such the technologies used were React, using Context API and React Hooks, and Jest.
 
 ---
 
@@ -48,5 +52,3 @@ This is a screenshot of the last run of the Trybe evaluator, which scores the de
 ![Evaluator Results 4](./public/evaluator-results-4.png)
 ![Evaluator Results 5](./public/evaluator-results-5.png)
 ![Evaluator Results 6](./public/evaluator-results-6.png)
-
-<!-- Este README foi inspirado por [Paulo](https://github.com/pauloricardoz)
